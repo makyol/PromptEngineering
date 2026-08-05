@@ -1,0 +1,303 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+
+% Encoding and fonts for pdfLaTeX
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{hyperref}
+
+\title{Prompt Engineering}
+\author{Mehmet Ali Akyol, PhD}
+\institute{Ankara Medipol University}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+    \begin{center}
+        \vspace{1cm}
+        \textbf{Week 4: Prompt Patterns \& Frameworks}
+    \end{center}
+\end{frame}
+
+\section{Overview}
+
+\begin{frame}
+    \frametitle{Where We Are}
+    \begin{itemize}
+        \item Week 1: Prompt fundamentals and the power of structured instructions.
+        \item Week 2: The mechanics of modern language models.
+        \item Week 3: Principles and anti-patterns for effective prompt design.
+        \item \textbf{This week:} Codifying best practice with reusable prompt patterns and frameworks.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Weekly Learning Objectives}
+    \begin{itemize}
+        \item Differentiate between atomic prompt patterns and broader frameworks.
+        \item Combine patterns to address complex, multi-step tasks.
+        \item Select frameworks based on task type, risk level, and time available.
+        \item Translate frameworks into templates that teammates can reuse.
+        \item Evaluate tradeoffs between prescriptive templates and flexible prompting.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Key Concepts}
+    \begin{itemize}
+        \item Pattern vs. framework vs. playbook
+        \item Pattern stacks (role + format + reasoning)
+        \item Prompt lifecycle frameworks (PLAN, DRAFT, REVIEW)
+        \item Task diagnostics (clarity, constraints, context, checkpoints)
+        \item Governance patterns (guardrails, refusal handling)
+    \end{itemize}
+\end{frame}
+
+\section{Pattern Library}
+
+\begin{frame}
+    \frametitle{Atomic Patterns Recap}
+    \begin{itemize}
+        \item \textbf{Role}: Persona, audience, tone setters.
+        \item \textbf{Format}: Tables, JSON, bullet, code block.
+        \item \textbf{Reasoning}: Step-by-step, chain-of-thought, critique.
+        \item \textbf{Context}: Retrieved excerpts, facts, style guides.
+        \item \textbf{Constraints}: Word limits, banned topics, sourcing rules.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Pattern Stacking}
+    \begin{itemize}
+        \item Combine patterns intentionally: role + format + reasoning \textrightarrow{} reliable outputs.
+        \item Use delimiters to isolate instructions, data, and examples.
+        \item Add validation requests:\ ``List assumptions before final answer."\ or\ ``Return JSON conforming to schema.''
+        \item Introduce fallback logic:\ ``If information missing, respond with: insufficient context.''
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Adaptation Patterns}
+    \begin{itemize}
+        \item \textbf{Surface shift}: Change tone or reading level without altering content.
+        \item \textbf{Format shift}: Convert text to tables, checklists, timelines.
+        \item \textbf{Perspective shift}: Rewrite from stakeholder viewpoints.
+        \item \textbf{Language shift}: Translate while preserving style constraints.
+    \end{itemize}
+\end{frame}
+
+\section{Frameworks}
+
+\begin{frame}
+    \frametitle{Framework Examples}
+    \begin{itemize}
+        \item \textbf{CO-STAR}: Context, Objective, Style, Tone, Audience, Response.
+        \item \textbf{RACI Prompt Canvas}: Role, Action, Constraints, Input.
+        \item \textbf{IDEA Loop}: Identify task, Draft prompt, Evaluate output, Adjust.
+        \item \textbf{SMART Prompt}: Specific, Measurable, Achievable, Relevant, Time-bound outputs.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Choosing a Framework}
+    \begin{itemize}
+        \item \textbf{Low stakes}: Lightweight templates (role + format) suffice.
+        \item \textbf{Moderate stakes}: Add evaluation and guardrails (IDEA Loop, SMART Prompt).
+        \item \textbf{High stakes}: Multi-stage prompts with critique, verification, and escalation rules.
+        \item Consider team adoption: Can colleagues follow it quickly?
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Framework to Template}
+    \begin{itemize}
+        \item Start with fields the requester fills (objective, audience, constraints).
+        \item Encode defaults for tone, format, delimiters to ensure consistency.
+        \item Provide example completions highlighting best practice.
+        \item Offer optional add-ons (e.g., risk checks, summary level).
+    \end{itemize}
+\end{frame}
+
+\section{Deep Dive}
+
+\begin{frame}[fragile]
+    \frametitle{Deep Dive: CO-STAR Framework}
+    \begin{itemize}
+        \item \textbf{C}ontext: \textit{Summarize the following user feedback for a product manager.}
+        \item \textbf{O}bjective: \textit{Extract the core feature request and the user's primary pain point.}
+        \item \textbf{S}tyle: \textit{Use clear, professional language.}
+        \item \textbf{T}one: \textit{Neutral and objective.}
+        \item \textbf{A}udience: \textit{A busy product manager who needs the key takeaway in seconds.}
+        \item \textbf{R}esponse: \textit{Format as a JSON object with keys "feature\_request" and "pain\_point".}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Deep Dive: RACI Prompt Canvas}
+	\begin{block}{Origin}
+		Adapted from the classic RACI project management matrix (Responsible, Accountable, Consulted, Informed), which has been used for decades to clarify roles in complex projects.
+	\end{block}
+    \begin{itemize}
+        \item \textbf{R}ole: \textit{You are a helpful, expert-level programming assistant.}
+        \item \textbf{A}ction: \textit{Refactor the provided Python code to be more idiomatic and efficient.}
+        \item \textbf{C}onstraints: \textit{Use list comprehensions where appropriate and ensure the code adheres to PEP 8 standards.}
+        \item \textbf{I}nput: \textit{The code to be refactored is provided below in the text block.}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Deep Dive: The IDEA Loop}
+	\begin{block}{Origin}
+		A modern variant of classic continuous improvement cycles like PDCA (Plan-Do-Check-Act) or John Boyd's OODA Loop (Observe-Orient-Decide-Act), tailored for the iterative nature of prompt engineering.
+	\end{block}
+    \begin{itemize}
+        \item \textbf{I}dentify: The goal is to get a concise, 3-bullet summary of a long report.
+        \item \textbf{D}raft: The first prompt is simple: "Summarize this report."
+        \item \textbf{E}valuate: The output is a long paragraph, not the desired bulleted list.
+        \item \textbf{A}djust: The prompt is refined: "Summarize this report in exactly three bullet points."
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Deep Dive: SMART Prompt Outputs}
+	\begin{block}{Origin}
+		Directly borrows from the widely-used SMART criteria for effective goal-setting, first appearing in a 1981 article by George T. Doran for defining project objectives.
+	\end{block}
+    \begin{itemize}
+        \item \textbf{S}pecific: \textit{Generate 5 multiple-choice questions about photosynthesis.}
+        \item \textbf{M}easurable: \textit{Each question must have exactly 4 options: 1 correct and 3 incorrect.}
+        \item \textbf{A}chievable: \textit{The questions should be suitable for a 9th-grade biology class.}
+        \item \textbf{R}elevant: \textit{The questions must cover the topics of chlorophyll and cellular respiration.}
+        \item \textbf{T}ime-bound: \textit{This is a single-turn request; generate all 5 questions now.}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Advanced Pattern: Meta-Prompting}
+    \begin{block}{Concept}
+        Using a prompt to have an LLM generate, critique, or refine another prompt.
+    \end{block}
+    \begin{itemize}
+        \item \textbf{Generator Prompt:} "Create a prompt for a junior developer to document a Python function."
+        \item \textbf{Critique Prompt:} "Review this prompt. Is it clear? Does it specify the output format? Suggest one improvement."
+        \item \textbf{Refinement Prompt:} "Given the following critique, revise the original prompt to be more effective."
+        \item \textbf{Use Case:} Automating the creation and maintenance of a high-quality prompt library.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Advanced Pattern: Tool Use \& Function Calling}
+    \begin{block}{Concept}
+        Empowering an LLM to use external tools by providing a manifest of available functions and their schemas.
+    \end{block}
+    \begin{itemize}
+        \item The model doesn't execute code; it generates a JSON object specifying the tool to call and the arguments to use.
+        \item \textbf{Example Flow:}
+        \begin{enumerate}
+            \item User asks: "What's the weather in Istanbul?"
+            \item Model returns: \texttt{\{"tool": "get\_weather", "city": "Istanbul"\}}
+            \item Your code executes the function and passes the result back to the model.
+            \item Model generates a natural language response based on the tool's output.
+        \end{enumerate}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Advanced Pattern: Dynamic Few-Shot Selection}
+    \begin{block}{Concept}
+        Instead of using static, hard-coded examples, programmatically select the most relevant examples from a library based on the user's query.
+    \end{block}
+    \begin{itemize}
+        \item \textbf{How it works:}
+        \begin{enumerate}
+            \item Store a large library of high-quality prompt/completion pairs.
+            \item When a user query comes in, use a similarity search (e.g., vector embeddings) to find the most similar examples in your library.
+            \item Dynamically insert these top K examples into the prompt before sending it to the LLM.
+        \end{enumerate}
+        \item \textbf{Benefit:} Provides highly relevant, in-context learning for the model on-the-fly.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{From Frameworks to Playbooks}
+    \begin{block}{Concept}
+        A playbook is an organizational asset that goes beyond a single prompt, detailing a complete, multi-step workflow for a complex business process.
+    \end{block}
+    \begin{itemize}
+        \item \textbf{A Playbook Contains:}
+        \begin{itemize}
+            \item The business goal and success metrics.
+            \item A sequence of prompts (a prompt chain).
+            \item Human-in-the-loop review and approval steps.
+            \item Guardrails and escalation paths for failures.
+            \item Examples of good and bad final outputs.
+        \end{itemize}
+        \item \textbf{Goal:} To make AI-driven processes reliable, repeatable, and scalable across a team.
+    \end{itemize}
+\end{frame}
+
+\section{Worked Examples}
+
+\begin{frame}
+    \frametitle{Policy Brief Template}
+    \begin{itemize}
+        \item Context: national AI policy update, 1-page summary.
+        \item Framework: CO-STAR + critique loop.
+        \item Output: Executive summary, key impacts, stakeholder risks, action items.
+        \item Guardrail: require citation markers linked to provided context IDs.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Customer Support Escalation}
+    \begin{itemize}
+        \item Objective: classify tickets and draft replies.
+        \item Pattern stack: role + format + reasoning + guardrail.
+        \item Steps: detect sentiment, map to policy, produce compliant response, list disclaimers.
+        \item Evaluation: JSON report with confidence fields and suggested follow-up.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Research Synthesis Pattern}
+    \begin{itemize}
+        \item Inputs: annotated bibliography, research question, stakeholder.
+        \item Framework: PLAN (Purpose, Lens, Audience, Next steps).
+        \item Output: 3-section memo with citations, gaps, recommended experiments.
+        \item Reflection: require identification of uncertain claims for human review.
+    \end{itemize}
+\end{frame}
+
+% --- Activities Section Removed ---
+
+% --- Assignment Section Removed ---
+
+\section{Wrap-up}
+
+\begin{frame}
+    \frametitle{Key Takeaways}
+    \begin{itemize}
+        \item Patterns are building blocks; frameworks package them for reuse.
+        \item Match framework complexity to task stakes and resources.
+        \item Templates accelerate teams when paired with clear guardrails.
+        \item Iterate: test, critique, and refine before broad rollout.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Questions and Discussion}
+    \begin{center}
+    {\Huge Thank You!}
+    \vspace{1cm}
+
+        \textbf{Dr.\ Mehmet Ali Akyol}\\
+        \texttt{mehmetali.akyol@gmail.com}
+    \vspace{1cm}
+
+    {\large Questions?}
+    \end{center}
+\end{frame}
+
+\end{document}

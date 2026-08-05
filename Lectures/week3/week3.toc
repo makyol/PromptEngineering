@@ -1,0 +1,6 @@
+\beamer@sectionintoc {1}{Overview}{2}{0}{1}
+\beamer@sectionintoc {2}{Prompt Anatomy}{5}{0}{2}
+\beamer@sectionintoc {3}{Prompting Foundations}{7}{0}{3}
+\beamer@sectionintoc {4}{Core Patterns}{8}{0}{4}
+\beamer@sectionintoc {5}{Worked Examples}{22}{0}{5}
+\beamer@sectionintoc {6}{Wrap-up}{27}{0}{6}

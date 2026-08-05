@@ -1,0 +1,464 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+
+% Encoding and fonts for pdfLaTeX
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{hyperref}
+
+\title{Prompt Engineering}
+\author{Mehmet Ali Akyol, PhD}
+\institute{Ankara Medipol University}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+    \begin{center}
+        \vspace{1cm}
+        \textbf{Week 5: Controlling Style, Tone, and Format}
+    \end{center}
+\end{frame}
+
+\section{Overview}
+
+\begin{frame}
+    \frametitle{Where We Are}
+    \begin{itemize}
+        \item Prior weeks established fundamentals and reusable pattern frameworks.
+        \item \textbf{This week:} Focus on precise control of style, tone, register, and structured formatting without rehashing basics.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Weekly Learning Objectives}
+    \begin{itemize}
+        \item Rapidly profile audience and medium to derive tone/register parameters.
+        \item Operationalize voice guidelines (brand, compliance, cultural sensitivity) in compact prompt clauses.
+        \item Specify parse-ready output (tables / JSON / labeled sections) aligned to downstream pipeline needs.
+        \item Instrument prompts for self-audit to catch tone, register, or formatting drift.
+        \item Produce lightweight, reusable micro style guides for collaborative human–AI drafting.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Key Concepts}
+    \begin{itemize}
+        \item Tone ladder calibration vs.\ tone adjectives
+        \item Voice fingerprint (syntax rhythm, perspective, lexical field)
+        \item Register levers (jargon density, sentence length, metaphor frequency)
+        \item Structural contracts (schema / heading spec / placeholder tokens)
+        \item Drift detection and corrective refinement loops
+    \end{itemize}
+\end{frame}
+
+\section{Controlling Style and Tone}
+
+
+\begin{frame}[fragile]
+    \frametitle{Quick Question: Which Email Would You Send?}
+    \begin{columns}[T]
+        \column{0.48\textwidth}
+        \textbf{Version A}
+        \begin{block}{}
+        {\small
+        Subject: Payment Due
+        
+        Your invoice is overdue. Please pay as soon as possible. If you have questions, contact us.
+        
+        Thanks.
+        }
+        \end{block}
+        
+        \column{0.48\textwidth}
+        \textbf{Version B}
+        \begin{block}{}
+        {\small
+        Subject: Friendly Payment Reminder
+        
+        Hi [Name],
+        
+        We haven't received payment for Invoice \#2847 (due Nov 1). We understand things get busy!
+        
+        Could you please submit payment by Nov 10? Reply if you need help.
+        
+        Thank you for your business!
+        }
+        \end{block}
+    \end{columns}
+    \vspace{0.3cm}
+    \textbf{Quick poll:} A, B, or Depends?
+\end{frame}
+
+\begin{frame}
+    \frametitle{Linguistic Register: Beyond Formal vs. Casual}
+    \textbf{Three dimensions of register control:}
+    \begin{itemize}
+        \item \textbf{Field (Topic Domain):} Controls terminology density and specialization.
+        \begin{itemize}
+            \item Technical: \emph{myocardial infarction, hemodynamic instability}
+            \item Lay: \emph{heart attack, blood pressure problems}
+        \end{itemize}
+        \item \textbf{Tenor (Relationship):} Manages power distance and social connection.
+        \begin{itemize}
+            \item Authority: \emph{You must submit\ldots}, \emph{I recommend\ldots}
+            \item Peer: \emph{Let's review\ldots}, \emph{What do you think?}
+            \item Subordinate: \emph{Would it be possible\ldots}, \emph{I'd appreciate\ldots}
+        \end{itemize}
+        \item \textbf{Mode (Channel):} Adjusts for delivery style and planning.
+        \begin{itemize}
+            \item Written-planned: complete sentences, cohesive structure
+            \item Spoken-spontaneous: fragments, fillers, self-correction
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Multi-Dimensional Register Specifications}
+    \textbf{Instead of vague instructions:}
+    \begin{itemize}
+        \item ``Be professional'' $\rightarrow$ ambiguous
+        \item ``Make it friendly'' $\rightarrow$ inconsistent results
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    \textbf{Use precise dimensional specs:}
+    \begin{itemize}
+        \item \texttt{CEFR B1 + peer tenor + written-planned mode}
+        \item \texttt{Domain: healthcare lay + subordinate tenor + email mode}
+        \item \texttt{Technical depth: expert + authority tenor + monologic}
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    \textbf{Result:} Precise, reproducible style control without trial-and-error.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Voice and Tone Diagnostics}
+    \textbf{Step 1: Audience Analysis}
+    \begin{itemize}
+        \item Industry context: legal (risk-averse), tech (innovation-forward), healthcare (empathetic)
+        \item Reading level: CEFR B1 (general public) vs.\ C2 (domain experts)
+        \item Cultural norms: directness (US/Germany) vs.\ indirectness (Japan/Middle East)
+    \end{itemize}
+    
+    \textbf{Step 2: Tone Mapping}
+    \begin{itemize}
+        \item Vague adjectives $\rightarrow$ Observable behaviors
+        \item \emph{Warm}: Use names, express gratitude, acknowledge effort
+        \item \emph{Urgent}: Short sentences, action verbs, explicit deadlines
+        \item \emph{Neutral}: Third-person, passive constructions, hedge words
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Voice and Tone Diagnostics (continued)}
+    \textbf{Step 3: No-Go Zones}
+    \begin{itemize}
+        \item Banned words: \emph{cheap, guarantee, revolutionary, disrupt}
+        \item Prohibited claims: \emph{We're the best, FDA-approved (if not true)}
+        \item Brand sensitivities: competitor names, controversial topics
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    \textbf{Step 4: Provide Exemplars}
+    \begin{itemize}
+        \item \textbf{Strong sample:} \emph{Thanks for your patience. We've resolved the issue and added extra support hours.}
+        \item \textbf{Counter-example:} \emph{Your ticket was processed. Issue closed.}
+        \item \textbf{Why it matters:} AI learns boundaries from contrasts, not just positive examples.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Brand Voice Fingerprinting}
+    \begin{block}{Concept}
+        Extract measurable, reproducible voice attributes from existing content to ensure AI outputs match your brand.
+    \end{block}
+    
+    \textbf{Four dimensions to capture:}
+    \begin{enumerate}
+        \item \textbf{Syntax signature:} Measure sentence structure patterns
+        \item \textbf{Lexical field:} Identify preferred vocabulary choices
+        \item \textbf{Rhythm:} Analyze pacing and variety
+        \item \textbf{Perspective:} Determine point-of-view consistency
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Brand Voice Fingerprinting: Measurable Attributes}
+    \begin{columns}[T]
+        \begin{column}{0.48\textwidth}
+            \textbf{Syntax Signature}
+            \begin{itemize}
+                \item Avg.\ sentence length: 12--18 words
+                \item Clause complexity: 1.5 clauses/sentence
+                \item Passive voice: $<$10\%
+            \end{itemize}
+            
+            \vspace{0.2cm}
+            \textbf{Lexical Field}
+            \begin{itemize}
+                \item Preferred: \emph{enable, drive, foster}
+                \item Avoid: \emph{leverage, synergy, utilize}
+            \end{itemize}
+        \end{column}
+        
+        \begin{column}{0.48\textwidth}
+            \textbf{Rhythm}
+            \begin{itemize}
+                \item Sentence length variance: high
+                \item Fragment usage: occasional for emphasis
+                \item Lists: 3--5 items, parallel structure
+            \end{itemize}
+            
+            \vspace{0.2cm}
+            \textbf{Perspective}
+            \begin{itemize}
+                \item First-person plural: ``We help you\ldots''
+                \item vs.\ Institutional: ``The platform provides\ldots''
+            \end{itemize}
+        \end{column}
+    \end{columns}
+    
+    \vspace{0.3cm}
+    \textbf{Process:} Analyze 3--5 approved samples $\rightarrow$ Extract metrics $\rightarrow$ Encode as prompt constraints
+\end{frame}
+
+\begin{frame}
+    \frametitle{Style Guides in Prompts}
+    \begin{itemize}
+        \item Embed condensed brand voice manuals: values, vocabulary, cadence.
+        \item Use bullet checklists to anchor style: ``Always include\ldots'', ``Never include\ldots''.
+    \item Request self-audit — \emph{List 3 style guidelines you followed before the final answer.} 
+        \item Maintain iterative memory with conversation tags (e.g., \texttt{StyleGuide v2}).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Tone Shift Mechanics: Instruction Levers}
+    \begin{block}{Core Insight}
+        Small, atomic prompt changes yield predictable tone movement.
+    \end{block}
+    \begin{itemize}
+        \item \textbf{Contraction control:} \emph{Avoid contractions} \textrightarrow{} formal; \emph{Use contractions} \textrightarrow{} casual.
+        \item \textbf{Sentence directive:} \emph{Use short, direct sentences} vs.\ \emph{Use complex, flowing prose}.
+        \item \textbf{Affective markers:} \emph{Include gratitude and empathy} vs.\ \emph{Use neutral, objective language}.
+        \item \textbf{Urgency cues:} \emph{Emphasize deadline and consequences} vs.\ \emph{Provide context without pressure}.
+        \item Test each lever in isolation to measure effect size.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Register and Reading Level}
+    \begin{itemize}
+        \item Specify reading grade (CEFR level, Flesch-Kincaid, Common European levels).
+        \item Ask for analogies or metaphors suited to audience background.
+        \item Include domain-specific vocabulary lists to use or avoid.
+    \item Prompt for translanguaging — \emph{Introduce one Turkish idiom and translate it.} 
+    \end{itemize}
+\end{frame}
+
+\section{Formatting Mastery}
+
+\begin{frame}
+    \frametitle{Structural Contracts: Parse-Ready Output}
+    \begin{block}{Concept}
+        A structural contract is an explicit, testable specification for output shape.
+    \end{block}
+    \begin{itemize}
+        \item \textbf{Why?} Downstream automation (APIs, DBs, dashboards) requires predictable format.
+        \item \textbf{Components:} section labels, field names, data types, ordering rules.
+        \item \textbf{Enforcement:} request model to echo the contract before generating content.
+        \item \textbf{Validation hook:} \emph{If any required field is missing, output INCOMPLETE and list missing fields}.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Structured Output Techniques}
+    \begin{itemize}
+        \item Define exact headings, table columns, or JSON fields.
+        \item Use placeholders: \texttt{<Intro>}, \texttt{<Key Risks>}, \texttt{<Call to Action>}.
+        \item Enforce ordering: numbered lists, priority ranking, timeline progression.
+    \item Incorporate validation prompts — \emph{Confirm all fields are filled; note any missing data.} 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Schema Enforcement}
+    \begin{itemize}
+        \item Provide schema with types and constraints.
+        \item Ask model to restate schema pre-output to ensure alignment.
+        \item Encourage graceful failure — \emph{If you cannot comply, return VALIDATION\_ERROR}.
+    \end{itemize}
+\vspace{0.2cm}
+\textbf{Example}
+\begin{verbatim}
+Return JSON array of objects with keys:
+- task (string, sentence case)
+- tone (one of: neutral, upbeat, urgent)
+- word_limit (integer, 50-200)
+- notes (array of 1-3 short strings)
+Only output JSON.
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Multi-Channel Formatting}
+    \begin{itemize}
+        \item Build variants: email, SMS, chatbot, longform doc.
+    \item Use conditional instructions — \emph{If channel=SMS, limit to 160 characters.} 
+        \item Include metadata for automation: tags, CTA keywords, compliance flags.
+        \item Request summary + main content for editorial review workflows.
+    \end{itemize}
+\end{frame}
+
+\section{Quality Control}
+
+\begin{frame}
+    \frametitle{Multi-Stakeholder Voice Reconciliation}
+    \begin{block}{Challenge}
+        Different stakeholders (legal, marketing, product) impose conflicting voice rules.
+    \end{block}
+    \begin{itemize}
+        \item \textbf{Strategy 1 — Layered prompts:} Legal disclaimers as append-only; marketing tone for body.
+        \item \textbf{Strategy 2 — Priority matrix:} Encode rule precedence (compliance > brand > preference).
+        \item \textbf{Strategy 3 — Modular outputs:} Generate compliant core + stylized wrapper separately; merge post-hoc.
+        \item Document conflicts in a decision log; iterate with stakeholder input.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Detecting Drift}
+    \begin{itemize}
+        \item Prompt for reflection — \emph{Describe how this output aligns with tone X}.
+        \item Use comparison prompts — \emph{Compare to sample and note deviations}.
+        \item Run batch consistency checks with templated critique prompts.
+        \item Employ versioning: keep changelog of style guide tweaks.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Revision Loops}
+    \begin{itemize}
+        \item Phase 1: Draft with full instructions.
+        \item Phase 2: Critique focusing on tone, compliance, formatting.
+        \item Phase 3: Revise using critique as structured feedback.
+        \item Escalate to human review when checks fail twice.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Programmatic Tone Testing}
+    \begin{block}{Concept}
+        Automate tone evaluation by embedding test prompts in your pipeline.
+    \end{block}
+    \begin{itemize}
+        \item \textbf{Self-labeling:} Ask model to classify its own tone (formal / neutral / casual).
+        \item \textbf{Reference comparison:} Provide gold-standard sample; request deviation score (0--10).
+        \item \textbf{Sentiment analysis:} Use lightweight NLP tool to measure valence and arousal.
+        \item \textbf{Readability metrics:} Flesch-Kincaid, SMOG index for grade-level verification.
+        \item Run tests on batch outputs; flag outliers for manual review.
+    \end{itemize}
+\end{frame}
+
+\section{Worked Examples}
+
+\begin{frame}
+    \frametitle{Healthcare: Patient Outreach}
+    \begin{itemize}
+        \item Audience: adult patients, B1 reading level.
+        \item Tone: empathetic, reassuring; include disclaimer.
+        \item Format: 3 bullets + call to action button text.
+        \item Validation: highlight any missing appointment data.
+    \end{itemize}
+    \vspace{0.3cm}
+    \textbf{Before:} Generic, no tone control, missing validation.\\
+    \textbf{After:} Empathy markers, B1 vocabulary, graceful failure for missing fields.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Finance: Investor Update}
+    \begin{itemize}
+        \item Voice: confident, transparent, data-led.
+        \item Include table (metric, Q2 value, delta vs.\ Q1).
+        \item Provide macro context paragraph and risk disclosure statement.
+        \item Request internal summary for leadership in 100 words.
+    \end{itemize}
+    \vspace{0.3cm}
+    \textbf{Before:} Unstructured narrative, no quantitative anchor.\\
+    \textbf{After:} Multi-format output (table + paragraphs), dual audiences (investors + internal).
+\end{frame}
+
+\begin{frame}
+    \frametitle{Education: Lesson Plan Variants}
+    \begin{itemize}
+        \item Generate two versions: 6th grade science, undergraduate seminar.
+        \item Tone shift from playful to scholarly.
+        \item Format: table with sections (Hook, Core Content, Activity, Assessment).
+        \item Reflection: note adjustments made for each audience.
+    \end{itemize}
+    \vspace{0.3cm}
+    \textbf{Before:} Single-register output, no audience differentiation.\\
+    \textbf{After:} Parallel outputs with explicit register shift + meta-commentary on changes.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Legal-Marketing Hybrid: Product Announcement}
+    \begin{block}{Scenario}
+        Legal requires risk disclaimers; marketing wants upbeat, benefit-forward language.
+    \end{block}
+    \begin{itemize}
+        \item \textbf{Approach:} Two-pass generation.
+        \item Pass 1: Marketing-optimized body (tone: upbeat; focus: user benefits).
+        \item Pass 2: Append legal footer (tone: neutral; format: separate section with \texttt{<Legal>} tag).
+        \item \textbf{Validation:} Confirm legal section is non-empty and placed after marketing content.
+    \end{itemize}
+    \vspace{0.2cm}
+    \textbf{Outcome:} Satisfies both stakeholders without tone bleed between sections.
+\end{frame}
+
+\section{Activities}
+
+\begin{frame}
+    \frametitle{Activity 1: Tone Ladder Workshop}
+    \begin{block}{Goal}
+        Practice moving a message up and down the formality scale.
+    \end{block}
+    \begin{itemize}
+        \item Choose a baseline message (e.g., payment reminder).
+        \item Produce five variants from \emph{stern} to \emph{friendly} using prompt tweaks.
+        \item Annotate which instructions caused each shift.
+    \end{itemize}
+\end{frame}
+
+% (Activity 2 removed per course adjustment)
+% (Assignment and rubric removed to avoid redundancy with earlier weeks)
+
+\section{Wrap-up}
+
+\begin{frame}
+    \frametitle{Key Takeaways}
+    \begin{itemize}
+        \item Tone and format control start with precise diagnostics.
+        \item Combine style guides with structural constraints for reliability.
+        \item Revision prompts catch drift and safeguard brand voice.
+        \item Documented playbooks enable scalable human-AI collaboration.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Questions and Discussion}
+    \begin{center}
+    {\Huge Thank You!}
+    \vspace{1cm}
+
+        \textbf{Dr.\ Mehmet Ali Akyol}\\
+        \texttt{mehmetali.akyol@gmail.com}
+    \vspace{1cm}
+
+    {\large Questions?}
+    \end{center}
+\end{frame}
+
+\end{document}

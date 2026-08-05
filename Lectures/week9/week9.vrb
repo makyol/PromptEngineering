@@ -1,0 +1,10 @@
+\frametitle{Template: Audio (via transcript) + action items}
+\begin{verbatim}
+Input: Transcript of a 20-minute meeting.
+Task:
+1) Summarize in 5 bullets.
+2) List action items as: owner, task, due_date (if stated).
+3) List open questions.
+Rule: Only use information explicitly in the transcript.
+Output: Markdown.
+\end{verbatim}

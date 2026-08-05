@@ -1,0 +1,425 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+
+\geometry{margin=0.75in}
+
+\title{\textbf{Midterm Assignment: Grading Guide}\\
+\large Instructor Reference for Objective Assessment}
+\author{Prompt Engineering Course}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Grading Philosophy}
+
+This rubric is designed for \textbf{objective, efficient grading} with minimal subjectivity. Each criterion has clear indicators for full credit, partial credit, or no credit.
+
+\textbf{Time estimate:} 15--20 minutes per student submission.
+
+\section*{Quick Grading Workflow}
+
+\begin{enumerate}
+    \item Verify submission format (PDF, all parts present) --- deduct 5 points if incomplete
+    \item Grade each part using the rubrics below
+    \item Check word counts --- deduct 1 point per section if significantly over/under (>20\%)
+    \item Verify screenshots are included and readable
+    \item Total points and provide brief feedback (2--3 sentences per part)
+\end{enumerate}
+
+\hrule
+\vspace{0.5cm}
+
+\section{Part 1: Prompt Comparison Analysis (30 points)}
+
+\subsection*{Detailed Rubric}
+
+\begin{longtable}{|p{5cm}|p{2cm}|p{8cm}|}
+\hline
+\textbf{Criterion} & \textbf{Points} & \textbf{Indicators} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Criterion} & \textbf{Points} & \textbf{Indicators} \\
+\hline
+\endhead
+
+Task description clear and appropriate & 3 & 
+\textbf{Full (3):} Domain stated, task is specific and realistic \\
+\textbf{Partial (2):} Domain stated but task somewhat vague \\
+\textbf{Minimal (1):} Domain stated but task unclear \\
+\textbf{None (0):} Missing or inappropriate \\
+\hline
+
+Version A demonstrates vague prompting & 4 & 
+\textbf{Full (4):} Clearly lacks specificity, context, constraints \\
+\textbf{Good (3):} Somewhat vague but has some detail \\
+\textbf{Partial (2):} Not clearly distinguishable from Version B \\
+\textbf{Minimal (1):} Minimal difference from Version B \\
+\textbf{None (0):} Missing \\
+\hline
+
+Version B applies $\geq$3 techniques with labels & 9 & 
+\textbf{Full (9):} 3+ techniques correctly applied and labeled (role, delimiters, few-shot, CoT, structured output, etc.) \\
+\textbf{Good (7--8):} 3 techniques applied, labels may be incomplete \\
+\textbf{Partial (5--6):} 2 techniques, labeling unclear \\
+\textbf{Minimal (2--4):} 1--2 techniques, techniques not clearly identified \\
+\textbf{None (0--1):} No clear improvement or missing \\
+\hline
+
+Screenshots included for both versions & 3 & 
+\textbf{Full (3):} Both screenshots present and readable \\
+\textbf{Partial (2):} Both present but one illegible \\
+\textbf{Minimal (1):} One screenshot missing or illegible \\
+\textbf{None (0):} No screenshots \\
+\hline
+
+Analysis identifies 3+ concrete improvements & 5 & 
+\textbf{Full (5):} 3+ specific, measurable improvements identified (e.g., ``Version B output was 200 words vs.\ 50 words'', ``included specific legal clauses'') \\
+\textbf{Good (4):} 3 improvements with some specificity \\
+\textbf{Partial (3):} 2 improvements or vague descriptions \\
+\textbf{Minimal (1--2):} 1 improvement identified \\
+\textbf{None (0):} No analysis \\
+\hline
+
+Analysis explains WHY improvements occurred using course concepts & 6 & 
+\textbf{Full (6):} Explicitly references course concepts (role prompting, context, constraints, etc.) and explains causal relationship clearly \\
+\textbf{Good (5):} References concepts with clear connection \\
+\textbf{Partial (3--4):} References concepts but connection unclear \\
+\textbf{Minimal (1--2):} Generic explanation without course terminology \\
+\textbf{None (0):} No explanation \\
+\hline
+
+\textbf{TOTAL} & \textbf{30} & \\
+\hline
+\end{longtable}
+
+\subsection*{Common Issues to Watch For}
+
+\begin{itemize}
+    \item \textbf{Too similar:} Version A and B are nearly identical (deduct from criterion 2)
+    \item \textbf{Mislabeled techniques:} Student claims ``chain-of-thought'' but prompt doesn't show reasoning steps (deduct from criterion 3)
+    \item \textbf{Superficial analysis:} Says ``B is better'' without specific evidence (deduct from criterion 5)
+    \item \textbf{Missing screenshots:} Common oversight (deduct from criterion 4)
+\end{itemize}
+
+\hrule
+\vspace{0.5cm}
+
+\section{Part 2: Practical Prompt Design (40 points)}
+
+\subsection*{Detailed Rubric}
+
+\begin{longtable}{|p{5cm}|p{2cm}|p{8cm}|}
+\hline
+\textbf{Criterion} & \textbf{Points} & \textbf{Indicators} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Criterion} & \textbf{Points} & \textbf{Indicators} \\
+\hline
+\endhead
+
+Framework selection justified appropriately & 5 & 
+\textbf{Full (5):} Clear, logical explanation of why framework suits task with specific reasoning \\
+\textbf{Good (4):} Good explanation with adequate reasoning \\
+\textbf{Partial (2--3):} Justification present but weak reasoning \\
+\textbf{Minimal (1):} Framework stated, no justification \\
+\textbf{None (0):} Missing \\
+\hline
+
+All framework components present and clearly labeled & 10 & 
+\textbf{CO-STAR (6 components):} Full (10) = all 6; Good (8) = 5; Partial (6) = 4; Minimal (4) = 2--3 \\
+\textbf{RACI (4 components):} Full (10) = all 4; Good (8) = 3; Partial (5) = 2 \\
+\textbf{IDEA (4 components):} Full (10) = all 4; Good (8) = 3; Partial (5) = 2 \\
+\textbf{SMART (5 criteria):} Full (10) = all 5; Good (8) = 4; Partial (6) = 3; Minimal (4) = 2 \\
+\textbf{Labels clear:} Deduct 2 points if components not labeled \\
+\hline
+
+Prompt is well-structured, clear, and complete & 5 & 
+\textbf{Full (5):} Prompt is coherent, specific, actionable, no ambiguity \\
+\textbf{Good (4):} Minor clarity issues \\
+\textbf{Partial (3):} Some confusion or missing details \\
+\textbf{Minimal (1--2):} Poorly structured or incomplete \\
+\textbf{None (0):} Missing \\
+\hline
+
+AI output included with annotations & 3 & 
+\textbf{Full (3):} Output included, student annotated where AI followed framework \\
+\textbf{Partial (2):} Output included, no annotations \\
+\textbf{Minimal (1):} Partial output \\
+\textbf{None (0):} Missing \\
+\hline
+
+Identifies 2+ weaknesses and creates effective refinement prompt & 8 & 
+\textbf{Full (8):} 2+ specific weaknesses identified, refinement prompt addresses them directly and effectively \\
+\textbf{Good (6--7):} 2 weaknesses, refinement prompt addresses them well \\
+\textbf{Partial (4--5):} 2 weaknesses, refinement prompt partially addresses \\
+\textbf{Minimal (2--3):} 1 weakness, weak refinement \\
+\textbf{Poor (1):} Vague issues, generic refinement \\
+\textbf{None (0):} Missing \\
+\hline
+
+Improved output demonstrates measurable enhancement & 4 & 
+\textbf{Full (4):} Clear, significant improvement visible in output (more specific, better structured, addresses identified weaknesses) \\
+\textbf{Good (3):} Noticeable improvement \\
+\textbf{Partial (2):} Slight improvement \\
+\textbf{Minimal (1):} Minimal or unclear improvement \\
+\textbf{None (0):} No discernible improvement or missing \\
+\hline
+
+Framework effectiveness reflection is thoughtful and specific & 5 & 
+\textbf{Full (5):} Evaluates framework strengths/limitations, considers alternatives, demonstrates learning \\
+\textbf{Good (4):} Thoughtful but general \\
+\textbf{Partial (2--3):} Superficial reflection \\
+\textbf{Minimal (1):} Generic statements \\
+\textbf{None (0):} Missing \\
+\hline
+
+\textbf{TOTAL} & \textbf{40} & \\
+\hline
+\end{longtable}
+
+\subsection*{Framework Component Checklist}
+
+Use this to quickly verify components are present:
+
+\textbf{CO-STAR:}
+\begin{itemize}
+    \item[$\square$] Context --- background info
+    \item[$\square$] Objective --- clear goal
+    \item[$\square$] Style --- writing style specified
+    \item[$\square$] Tone --- emotional quality
+    \item[$\square$] Audience --- who it's for
+    \item[$\square$] Response --- format/structure
+\end{itemize}
+
+\textbf{RACI:}
+\begin{itemize}
+    \item[$\square$] Role --- AI persona
+    \item[$\square$] Audience --- target reader
+    \item[$\square$] Context --- situation
+    \item[$\square$] Instructions --- clear directives
+\end{itemize}
+
+\textbf{IDEA:}
+\begin{itemize}
+    \item[$\square$] Instruct --- main directive
+    \item[$\square$] Detail --- specifications
+    \item[$\square$] Example --- sample/format
+    \item[$\square$] Adjust --- refinement criteria
+\end{itemize}
+
+\textbf{SMART:}
+\begin{itemize}
+    \item[$\square$] Specific --- precise output requirements
+    \item[$\square$] Measurable --- quantifiable elements
+    \item[$\square$] Actionable --- practical next steps
+    \item[$\square$] Relevant --- aligned with goal
+    \item[$\square$] Time-bound --- temporal constraints
+\end{itemize}
+
+\hrule
+\vspace{0.5cm}
+
+\section{Part 3: Critical Reflection (30 points)}
+
+\subsection*{Detailed Rubric}
+
+\begin{longtable}{|p{5cm}|p{2cm}|p{8cm}|}
+\hline
+\textbf{Criterion} & \textbf{Points} & \textbf{Indicators} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Criterion} & \textbf{Points} & \textbf{Indicators} \\
+\hline
+\endhead
+
+Skill progression demonstrates clear learning trajectory with specific example & 7 & 
+\textbf{Full (7):} Articulates evolution from basic to advanced understanding, provides specific ``aha moment'' with context, explains challenge and solution \\
+\textbf{Good (5--6):} Shows progression, includes example but lacks depth \\
+\textbf{Partial (3--4):} Generic progression description, vague example \\
+\textbf{Minimal (1--2):} Superficial reflection \\
+\textbf{None (0):} Missing \\
+\hline
+
+Practical application is realistic, detailed, and uses appropriate frameworks & 8 & 
+\textbf{Full (8):} Realistic scenario, identifies specific frameworks/techniques with justification, anticipates challenges with solutions \\
+\textbf{Good (6--7):} Good scenario, frameworks identified but justification weak, some challenges mentioned \\
+\textbf{Partial (4--5):} Generic scenario or frameworks not clearly identified, challenges vague \\
+\textbf{Minimal (2--3):} Unrealistic scenario, no framework identification \\
+\textbf{None (0--1):} Missing or completely off-topic \\
+\hline
+
+Limitations \& ethics discussion shows understanding of AI capabilities and responsible use & 8 & 
+\textbf{Full (8):} 2 specific limitations identified and explained, relevant ethical consideration with mitigation strategy \\
+\textbf{Good (6--7):} 2 limitations, ethical consideration present but solution generic \\
+\textbf{Partial (4--5):} 1--2 limitations, ethical discussion superficial \\
+\textbf{Minimal (2--3):} Vague limitations, minimal ethics discussion \\
+\textbf{None (0--1):} Missing or incorrect \\
+\hline
+
+Future learning goals are specific and relevant & 4 & 
+\textbf{Full (4):} Specific goals tied to identified skill gaps with clear direction \\
+\textbf{Good (3):} Specific goals but connection to learning unclear \\
+\textbf{Partial (2):} Generic goals \\
+\textbf{Minimal (1):} Vague aspirations \\
+\textbf{None (0):} Missing \\
+\hline
+
+Writing is clear, well-organized, and meets word count & 3 & 
+\textbf{Full (3):} Professional writing, logical flow, within 400--550 words (±10\%) \\
+\textbf{Partial (2):} Minor clarity issues or slightly off word count \\
+\textbf{Minimal (1):} Disorganized or significantly off word count \\
+\textbf{None (0):} Incomprehensible or missing \\
+\hline
+
+\textbf{TOTAL} & \textbf{30} & \\
+\hline
+\end{longtable}
+
+\subsection*{Week 2 Limitations Reference}
+
+Students should reference concepts like:
+\begin{itemize}
+    \item Hallucinations (making up facts)
+    \item Context window limits
+    \item Training data cutoff
+    \item Cannot reason like humans
+    \item Struggles with math/logic
+    \item No real-world grounding
+    \item Biases in training data
+\end{itemize}
+
+\hrule
+\vspace{0.5cm}
+
+\section{Overall Grading Notes}
+
+\subsection*{Automatic Deductions}
+
+\begin{itemize}
+    \item \textbf{-5 points:} Missing entire part
+    \item \textbf{-3 points:} Multiple word count violations (>20\% over/under)
+    \item \textbf{-2 points:} Missing AI tool specification
+    \item \textbf{-2 points:} Poor formatting (illegible, no section labels)
+    \item \textbf{-1 point:} Missing cover page with student info
+\end{itemize}
+
+\subsection*{Bonus Opportunities (Optional)}
+
+\begin{itemize}
+    \item \textbf{+2 points:} Exceptional creativity or insight in application
+    \item \textbf{+2 points:} Goes significantly beyond requirements (e.g., tests 3+ frameworks, creates comprehensive brand guide)
+    \item \textbf{Maximum bonus:} 3 points (total cannot exceed 100)
+\end{itemize}
+
+\subsection*{Red Flags for Academic Integrity}
+
+Watch for:
+\begin{itemize}
+    \item Screenshots that don't match prompts described
+    \item Suspiciously perfect outputs (AI-generated reflection about AI use)
+    \item Identical submissions from multiple students
+    \item Prompts copied from online sources without attribution
+\end{itemize}
+
+If suspected, request student to walk through their process in office hours.
+
+\hrule
+\vspace{0.5cm}
+
+\section{Efficient Grading Checklist}
+
+For each submission:
+
+\begin{enumerate}
+    \item \textbf{Format check (2 min):}
+    \begin{itemize}
+        \item[$\square$] PDF format
+        \item[$\square$] All 3 parts present
+        \item[$\square$] Cover page with student info
+        \item[$\square$] AI tool specified
+    \end{itemize}
+    
+    \item \textbf{Part 1 (5 min):}
+    \begin{itemize}
+        \item[$\square$] Task description clear (3 pts)
+        \item[$\square$] Version A is clearly vague (4 pts)
+        \item[$\square$] Version B has 3+ labeled techniques (9 pts)
+        \item[$\square$] Screenshots present (3 pts)
+        \item[$\square$] Analysis identifies 3+ improvements (5 pts)
+        \item[$\square$] Explains WHY with course concepts (6 pts)
+    \end{itemize}
+    
+    \item \textbf{Part 2 (6 min):}
+    \begin{itemize}
+        \item[$\square$] Framework justified (5 pts)
+        \item[$\square$] All components present and labeled (10 pts) --- use checklist
+        \item[$\square$] Prompt clear and complete (5 pts)
+        \item[$\square$] Output with annotations (3 pts)
+        \item[$\square$] Refinement addresses 2 weaknesses (8 pts)
+        \item[$\square$] Improvement visible (4 pts)
+        \item[$\square$] Reflection thoughtful (5 pts)
+    \end{itemize}
+    
+    \item \textbf{Part 3 (4 min):}
+    \begin{itemize}
+        \item[$\square$] Skill progression with example (7 pts)
+        \item[$\square$] Practical application with frameworks (8 pts)
+        \item[$\square$] 2 limitations + ethics (8 pts)
+        \item[$\square$] Future goals (4 pts)
+        \item[$\square$] Word count 400--550 (3 pts)
+    \end{itemize}
+    
+    \item \textbf{Final review (2 min):}
+    \begin{itemize}
+        \item[$\square$] Apply any deductions
+        \item[$\square$] Consider bonus (optional)
+        \item[$\square$] Total score
+        \item[$\square$] Write 2--3 sentence feedback per part
+    \end{itemize}
+\end{enumerate}
+
+\textbf{Total grading time per student: 15--20 minutes}
+
+\hrule
+\vspace{0.5cm}
+
+\section{Sample Feedback Templates}
+
+\subsection*{Part 1 Feedback}
+
+\textbf{Strong submission:}\\
+``Excellent comparison. Your Version B effectively used role prompting, few-shot examples, and structured output. Analysis clearly identified improvements (specificity, format, tone) and explained WHY using course concepts. Well done!''
+
+\textbf{Needs improvement:}\\
+``Version B shows some improvement but techniques need clearer labeling. Analysis would benefit from more specific examples (e.g., word count, structural differences). Reference Week 3 concepts more explicitly.''
+
+\subsection*{Part 2 Feedback}
+
+\textbf{Strong submission:}\\
+``CO-STAR framework applied comprehensively with all 6 components clearly labeled. Refinement prompt effectively addressed identified weaknesses (specificity, tone). Reflection demonstrates strong framework understanding.''
+
+\textbf{Needs improvement:}\\
+``RACI framework incomplete --- missing Context component. Prompt is clear but refinement doesn't address specific weaknesses. Explain WHY framework was chosen for this task.''
+
+\subsection*{Part 3 Feedback}
+
+\textbf{Strong submission:}\\
+``Thoughtful reflection showing clear progression from basic to advanced prompting. Practical application is realistic with appropriate framework choices. Ethics discussion considers hallucination risks and proposes verification steps.''
+
+\textbf{Needs improvement:}\\
+``Reflection is general --- provide specific `aha moment' example. Practical application needs concrete framework identification (which Week 3/4 technique?). Discuss LLM limitations from Week 2 more explicitly.''
+
+\end{document}

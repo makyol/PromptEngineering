@@ -1,0 +1,119 @@
+% Quiz: Prompt Engineering (Week 10) - Complex Problem Solving
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{enumitem}
+\geometry{margin=1in}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE Prompt Engineering \textemdash{} Quiz 5}\\[6pt]
+  {\large Name: \underline{\hspace{6cm}} \quad Date: \underline{\hspace{3cm}}}
+\end{center}
+\vspace{0.5cm}
+
+\textbf{Instructions:} This quiz contains 12 multiple-choice questions based on the "Prompting for Complex Problem Solving" lecture. Answer all questions. 
+\vspace{0.5cm}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{\#\arabic*}]
+
+  \item What is the primary goal of \textbf{Decomposition} in the context of solving complex problems with LLMs?
+    \begin{enumerate}[label=\Alph*)]
+      \item To reduce the number of tokens used in the prompt.
+      \item To break down ambiguous or large problems into manageable, promptable components.
+      \item To force the model to use external tools like a calculator.
+      \item To increase the temperature setting of the model.
+    \end{enumerate}
+
+  \item Which prompting technique encourages the model to "show its work" or reasoning steps before providing a final answer?
+    \begin{enumerate}[label=\Alph*)]
+      \item Zero-Shot Prompting
+      \item Chain-of-Thought (CoT)
+      \item Few-Shot Prompting
+      \item Retrieval Augmented Generation (RAG)
+    \end{enumerate}
+
+  \item How does the \textbf{Tree of Thoughts (ToT)} framework differ from standard linear reasoning?
+    \begin{enumerate}[label=\Alph*)]
+      \item It forces the model to answer immediately without thinking.
+      \item It explores multiple possible reasoning paths or branches simultaneously.
+      \item It relies solely on external search engines for answers.
+      \item It is only used for creative writing tasks.
+    \end{enumerate}
+
+  \item In the \textbf{ReAct} framework, what are the three core components of the loop?
+    \begin{enumerate}[label=\Alph*)]
+      \item Input, Process, Output
+      \item Thought, Action, Observation
+      \item Plan, Execute, Review
+      \item Context, Question, Answer
+    \end{enumerate}
+
+  \item What is the main advantage of \textbf{Retrieval Augmented Generation (RAG)}?
+    \begin{enumerate}[label=\Alph*)]
+      \item It allows the model to run faster on local hardware.
+      \item It reduces hallucinations by grounding the model's answer in retrieved external context.
+      \item It increases the model's training data permanently.
+      \item It removes the need for prompt engineering.
+    \end{enumerate}
+
+  \item What does the acronym \textbf{MECE} stand for in problem structuring?
+    \begin{enumerate}[label=\Alph*)]
+      \item Most Efficient, Cost Effective
+      \item Mutually Exclusive, Collectively Exhaustive
+      \item Maximum Effort, Critical Evaluation
+      \item Multi-Environment, Cloud Enabled
+    \end{enumerate}
+
+  \item In the \textbf{SCQA} framework, what does the "C" stand for?
+    \begin{enumerate}[label=\Alph*)]
+      \item Context
+      \item Complication
+      \item Conclusion
+      \item Cost
+    \end{enumerate}
+
+  \item What is the first step in \textbf{Least-to-Most Prompting}?
+    \begin{enumerate}[label=\Alph*)]
+      \item Solve the hardest part of the problem first.
+      \item Decompose the problem into a list of sub-questions.
+      \item Ask the model to guess the final answer.
+      \item Provide a dictionary of terms.
+    \end{enumerate}
+
+  \item How does \textbf{Self-Consistency} improve the reliability of LLM outputs?
+    \begin{enumerate}[label=\Alph*)]
+      \item By asking the model to answer the same question multiple times and picking the most frequent answer.
+      \item By restricting the model to a single possible answer.
+      \item By increasing the model's vocabulary size.
+      \item By using a larger context window.
+    \end{enumerate}
+
+  \item What is the purpose of \textbf{Adversarial Prompting} (or Red Teaming) your own plan?
+    \begin{enumerate}[label=\Alph*)]
+      \item To make the model angry.
+      \item To find logical gaps, risky assumptions, and flaws in the proposed solution.
+      \item To generate more polite responses.
+      \item To translate the plan into another language.
+    \end{enumerate}
+
+  \item Why might an LLM need to use an external tool like a \textbf{Calculator}?
+    \begin{enumerate}[label=\Alph*)]
+      \item LLMs are probabilistic text predictors and often struggle with precise arithmetic.
+      \item LLMs cannot process numbers at all.
+      \item Calculators are faster than LLMs at generating text.
+      \item To save battery power on the server.
+    \end{enumerate}
+
+  \item What is a common issue caused by \textbf{Greedy Decoding} in LLMs when planning?
+    \begin{enumerate}[label=\Alph*)]
+      \item The model refuses to answer.
+      \item The model picks the most likely \textit{next} word without considering the long-term goal.
+      \item The model generates text in the wrong language.
+      \item The model crashes due to memory errors.
+    \end{enumerate}
+
+\end{enumerate}
+
+\end{document}

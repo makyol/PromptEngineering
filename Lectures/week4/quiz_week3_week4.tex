@@ -1,0 +1,120 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+\title{Prompt Engineering Quiz: Week 3 \& 4}
+\author{Ankara Medipol University}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Instructions}
+Please choose the best answer for each of the following questions.
+
+\begin{enumerate}
+
+    \item Which component of a good prompt specifies the persona the AI should adopt and the target reader?
+    \begin{enumerate}
+        \item Output Spec
+        \item Context
+        \item Role/Audience
+        \item Constraints
+    \end{enumerate}
+
+    \item When you provide 1-3 high-quality examples of the desired output format in your prompt, what pattern are you using?
+    \begin{enumerate}
+        \item Zero-shot prompting
+        \item Few-shot prompting
+        \item Role prompting
+        \item Reflection prompting
+    \end{enumerate}
+
+    \item What is the primary purpose of Retrieval-Augmented Generation (RAG)?
+    \begin{enumerate}
+        \item To make the model's responses more creative and imaginative.
+        \item To ground the model's answers in provided, specific context.
+        \item To translate the model's output into different languages.
+        \item To have the model critique its own work before finalizing an answer.
+    \end{enumerate}
+
+    \item The instruction "Let's think step by step" is a common way to trigger which reasoning technique, especially when no examples are provided?
+    \begin{enumerate}
+        \item Tree-of-Thoughts (ToT)
+        \item Zero-shot Chain-of-Thought (CoT)
+        \item Self-consistency
+        \item Plan-then-solve
+    \end{enumerate}
+
+    \item Why are delimiters like triple backticks (\texttt{\`\`\`}) important in a prompt?
+    \begin{enumerate}
+        \item They make the prompt run faster.
+        \item They are required for all prompts to work.
+        \item They clearly separate instructions from data or context, reducing ambiguity.
+        \item They automatically format the output as a code block.
+    \end{enumerate}
+
+    \item Asking the model to "be brief" and "include all details" in the same prompt is an example of which anti-pattern?
+    \begin{enumerate}
+        \item Overloaded ask
+        \item Vague audience
+        \item Hidden constraints
+        \item Conflicting directives
+    \end{enumerate}
+
+    \item Which framework is adapted from project management and uses the components: Context, Objective, Style, Tone, Audience, and Response?
+    \begin{enumerate}
+        \item SMART
+        \item RACI
+        \item IDEA
+        \item CO-STAR
+    \end{enumerate}
+
+    \item What is the main difference between a prompt pattern and a prompt framework?
+    \begin{enumerate}
+        \item Patterns are for simple tasks, while frameworks are only for complex AI.
+        \item Frameworks package multiple patterns into a reusable, structured template for a workflow.
+        \item Patterns define the output format, while frameworks define the input data.
+        \item There is no difference; the terms are interchangeable.
+    \end{enumerate}
+
+    \item The process of using an LLM to generate, critique, or refine another prompt is known as:
+    \begin{enumerate}
+        \item Prompt Chaining
+        \item Meta-Prompting
+        \item Dynamic Few-Shot Selection
+        \item Pattern Stacking
+    \end{enumerate}
+
+    \item In the context of LLMs, what does "Tool Use" or "Function Calling" allow the model to do?
+    \begin{enumerate}
+        \item Execute Python code directly within the model's environment.
+        \item Browse the internet without any restrictions.
+        \item Generate a structured JSON object specifying a function to be called and its arguments.
+        \item Automatically debug and fix errors in its own code.
+    \end{enumerate}
+
+    \item A comprehensive organizational asset that details a complete, multi-step workflow with prompts, human review steps, and guardrails is best described as a:
+    \begin{enumerate}
+        \item Prompt Pattern
+        \item Prompt Framework
+        \item Prompt Playbook
+        \item Prompt Template
+    \end{enumerate}
+
+    \item The IDEA Loop is a framework for continuous improvement. What does the "A" in IDEA stand for?
+    \begin{enumerate}
+        \item Analyze
+        \item Adjust
+        \item Audience
+        \item Action
+    \end{enumerate}
+
+\end{enumerate}
+
+\end{document}

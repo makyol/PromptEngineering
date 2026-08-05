@@ -1,0 +1,345 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{tabularx}
+
+% Header/Footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Prompt Engineering - Makeup Exam}
+\lhead{Ankara Medipol University}
+\rfoot{Page \thepage\ of \pageref{LastPage}}
+
+\title{\textbf{Prompt Engineering}\\\large Makeup Examination\\Fall 2025--2026}
+\author{Instructor: Mehmet Ali Akyol, PhD\\Ankara Medipol University}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\noindent\textbf{Student Name:} \underline{\hspace{6cm}} \hfill \textbf{Student ID:} \underline{\hspace{4cm}}
+
+\vspace{0.5cm}
+\noindent\textbf{Instructions:}
+\begin{itemize}[noitemsep]
+    \item This exam consists of 20 multiple-choice questions.
+    \item Each question is worth 5 points for a total of 100 points.
+    \item Select the \textbf{best} answer for each question.
+    \item You have 60 minutes to complete this exam.
+    \item No electronic devices or notes are permitted.
+    \item Mark your answers on the optical form provided.
+\end{itemize}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\begin{enumerate}
+
+\item A \textbf{prompt} in the context of AI is best defined as:
+\begin{enumerate}[label=\Alph*)]
+    \item The internal memory of an LLM
+    \item The training data used to build the model
+    \item The hardware that runs the AI system
+    \item The input message you give to an AI system to elicit a response
+\end{enumerate}
+
+\item What is \textbf{tokenization} in the context of LLMs?
+\begin{enumerate}[label=\Alph*)]
+    \item The process of encrypting user data
+    \item Generating authentication tokens for API access
+    \item Converting images into text descriptions
+    \item Breaking text into smaller chunks (tokens) that the model can process
+\end{enumerate}
+
+\item What are \textbf{embeddings} in LLM architecture?
+\begin{enumerate}[label=\Alph*)]
+    \item Physical components of the computer running the model
+    \item The user interface elements of AI applications
+    \item Error logs generated during model training
+    \item Numerical representations of tokens that capture semantic meaning
+\end{enumerate}
+
+\item The 2017 paper ``Attention Is All You Need'' introduced which key innovation?
+\begin{enumerate}[label=\Alph*)]
+    \item Self-attention mechanism (Transformer architecture)
+    \item Tokenization
+    \item Recurrent neural networks
+    \item Convolutional neural networks
+\end{enumerate}
+
+\item \textbf{Hallucination} in LLMs refers to:
+\begin{enumerate}[label=\Alph*)]
+    \item The model refusing to answer questions
+    \item The model asking clarifying questions
+    \item The model generating plausible but incorrect or fabricated information
+    \item The model running out of memory
+\end{enumerate}
+
+\item In the anatomy of a good prompt, which element specifies headings, JSON schema, or table columns?
+\begin{enumerate}[label=\Alph*)]
+    \item Task
+    \item Context
+    \item Constraints
+    \item Output Specification
+\end{enumerate}
+
+\item \textbf{Zero-shot prompting} is best described as:
+\begin{enumerate}[label=\Alph*)]
+    \item Giving just the task without any examples
+    \item Providing multiple examples before the task
+    \item Using images along with text
+    \item Chaining multiple prompts together
+\end{enumerate}
+
+\item \textbf{Few-shot prompting} is most useful when:
+\begin{enumerate}[label=\Alph*)]
+    \item You want to save tokens
+    \item The task is extremely simple
+    \item You need to steer style or format with specific examples
+    \item You want to reduce response time
+\end{enumerate}
+
+\item Which is an example of a ``prompt anti-pattern''?
+\begin{enumerate}[label=\Alph*)]
+    \item Specifying output format clearly
+    \item Providing relevant context
+    \item Setting clear constraints
+    \item Including conflicting directives like ``be brief'' and ``include all details''
+\end{enumerate}
+
+\item In Retrieval-Augmented Generation (RAG), what is the primary purpose?
+\begin{enumerate}[label=\Alph*)]
+    \item To speed up model inference
+    \item To reduce the model size
+    \item To ground answers with provided excerpts or references
+    \item To train the model on new data
+\end{enumerate}
+
+\item The \textbf{CO-STAR} framework stands for:
+\begin{enumerate}[label=\Alph*)]
+    \item Code, Output, Style, Testing, Analysis, Review
+    \item Context, Objective, Style, Tone, Audience, Response
+    \item Constraint, Optimization, Structure, Target, Action, Result
+    \item Chain, Order, Sequence, Task, Answer, Repeat
+\end{enumerate}
+
+\item \textbf{Meta-prompting} refers to:
+\begin{enumerate}[label=\Alph*)]
+    \item Using prompts to have an LLM generate or refine other prompts
+    \item Prompting about metadata
+    \item Using multiple models simultaneously
+    \item Prompting in multiple languages
+\end{enumerate}
+
+\item Which dimension of linguistic register controls terminology density?
+\begin{enumerate}[label=\Alph*)]
+    \item Tenor (Relationship)
+    \item Mode (Channel)
+    \item Field (Topic Domain)
+    \item Rhythm
+\end{enumerate}
+
+\item \textbf{Brand Voice Fingerprinting} involves:
+\begin{enumerate}[label=\Alph*)]
+    \item Creating biometric authentication
+    \item Recording audio samples of brand representatives
+    \item Extracting measurable voice attributes from existing content to ensure AI outputs match brand style
+    \item Generating unique identifiers for users
+\end{enumerate}
+
+\item What is the main advantage of using ``LLM-as-a-Judge'' for evaluation?
+\begin{enumerate}[label=\Alph*)]
+    \item It is always 100\% accurate
+    \item It eliminates the need for any human review
+    \item It enables scalable evaluation of thousands of outputs quickly
+    \item It reduces model training costs
+\end{enumerate}
+
+\item \textbf{Verbosity Bias} in LLM evaluation refers to:
+\begin{enumerate}[label=\Alph*)]
+    \item Models producing too few tokens
+    \item Preference for technical jargon
+    \item The tendency to rate longer answers as better, even if they contain fluff
+    \item Bias toward English-language responses
+\end{enumerate}
+
+\item \textbf{Tree of Thoughts (ToT)} differs from Chain-of-Thought by:
+\begin{enumerate}[label=\Alph*)]
+    \item Using fewer tokens
+    \item Being faster to execute
+    \item Requiring no examples
+    \item Exploring multiple reasoning branches and allowing backtracking
+\end{enumerate}
+
+\item The \textbf{IRAC} framework (Issue, Rule, Analysis, Conclusion) is specifically designed for:
+\begin{enumerate}[label=\Alph*)]
+    \item Medical diagnosis
+    \item Financial reporting
+    \item Software development
+    \item Legal reasoning and analysis
+\end{enumerate}
+
+\item The term \textbf{Automation Bias} refers to:
+\begin{enumerate}[label=\Alph*)]
+    \item Bias in robotic systems
+    \item Preference for automated testing
+    \item The tendency for humans to over-rely on AI outputs without critical verification
+    \item AI systems preferring automated tasks
+\end{enumerate}
+
+\item \textbf{Agentic AI} differs from traditional chatbots by being:
+\begin{enumerate}[label=\Alph*)]
+    \item Unable to use external tools
+    \item Text-only without multimodal capabilities
+    \item Proactive, multi-step, stateful, and capable of autonomous tool usage
+    \item Slower and less accurate
+\end{enumerate}
+
+\end{enumerate}
+
+\vspace{1cm}
+\hrule
+\vspace{0.5cm}
+
+\begin{center}
+\textbf{--- END OF EXAM ---}
+\end{center}
+
+\newpage
+%=============================================================================
+\section*{Optical Form Answer Sheet}
+%=============================================================================
+
+\noindent\textbf{Student Name:} \underline{\hspace{6cm}} \hfill \textbf{Student ID:} \underline{\hspace{4cm}}
+
+\vspace{1cm}
+
+\noindent\textbf{Instructions:} Fill in the circle completely for your answer choice. Use pencil only.
+
+\vspace{1cm}
+
+\begin{center}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{|c|c|c|c|c||c|c|c|c|c|}
+\hline
+\textbf{Q} & \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D} & \textbf{Q} & \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D} \\
+\hline
+1 & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & 11 & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ \\
+\hline
+2 & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & 12 & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ \\
+\hline
+3 & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & 13 & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ \\
+\hline
+4 & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & 14 & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ \\
+\hline
+5 & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & 15 & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ \\
+\hline
+6 & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & 16 & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ \\
+\hline
+7 & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & 17 & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ \\
+\hline
+8 & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & 18 & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ \\
+\hline
+9 & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & 19 & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ \\
+\hline
+10 & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & 20 & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ & $\bigcirc$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{2cm}
+
+\noindent\textbf{Instructor Signature:} \underline{\hspace{6cm}} \hfill \textbf{Date:} \underline{\hspace{4cm}}
+
+\newpage
+%=============================================================================
+\section*{Answer Key (For Instructor Use Only)}
+%=============================================================================
+
+\begin{center}
+\begin{tabular}{|c|c||c|c||c|c||c|c|}
+\hline
+\textbf{Q} & \textbf{Ans} & \textbf{Q} & \textbf{Ans} & \textbf{Q} & \textbf{Ans} & \textbf{Q} & \textbf{Ans} \\
+\hline
+1 & D & 6 & D & 11 & B & 16 & C \\
+2 & D & 7 & A & 12 & A & 17 & D \\
+3 & D & 8 & C & 13 & C & 18 & D \\
+4 & A & 9 & D & 14 & C & 19 & C \\
+5 & C & 10 & C & 15 & C & 20 & C \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{1cm}
+
+\section*{Detailed Answer Key with Explanations}
+
+\begin{enumerate}
+    \item \textbf{D} - A prompt is the input message given to an AI system.
+    \item \textbf{D} - Tokenization breaks text into processable chunks.
+    \item \textbf{D} - Embeddings are numerical vectors capturing semantic meaning.
+    \item \textbf{A} - The Transformer architecture introduced self-attention.
+    \item \textbf{C} - Hallucination is generating plausible but incorrect information.
+    \item \textbf{D} - Output Specification defines format like JSON, tables.
+    \item \textbf{A} - Zero-shot means no examples, just the task.
+    \item \textbf{C} - Few-shot steers style/format with examples.
+    \item \textbf{D} - Conflicting directives are a common anti-pattern.
+    \item \textbf{C} - RAG grounds answers with provided context.
+    \item \textbf{B} - CO-STAR: Context, Objective, Style, Tone, Audience, Response.
+    \item \textbf{A} - Meta-prompting uses prompts to generate/refine prompts.
+    \item \textbf{C} - Field (Topic Domain) controls terminology density.
+    \item \textbf{C} - Brand Voice Fingerprinting extracts measurable attributes.
+    \item \textbf{C} - LLM-as-Judge enables scalable evaluation.
+    \item \textbf{C} - Verbosity Bias favors longer answers.
+    \item \textbf{D} - ToT explores multiple branches with backtracking.
+    \item \textbf{D} - IRAC is for Legal reasoning.
+    \item \textbf{C} - Automation Bias is over-reliance on AI outputs.
+    \item \textbf{C} - Agentic AI is proactive, multi-step, stateful.
+\end{enumerate}
+
+\vspace{1cm}
+
+\section*{Topic Coverage by Question}
+
+\begin{itemize}
+    \item \textbf{Foundations} (Q1--Q5): Basic concepts of prompts, tokenization, embeddings, transformers, and hallucination
+    \item \textbf{Prompt Design Principles} (Q6--Q10): Output specification, zero-shot, few-shot, anti-patterns, and RAG
+    \item \textbf{Patterns and Frameworks} (Q11--Q12): CO-STAR framework and meta-prompting
+    \item \textbf{Style and Format Control} (Q13--Q14): Linguistic register and brand voice fingerprinting
+    \item \textbf{Evaluation Methods} (Q15--Q16): LLM-as-Judge and verbosity bias
+    \item \textbf{Complex Problem Solving} (Q17): Tree of Thoughts
+    \item \textbf{Domain-Specific Applications} (Q18): IRAC framework for legal reasoning
+    \item \textbf{Ethics and Responsible AI} (Q19--Q20): Automation bias and agentic AI
+\end{itemize}
+
+\vspace{1cm}
+
+\section*{Grading Scale}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Points} & \textbf{Grade} \\
+\hline
+90--100 & AA \\
+85--89 & BA \\
+80--84 & BB \\
+75--79 & CB \\
+70--74 & CC \\
+65--69 & DC \\
+60--64 & DD \\
+50--59 & FD \\
+0--49 & FF \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{document}

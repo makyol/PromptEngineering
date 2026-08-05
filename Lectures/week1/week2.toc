@@ -1,0 +1,4 @@
+\beamer@sectionintoc {1}{Overview}{2}{0}{1}
+\beamer@sectionintoc {2}{Core Concepts of LLMs}{4}{0}{2}
+\beamer@sectionintoc {3}{Training and Fine-Tuning}{15}{0}{3}
+\beamer@sectionintoc {4}{Capabilities, Limitations, and Activities}{17}{0}{4}

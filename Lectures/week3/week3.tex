@@ -1,0 +1,334 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+
+% Encoding and fonts for pdfLaTeX
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{hyperref}
+
+\title{Prompt Engineering}
+\author{Mehmet Ali Akyol, PhD}
+\institute{Ankara Medipol University}
+\date{\today}
+
+\begin{document}
+
+% Title
+\begin{frame}
+	\titlepage
+	\begin{center}
+		\vspace{1cm}
+			\textbf{Week 3: Principles of Good Prompt Design}
+	\end{center}
+\end{frame}
+
+\section{Overview}
+
+\begin{frame}
+	\frametitle{Where We Are}
+	\begin{itemize}
+		\item Week 1: What is prompt engineering? Use cases, ethics, and course setup.
+		\item Week 2: How LLMs work (non-technical): tokens, embeddings, and transformers.
+		\item \textbf{This week:} Practical prompting patterns that make models more reliable and useful in your domain.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Weekly Learning Objectives}
+	\begin{itemize}
+		\item Identify and apply core prompting patterns (zero-shot, few-shot, role, structure, step-by-step).
+		\item Write prompts that specify audience, tone, constraints, and output format.
+		\item Iterate prompts using critique-and-revise loops to improve results.
+		\item Avoid common anti-patterns that cause ambiguity, bias, or hallucination.
+		\item Use guardrails and structured outputs to increase reliability.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Key Concepts}
+	\begin{itemize}
+		\item Task framing and intent
+		\item Zero-shot vs.~few-shot prompting
+		\item Role prompting (persona, audience, tone)
+		\item Delimiters and structured output
+		\item Step-by-step and reflection prompting
+		\item Retrieval-augmented prompting (using provided context)
+		\item Iterative refinement (critique \textrightarrow{} improve)
+		\item Anti-patterns and safety considerations
+	\end{itemize}
+\end{frame}
+
+\section{Prompt Anatomy}
+
+\begin{frame}
+	\frametitle{Anatomy of a Good Prompt}
+	\begin{itemize}
+		\item \textbf{Task}: What to do; success criteria in 1--2 bullets.
+		\item \textbf{Context}: Facts, definitions, excerpts; what to ignore.
+		\item \textbf{Role/Audience}: Persona and target reader; tone/register.
+		\item \textbf{Constraints}: Length, format, banned topics, sources.
+		\item \textbf{Output Spec}: Headings, JSON schema, table columns.
+		\item \textbf{Evaluation}: Checks, rubric, citations, confidence.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Prompt Checklist (Use Before You Run)}
+	\begin{itemize}
+		\item Is the goal explicit and testable?
+		\item Is audience and tone specified?
+		\item Are inputs delimited and labeled clearly?
+		\item Does the output spec match downstream needs?
+		\item Are safety boundaries and fallbacks included?
+		\item Did you request brief reasoning or self-checks where useful?
+	\end{itemize}
+\end{frame}
+
+\section{Prompting Foundations}
+
+\begin{frame}
+	\frametitle{Prompting Principles}
+	\begin{itemize}
+		\item \textbf{Be explicit:} State the task, constraints, and success criteria.
+		\item \textbf{Specify the audience:} Student, patient, executive, developer, etc.
+		\item \textbf{Constrain the output:} Length, bullets vs.~prose, JSON schema, table.
+		\item \textbf{Provide context:} Definitions, data, or excerpts to ground the answer.
+		\item \textbf{Ask for reasoning when helpful:} ``Show steps'' or ``explain briefly why''.
+		\item \textbf{Iterate:} Review the output, then refine the prompt.
+	\end{itemize}
+\end{frame}
+
+\section{Core Patterns}
+
+\begin{frame}
+	\frametitle{Zero-shot vs. Few-shot}
+	\begin{itemize}
+		\item \textbf{Zero-shot:} Just the task, no examples. Good for simple, well-known tasks.
+		\item \textbf{Few-shot:} Provide 1--3 high-quality examples to steer style or format.
+		\item Tip: Keep examples short and representative; highlight edge cases sparingly.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Role Prompting (Persona, Audience, Tone)}
+	\begin{itemize}
+		\item Set a role: \textit{``You are a patient educator''} or \textit{``You are a senior data engineer''}.
+		\item Specify audience and tone: \textit{``for first-year students, friendly and concise''}.
+		\item Clarify scope: what to include/avoid; reading level; domain jargon threshold.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Delimiters and Structure}
+	\begin{itemize}
+		\item Use clear delimiters to separate instructions and data, e.g., triple backticks.
+		\item Request structured output for downstream use (JSON, CSV, bullet list).
+	\end{itemize}
+\vspace{0.2cm}
+\textbf{Example}
+\begin{verbatim}
+Task: Extract key facts as JSON.
+Text:
+```
+The Berlin Wall fell in 1989. It had divided East and West Berlin since 1961.
+```
+Output JSON schema: {"year": number, "event": string, "location": string}
+Only output valid JSON.
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Structured Output: Validation Tricks}
+	\begin{itemize}
+		\item Ask model to \textit{restate the schema} before output.
+		\item Include allowed values/enums, number ranges, and required fields.
+		\item Provide an \texttt{"example"} object and a short \texttt{"counterexample"}.
+		\item Fail gracefully: "If you cannot comply, return VALIDATION\_ERROR".
+	\end{itemize}
+\vspace{0.2cm}
+	extbf{Mini-Schema}
+\begin{verbatim}
+{"title": string, "level": oneOf["A1","B1","C1"], "bullets": string[3]}
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Step-by-step and Reflection}
+	\begin{itemize}
+		\item Ask for steps or a brief plan before the final answer (helps correctness and clarity).
+	\item Reflection prompts: \textit{Before finalizing, list 2 potential mistakes and fix them}
+	\item Keep reasoning concise to reduce verbosity; prefer targeted checks over generic \texttt{think step-by-step}.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Deeper Reasoning: Chain-of-Thought Variants}
+	\begin{itemize}
+		\item \textbf{Zero-shot CoT:} Trigger internal monologue with phrases like \textit{"Let's think step by step."}
+		\item \textbf{Few-shot CoT:} Provide examples that include the reasoning process, not just the final answer.
+		\item \textbf{Tree-of-Thoughts (ToT):} Ask the model to explore multiple reasoning paths, self-critique them, and then choose the best one.
+		\item \textbf{When to use:} Essential for logic puzzles, math problems, and multi-step planning where the process is as important as the result.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Reasoning Control Variants}
+	\begin{itemize}
+		\item Plan-then-solve: short plan \textrightarrow{} final answer only.
+		\item Critique-then-revise: rubric with 2--3 criteria; output revised version.
+		\item Self-consistency: generate 3 variants, pick consensus elements.
+		\item Debate-style: two brief personas; moderator summary only.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Retrieval-Augmented Prompting}
+	\begin{itemize}
+		\item Ground answers with provided excerpts, tables, or references.
+		\item Instruct the model to cite where each claim came from (line or paragraph IDs).
+	\item Include a fallback: \textit{If the answer is not in the context, say: not found in provided context}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{RAG: Do's and Don'ts}
+	\begin{itemize}
+		\item \textbf{Do}: Chunk context, label with IDs, and cap tokens.
+		\item \textbf{Do}: Ask for citation markers per claim (e.g., [p3, §2]).
+		\item \textbf{Don't}: Mix system instructions inside context blocks.
+		\item \textbf{Don't}: Assume model will ignore irrelevant excerpts—state it.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Advanced RAG Techniques}
+	\begin{itemize}
+		\item \textbf{Query Transformation:} Before searching, ask the LLM to rephrase the user's query into a better search term or a hypothetical document (HyDE).
+		\item \textbf{Re-ranking:} Retrieve a larger set of documents (e.g., 10-20) and use a second, lightweight LLM call to rank them for relevance before feeding the top K to the final prompt.
+		\item \textbf{Handling Contradictions:} When context sources conflict, instruct the model to highlight the discrepancy and report on both perspectives.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Iterative Refinement (Critique \textrightarrow{} Improve)}
+	\begin{itemize}
+		\item Phase 1 (Draft): Generate a short draft that meets constraints.
+		\item Phase 2 (Critique): Evaluate against rubric (accuracy, clarity, format, tone).
+		\item Phase 3 (Revise): Produce the improved version only.
+		\item Stops mode collapse and helps you converge on quality.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Common Anti-Patterns (Prompt Smells)}
+	\begin{itemize}
+		\item Overloaded ask: too many goals in one turn \textrightarrow{} split steps.
+		\item Hidden constraints: unstated data or evaluation rules.
+		\item Vague audience: no register guidance \textrightarrow{} define reader profile.
+		\item Conflicting directives: "be brief" and "include all details".
+		\item Unbounded output: missing limits \textrightarrow{} set caps and priority.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Safety and Guardrails}
+	\begin{itemize}
+		\item Add scope limits and disclaimers for sensitive domains.
+		\item Disallow private data; require anonymization if provided.
+		\item Refusal policy: specify when to decline and offer safe next steps.
+		\item Ask for uncertainty notes when facts materially matter.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Anti-patterns and Safety}
+	\begin{itemize}
+		\item Vague goals: \textit{"Write something about X"} \textrightarrow{} Define purpose, length, audience.
+		\item Hidden constraints: Share all required context; avoid trick questions.
+		\item Overloaded tasks: Split multi-step tasks into sequential prompts.
+		\item Unsafe asks: Add guardrails (no private data, no medical/financial advice, etc.).
+		\item Over-trusting: Require citations or checks when accuracy matters.
+	\end{itemize}
+\end{frame}
+
+\section{Worked Examples}
+
+\begin{frame}
+	\frametitle{Engineering Example}
+	\begin{itemize}
+		\item \textbf{Task:} Summarize error logs and suggest next diagnostic steps for a web API.
+		\item \textbf{Better prompt:} Role + structure + constraints + fallback.
+		\item \textbf{Output:} Bulleted issues, probable causes, next 3 checks, and a one-line risk note.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Policy Example}
+	\begin{itemize}
+		\item \textbf{Task:} Draft a 200-word executive brief on an AI bill using provided excerpts.
+		\item \textbf{Prompt:} RAG citations per claim, JSON metadata: {"risk": oneOf[low,med,high]}.
+		\item \textbf{Output:} Brief paragraph + 3 action items with citation tags.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Education Example}
+	\begin{itemize}
+		\item \textbf{Task:} Create a 15-minute lesson outline on photosynthesis for grade 8.
+		\item \textbf{Prompt:} Audience and tone, 3 learning objectives, 2 activities, 5-question exit ticket.
+		\item \textbf{Output:} Sections with timing; avoid jargon beyond grade level; include misconceptions to watch.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Medical Example}
+	\begin{itemize}
+		\item \textbf{Task:} Draft a patient-friendly explanation of an HbA1c lab result.
+		\item \textbf{Prompt:} Persona (diabetes educator), reading level (B1), structured bullets, safety disclaimer.
+		\item \textbf{Output:} Definition, why it matters, what the number means, lifestyle pointers, when to contact a clinician.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Pattern: Prompt Chaining}
+	\begin{block}{Concept}
+		Break a complex task into a pipeline of smaller, specialized prompts. The output of one prompt becomes the input for the next.
+	\end{block}
+	\begin{itemize}
+		\item \textbf{Prompt 1 (Extract):} Pull raw, unstructured information from a source document.
+		\item \textbf{Prompt 2 (Structure):} Convert the raw text into a clean, predictable JSON object.
+		\item \textbf{Prompt 3 (Summarize):} Use the structured JSON to generate a human-readable summary.
+		\item \textbf{Benefits:} Improves reliability, makes debugging easier, and allows for specialized roles at each step.
+	\end{itemize}
+\end{frame}
+
+% (Activities section removed and content integrated/expanded elsewhere)
+
+\section{Wrap-up}
+
+\begin{frame}
+	\frametitle{Key Takeaways}
+	\begin{itemize}
+		\item Clear intent, audience, and constraints make the biggest difference.
+		\item Few-shot, role, structure, and reflection are versatile building blocks.
+		\item Iterate: draft, critique, and revise to reach dependable quality.
+		\item Add guardrails and citations when accuracy and safety matter.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Questions and Discussion}
+	\begin{center}
+	{\Huge Thank You!}
+	\vspace{1cm}
+
+		\textbf{Dr.\ Mehmet Ali Akyol}\\
+		\texttt{mehmetali.akyol@gmail.com}
+	\vspace{1cm}
+
+	{\large Questions?}
+	\end{center}
+\end{frame}
+
+\end{document}
+

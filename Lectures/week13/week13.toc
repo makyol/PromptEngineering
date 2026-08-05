@@ -1,0 +1,7 @@
+\beamer@sectionintoc {1}{The Shift to Agentic AI}{2}{0}{1}
+\beamer@sectionintoc {2}{Advanced Architectures \& Models}{4}{0}{2}
+\beamer@sectionintoc {3}{Agentic AI \& Orchestration}{10}{0}{3}
+\beamer@sectionintoc {4}{Prompt Engineering Lifecycle \& Tooling}{15}{0}{4}
+\beamer@sectionintoc {5}{AI Security \& Risks}{19}{0}{5}
+\beamer@sectionintoc {6}{Strategic Recommendations}{22}{0}{6}
+\beamer@sectionintoc {7}{Wrap-up}{25}{0}{7}

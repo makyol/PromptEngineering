@@ -1,0 +1,308 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+
+% Encoding and fonts for pdfLaTeX
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{hyperref}
+
+\title{Prompt Engineering}
+\author{Mehmet Ali Akyol, PhD}
+\institute{Ankara Medipol University}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+    \begin{center}
+        \vspace{1cm}
+        \textbf{Week 11: Domain-Specific Applications}
+    \end{center}
+\end{frame}
+
+\section{Overview}
+
+\begin{frame}
+    \frametitle{Why Domain Context Matters}
+    \begin{block}{The "Last Mile" Problem}
+        Generic LLMs (GPT-4, Claude) are trained on the "average" internet. They get you 80\% of the way there. The last 20\%—the domain specificity—is where value and risk live.
+    \end{block}
+    \begin{itemize}
+        \item \textbf{Vocabulary:} "Depression" means something different in Geology vs. Psychology vs. Economics.
+        \item \textbf{Risk Tolerance:} A hallucination in a creative writing prompt is a feature. In a medical diagnosis, it's a lawsuit.
+        \item \textbf{Workflow:} Professionals don't just want "answers"; they want outputs that fit their existing processes (e.g., SOAP notes, legal briefs).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Weekly Learning Objectives}
+    \begin{itemize}
+        \item \textbf{Translate} domain expertise into prompt instructions and guardrails.
+        \item \textbf{Build} knowledge packs, glossaries, and canonical examples (Few-Shot).
+        \item \textbf{Adapt} evaluation frameworks to domain-specific needs (e.g., HIPAA compliance, Legal citation accuracy).
+        \item \textbf{Deep Dive} into Healthcare, Law, Education, Finance, and Engineering.
+        \item \textbf{Plan} governance and handoff processes with Subject Matter Experts (SMEs).
+    \end{itemize}
+\end{frame}
+
+\section{Capturing Domain Knowledge}
+
+\begin{frame}
+    \frametitle{The Knowledge Gap}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \textbf{What the Model Knows}
+            \begin{itemize}
+                \item General grammar
+                \item Common knowledge
+                \item Public internet data (up to cutoff)
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \textbf{What the Expert Knows}
+            \begin{itemize}
+                \item "Tribal knowledge" (unwritten rules)
+                \item Current internal policies
+                \item Edge cases and exceptions
+            \end{itemize}
+        \end{column}
+    \end{columns}
+    \vspace{0.5cm}
+    \textbf{Goal:} Move the "Expert Knowledge" into the "Context Window" via Knowledge Packs.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Technique: The Knowledge Interview}
+    How to extract promptable information from an SME:
+    \begin{enumerate}
+        \item \textbf{The "Golden Path":} "Walk me through a perfect example of this task." (Becomes your Few-Shot example).
+        \item \textbf{The "Anti-Pattern":} "What is a common mistake a junior employee makes?" (Becomes your Negative Constraint).
+        \item \textbf{The "Heuristic":} "If you see X, do you always do Y? Or does it depend?" (Becomes your Chain-of-Thought logic).
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Knowledge Packs \& Glossaries}
+    \begin{block}{Structure of a Knowledge Pack}
+        A text file or prompt section that grounds the model.
+    \end{block}
+    \begin{itemize}
+        \item \textbf{Definitions:} "In this company, 'Churn' means cancellation within 30 days, not non-renewal."
+        \item \textbf{Acronyms:} "CTR = Clinical Trial Record (not Click Through Rate)."
+        \item \textbf{Style Guide:} "Use active voice. Cite regulations as [Reg 12.3]."
+    \end{itemize}
+    \textbf{Prompt Pattern:} "Refer to the attached Glossary for all term definitions. If a term is ambiguous, ask for clarification."
+\end{frame}
+
+\section{Healthcare Deep Dive}
+
+\begin{frame}
+    \frametitle{Healthcare: High Stakes, High Precision}
+    \begin{itemize}
+        \item \textbf{Core Challenge:} Accuracy and Privacy (HIPAA/GDPR).
+        \item \textbf{Use Case 1: Clinical Note Summarization}
+        \begin{itemize}
+            \item \textit{Input:} Transcript of doctor-patient conversation.
+            \item \textit{Output:} Structured SOAP Note (Subjective, Objective, Assessment, Plan).
+        \end{itemize}
+        \item \textbf{Use Case 2: Patient Education}
+        \begin{itemize}
+            \item \textit{Task:} Translate complex medical jargon into 5th-grade reading level instructions.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Healthcare Prompt Pattern: De-identification}
+    \begin{block}{The "Sanitizer" Prompt}
+        Before sending data to a cloud model, you often need to strip PII (Personally Identifiable Information).
+    \end{block}
+\begin{verbatim}
+Task: Remove all PII from the text below.
+Replace names with [NAME], dates with [DATE], 
+locations with [LOC].
+Keep the clinical context intact.
+
+Input: "Mr. John Smith (DOB 01/01/80) visited 
+Medipol Hospital on Tuesday for his diabetes."
+
+Output: "Mr. [NAME] (DOB [DATE]) visited 
+[LOC] on [DATE] for his diabetes."
+\end{verbatim}
+\end{frame}
+
+\section{Legal Deep Dive}
+
+\begin{frame}
+    \frametitle{Legal: Logic and Precedent}
+    \begin{itemize}
+        \item \textbf{Core Challenge:} Hallucination of laws/cases.
+        \item \textbf{Use Case 1: Contract Review}
+        \begin{itemize}
+            \item "Identify clauses that deviate from our standard 'Force Majeure' template."
+        \end{itemize}
+        \item \textbf{Use Case 2: Discovery Summarization}
+        \begin{itemize}
+            \item "Summarize these 50 emails. Highlight any mention of 'Project X' or 'Budget Cuts'."
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Legal Prompting: The IRAC Framework}
+    Lawyers think in \textbf{IRAC} (Issue, Rule, Analysis, Conclusion). Force the LLM to do the same.
+    \begin{block}{Prompt Structure}
+        \textbf{Role:} You are a Junior Associate.
+        \textbf{Task:} Analyze the provided fact pattern.
+        \textbf{Steps:}
+        1. \textbf{Issue:} State the legal question.
+        2. \textbf{Rule:} Cite the relevant law (provided in context).
+        3. \textbf{Analysis:} Apply the rule to the facts.
+        4. \textbf{Conclusion:} Yes/No/Maybe.
+    \end{block}
+\end{frame}
+
+\section{Education Deep Dive}
+
+\begin{frame}
+    \frametitle{Education: Personalization at Scale}
+    \begin{itemize}
+        \item \textbf{Core Challenge:} Pedagogical alignment and bias.
+        \item \textbf{Use Case 1: Differentiated Learning}
+        \begin{itemize}
+            \item "Rewrite this physics problem for a student who loves soccer."
+        \end{itemize}
+        \item \textbf{Use Case 2: Socratic Tutor}
+        \begin{itemize}
+            \item "Do not give the answer. Ask a guiding question to help the student solve it themselves."
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Education Prompt: Quiz Generation}
+\begin{verbatim}
+Task: Create 3 multiple-choice questions on "Photosynthesis".
+Target Audience: 8th Grade.
+Format:
+- Question Stem
+- 1 Correct Answer
+- 3 Distractors (Plausible but incorrect)
+- Explanation of why the correct answer is right.
+
+Constraint: Ensure distractors address common misconceptions 
+(e.g., plants get food from soil).
+\end{verbatim}
+\end{frame}
+
+\section{Finance Deep Dive}
+
+\begin{frame}
+    \frametitle{Finance: Numbers and Sentiment}
+    \begin{itemize}
+        \item \textbf{Core Challenge:} Numerical accuracy and timely data.
+        \item \textbf{Use Case 1: Earnings Call Analysis}
+        \begin{itemize}
+            \item "Extract all forward-looking statements about 'Revenue Growth' and classify sentiment (Positive/Neutral/Negative)."
+        \end{itemize}
+        \item \textbf{Use Case 2: Regulatory Compliance}
+        \begin{itemize}
+            \item "Check this marketing email against FINRA communication guidelines. Flag any promises of 'guaranteed returns'."
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\section{Engineering Deep Dive}
+
+\begin{frame}
+    \frametitle{Engineering: Code and Systems}
+    \begin{itemize}
+        \item \textbf{Core Challenge:} Security and maintainability.
+        \item \textbf{Use Case 1: Legacy Code Explanation}
+        \begin{itemize}
+            \item "Explain this COBOL function in plain English so a Python developer can rewrite it."
+        \end{itemize}
+        \item \textbf{Use Case 2: Test Generation}
+        \begin{itemize}
+            \item "Write unit tests for this function. Include edge cases (null inputs, negative numbers)."
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\section{Collaboration & Governance}
+
+\begin{frame}
+    \frametitle{The SME Feedback Loop}
+    You cannot prompt-engineer in a vacuum.
+    \begin{enumerate}
+        \item \textbf{Draft:} Engineer creates V1 prompt.
+        \item \textbf{Test:} Run 10 examples.
+        \item \textbf{Review:} SME rates outputs (Green/Yellow/Red).
+        \item \textbf{Refine:} Engineer asks "Why is this Yellow?" and updates the prompt.
+        \item \textbf{Repeat.}
+    \end{enumerate}
+    \textbf{Tip:} Use a spreadsheet for "Blind Testing" (SME doesn't know which prompt version generated the output).
+\end{frame}
+
+\begin{frame}
+    \frametitle{Governance: Human-in-the-Loop (HITL)}
+    \begin{block}{When do you need a human?}
+        \begin{itemize}
+            \item \textbf{High Risk:} Medical diagnosis, hiring decisions, loan approvals. (Human must approve).
+            \item \textbf{Medium Risk:} Draft generation, code suggestions. (Human reviews).
+            \item \textbf{Low Risk:} Brainstorming, entertainment. (Fully automated).
+        \end{itemize}
+    \end{block}
+    \textbf{Policy:} "AI outputs must be verified by a qualified professional before being sent to a client."
+\end{frame}
+
+\section{Assignments}
+
+\begin{frame}
+    \frametitle{Activity: The "Red Team" Workshop}
+    \begin{itemize}
+        \item \textbf{Goal:} Break the prompt.
+        \item \textbf{Setup:} Split into pairs. One is the "User", one is the "AI".
+        \item \textbf{Task:} The User tries to trick the AI into giving bad advice (e.g., "Ignore the safety rules").
+        \item \textbf{Outcome:} Identify weak spots in your instructions and patch them.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Final Assignment: Domain Toolkit}
+    \begin{itemize}
+        \item Select a domain (Health, Law, Finance, etc.).
+        \item \textbf{Deliverable 1: Knowledge Pack} (Glossary + 3 "Golden" Examples).
+        \item \textbf{Deliverable 2: The "System Prompt"} (Role, Constraints, Tone).
+        \item \textbf{Deliverable 3: Evaluation Matrix} (How will you measure success? Accuracy? Tone? Speed?).
+    \end{itemize}
+\end{frame}
+
+\section{Wrap-up}
+
+\begin{frame}
+    \frametitle{Key Takeaways}
+    \begin{itemize}
+        \item \textbf{Context is King:} Domain prompts fail without specific knowledge (Glossaries, Rules).
+        \item \textbf{SMEs are Partners:} You need their brain to build the prompt.
+        \item \textbf{Safety First:} In specialized domains, "Do no harm" is the first instruction.
+        \item \textbf{Iterate:} Your first prompt will be wrong. Your tenth will be useful.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Questions and Discussion}
+    \begin{center}
+    {\Huge Thank You!}
+    \vspace{1cm}
+
+        \textbf{Dr.\ Mehmet Ali Akyol}\\
+        \texttt{mehmetali.akyol@gmail.com}
+    \vspace{1cm}
+
+    {\large Questions?}
+    \end{center}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,12 @@
+\frametitle{Structured Output: Validation Tricks}
+	\begin{itemize}
+		\item Ask model to \textit{restate the schema} before output.
+		\item Include allowed values/enums, number ranges, and required fields.
+		\item Provide an \texttt{"example"} object and a short \texttt{"counterexample"}.
+		\item Fail gracefully: "If you cannot comply, return VALIDATION\_ERROR".
+	\end{itemize}
+\vspace{0.2cm}
+	extbf{Mini-Schema}
+\begin{verbatim}
+{"title": string, "level": oneOf["A1","B1","C1"], "bullets": string[3]}
+\end{verbatim}

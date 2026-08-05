@@ -1,0 +1,15 @@
+\frametitle{Deep Dive: The Judge Prompt}
+    \begin{block}{Template}
+        \small
+        ``You are an impartial judge. Evaluate the Assistant's response to the User's question.
+
+        \textbf{User Question:} [Insert Input]
+        \textbf{Assistant Response:} [Insert Output]
+        \textbf{Ground Truth:} [Insert Correct Answer]
+
+        Score the response from 1 to 5 based on:
+        1. Correctness (Is it factually true?)
+        2. Completeness (Did it answer all parts?)
+
+        Output format: JSON \{'score': int, 'reasoning': string\}''
+    \end{block}

@@ -1,0 +1,163 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\geometry{margin=1in}
+
+\title{Sample Midterm Submission\thanks{Illustrative content prepared by the instructor.}}
+\author{Dr.~Mehmet Ali Akyol}
+\date{Fall 2025}
+
+\begin{document}
+\maketitle
+
+\section*{Honor Statement}
+I confirm that the artefacts, prompt designs, critiques, and reflections contained in this dossier are my original work, created specifically for the Prompt Engineering midterm examination. Any external tools were used only as documented within the appendix, and all model-generated text was critically reviewed, edited, and annotated prior to inclusion.
+
+\section{Scenario Portfolio}
+\subsection{Domain 1: Oncology Outpatient Care}
+\textbf{Stakeholders:} Oncologists, nurse navigators, patients starting chemotherapy.
+
+\textbf{Task:} Produce a patient-friendly treatment roadmap covering medication schedule, expected side effects, and escalation instructions.
+
+\textbf{Justification:} High stakes communication requires precise tone, controlled vocabulary, and explicit guardrails---all core concepts from our early sessions on audience analysis and prompt brief construction.
+
+\noindent\textbf{Offline Ideation Artefact:} Figure~\ref{fig:whiteboard} shows whiteboard notes captured during a planning meeting with the oncology nursing lead. Key insights (colour coded) informed persona selection and constraint lists.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figures/whiteboard_oncology_placeholder.png}
+    \caption{Annotated whiteboard sketch outlining domain assumptions and constraints (scanned on 7~Oct~2025).}
+    \label{fig:whiteboard}
+\end{figure}
+
+\subsection{Domain 2: Municipal Infrastructure Planning}
+\textbf{Task:} Summarise citizen feedback on a proposed tram extension and map concerns to responsible departments.
+
+\textbf{Stakeholders:} City council analysts, transport engineers, community outreach teams.
+
+\textbf{Justification:} Requires balancing factual extraction with tone calibration for public communication.
+
+\subsection{Domain 3: Graduate-Level Machine Learning Course Support}
+\textbf{Task:} Generate formative quiz questions aligned to weekly learning objectives, ensuring Bloom's taxonomy coverage.
+
+\textbf{Stakeholders:} Course instructors, teaching assistants, students.
+
+\textbf{Justification:} Demonstrates educational prompt structures and the need for schema enforcement.
+
+\section{Model Mechanics Insight Log}
+\subsection{Experimental Setup}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Models:} Frontier model (GPT-4o October 2025 release) and lightweight open-source model (LLaMA-3 8B Instruct).
+    \item \textbf{Task:} Oncology treatment roadmap prompt v1.
+    \item \textbf{Variables:} Temperature (0.2 vs 0.8), max token limit (600 vs 300), inclusion/exclusion of few-shot exemplars.
+\end{itemize}
+
+\subsection{Findings}
+\begin{enumerate}[label=2.\arabic*]
+    \item \textbf{Token Accounting:} Frontier model consumed 482 tokens for temperature 0.2 with examples; lightweight model truncated at 301 tokens due to smaller context window. Table~\ref{tab:tokens} summarises counts and estimated costs.
+    \item \textbf{Mechanistic Insight:} Higher temperature introduced creative but clinically risky suggestions (e.g., recommending over-the-counter supplements). Few-shot examples anchored both models to safer phrasing. Differences align with expectations about attention distributions in larger models (better long-range coherence) versus smaller models (limited capacity, higher hallucination risk).
+\end{enumerate}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{lccc}
+        \hline
+        Configuration & Tokens (prompt) & Tokens (completion) & Estimated Cost (USD) \\
+        \hline
+        GPT-4o, $T=0.2$, few-shot & 220 & 262 & 0.031 \\
+        GPT-4o, $T=0.8$, no examples & 180 & 295 & 0.032 \\
+        LLaMA-3 8B, $T=0.2$, few-shot & 220 & 210 & 0.002 (GPU hour) \\
+        LLaMA-3 8B, $T=0.8$, no examples & 180 & 121 (truncated) & 0.001 \\
+        \hline
+    \end{tabular}
+    \caption{Token usage and approximate cost per experiment.}
+    \label{tab:tokens}
+\end{table}
+
+\subsection{Transformer Attention Sketch}
+Figure~\ref{fig:attention} illustrates my handwritten depiction of how attention heads prioritised symptom management instructions versus escalation clauses.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{figures/attention_sketch_placeholder.png}
+    \caption{Hand-drawn attention flow highlighting cross-token dependencies.}
+    \label{fig:attention}
+\end{figure}
+
+\section{Prompt Pattern Stack}
+\subsection{Oncology Task}
+\paragraph{Pattern Stack Summary}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Role Pattern:} "You are an oncology nurse navigator" to ensure empathetic phrasing.
+    \item \textbf{Format Pattern:} Structured sections (Schedule, Symptom Monitoring, When to Call).
+    \item \textbf{Reasoning Pattern:} Step-by-step verification checklist appended at the end.
+    \item \textbf{Framework:} CO-STAR canvas completed with contextual bullet points.
+\end{itemize}
+
+\paragraph{Prompt Evolution}
+\textbf{v1 Excerpt:}
+\begin{quote}
+You are an oncology nurse navigator. Draft a treatment roadmap for the next six weeks including medication timing, side effects, and emergency contacts. Use a welcoming tone and bullet list.
+\end{quote}
+
+\textbf{Critique Rubric:}
+\begin{enumerate}[label*=\arabic*.]
+    \item Clarity of instructions (0--3).
+    \item Coverage of safety guardrails (0--3).
+    \item Audience alignment (0--3).
+    \item Format adherence (0--3).
+\end{enumerate}
+
+\textbf{Rubric Outcome:} 8/12 due to missing dosage clarification and escalation thresholds.
+
+\textbf{v2 Improvements:} Added explicit delimiters, symptom-specific instructions, and a validation checklist instructing the model to confirm it included oncologist contact info. Annotated screenshot in Appendix A.1 details each modification.
+
+\section{Tone, Style, and Format Stress Test}
+\subsection{Infrastructure Brief}
+\paragraph{Tone Ladder}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Formal:} Used municipal memo template. Post-annotation notes highlighted compliance with passive voice limits.
+    \item \textbf{Neutral:} Balanced plain language with technical details; flagged a drift where the model introduced colloquialisms---manually corrected and logged.
+    \item \textbf{Conversational:} Employed second-person address while retaining key deadlines. Manual annotation confirmed inclusive language.
+\end{itemize}
+
+\paragraph{Schema Validation}
+Defined JSON schema for citizen feedback triage. Frontier model complied 3/3 times; lightweight model omitted the "department" field twice. Documented remediation by instructing the model to restate the schema before responding.
+
+\section{Iterative Refinement Case Study}
+\subsection{Graduate ML Quiz Generator}
+\paragraph{Iteration Log}
+\begin{enumerate}[label=5.\arabic*]
+    \item \textbf{Cycle 1:} Prompt produced questions clustered at lower Bloom levels. Critique prompt emphasised taxonomy distribution.
+    \item \textbf{Cycle 2:} Incorporated table format and reasoning trace. Minor hallucination in referencing a topic not yet covered; addressed by injecting syllabus excerpt.
+    \item \textbf{Cycle 3:} Added judge prompt to verify each question's difficulty tag. Achieved balanced distribution and accurate references.
+\end{enumerate}
+
+\paragraph{Quantitative Summary}
+Figure~\ref{fig:progress} visualises improvements across cycles. Accuracy rose from 60\% to 90\%; tone consistency stabilised after Cycle 2.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figures/iteration_progress_placeholder.png}
+    \caption{Comparison chart of key metrics per iteration (generated in LibreOffice Calc).}
+    \label{fig:progress}
+\end{figure}
+
+\paragraph{Reflection (Excerpt)}
+"The critique prompt focused on Bloom's taxonomy forced the model to reconsider question depth without me rewriting the entire instruction set. The judge prompt later ensured compliance with the 2/2/2 distribution target. If operationalising this workflow, I would automate the schema validation and taxonomy scoring while keeping human review for novelty and ambiguity checks."
+
+\section{Authenticity Measures}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Peer Feedback:} Appendix B contains signed notes from a 12-minute session with classmate Ayşe Demir, who recommended strengthening the escalation language in the oncology prompt.
+    \item \textbf{Model Interaction Log:} Appendix C lists all prompts and outputs with timestamps. Highlighted segments indicate manual edits.
+    \item \textbf{Links to Artefacts:} Photos, spreadsheets, and raw transcripts stored in \texttt{MIDTERM\_Sample\_APPENDIX.zip}.
+\end{itemize}
+
+\section{Optional Bonus Memo (Summary)}
+Prepared a one-page proposal for the Ankara Medipol University Teaching and Learning Center outlining how the quiz-generation workflow could be adopted, including roles (instructional designer, SME reviewer), tooling (prompt repository, evaluation dashboard), and risk controls.
+
+\end{document}

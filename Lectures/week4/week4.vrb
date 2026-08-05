@@ -1,0 +1,10 @@
+\frametitle{Deep Dive: RACI Prompt Canvas}
+	\begin{block}{Origin}
+		Adapted from the classic RACI project management matrix (Responsible, Accountable, Consulted, Informed), which has been used for decades to clarify roles in complex projects.
+	\end{block}
+    \begin{itemize}
+        \item \textbf{R}ole: \textit{You are a helpful, expert-level programming assistant.}
+        \item \textbf{A}ction: \textit{Refactor the provided Python code to be more idiomatic and efficient.}
+        \item \textbf{C}onstraints: \textit{Use list comprehensions where appropriate and ensure the code adheres to PEP 8 standards.}
+        \item \textbf{I}nput: \textit{The code to be refactored is provided below in the text block.}
+    \end{itemize}

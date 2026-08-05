@@ -1,0 +1,7 @@
+\beamer@sectionintoc {1}{Overview}{2}{0}{1}
+\beamer@sectionintoc {2}{Project Showcase}{3}{0}{2}
+\beamer@sectionintoc {3}{Synthesis}{5}{0}{3}
+\beamer@sectionintoc {4}{Reflection}{7}{0}{4}
+\beamer@sectionintoc {5}{Looking Forward}{9}{0}{5}
+\beamer@sectionintoc {6}{Course Evaluation}{11}{0}{6}
+\beamer@sectionintoc {7}{Closing}{12}{0}{7}

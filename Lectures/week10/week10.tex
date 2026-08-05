@@ -1,0 +1,427 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+
+% Encoding and fonts for pdfLaTeX
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{hyperref}
+
+\title{Prompt Engineering}
+\author{Mehmet Ali Akyol, PhD}
+\institute{Ankara Medipol University}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+    \begin{center}
+        \vspace{1cm}
+        \textbf{Week 10: Prompting for Complex Problem Solving}
+    \end{center}
+\end{frame}
+
+\section{Overview}
+
+\begin{frame}
+    \frametitle{Weekly Learning Objectives}
+    \begin{itemize}
+        \item \textbf{Decomposition:} Break down ambiguous problems into promptable components.
+        \item \textbf{Reasoning:} Facilitate reasoning chains (CoT), scenario analysis, and simulation.
+        \item \textbf{Augmentation:} Integrate external knowledge bases and tools (Search, Code).
+        \item \textbf{Validation:} Manage uncertainty with hypotheses, assumptions, and validation.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{From Tasks to Problems}
+    \begin{block}{The Shift}
+        In previous weeks, we focused on \textbf{Tasks}: discrete, well-defined actions (e.g., "Summarize this," "Write code for X").
+    \end{block}
+    \begin{itemize}
+        \item \textbf{Simple Tasks:} Linear, one right answer, low ambiguity.
+        \item \textbf{Complex Problems:} Non-linear, multiple valid solutions, high ambiguity (e.g., "How do we reduce customer churn?").
+        \item \textbf{The Challenge:} LLMs struggle with long-horizon planning without guidance.
+        \item \textbf{The Solution:} We must act as \textbf{Architects}, breaking the problem down into manageable "promptable" chunks.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Cognitive Architecture of LLMs}
+    \begin{block}{Why do they struggle with planning?}
+        LLMs are probabilistic next-token predictors, not logical planners with an internal world model.
+    \end{block}
+    \begin{itemize}
+        \item \textbf{No Internal State:} They don't "remember" the plan unless it's in the context window.
+        \item \textbf{Greedy Decoding:} They often pick the most likely \textit{next} word, not the best word for a goal 10 steps away.
+        \item \textbf{Hallucination Accumulation:} One small error in step 1 compounds by step 10.
+    \end{itemize}
+    \textbf{Implication:} We must externalize the "state" and "plan" into the prompt itself.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Key Concepts}
+    \begin{itemize}
+        \item \textbf{MECE Principle:} "Mutually Exclusive, Collectively Exhaustive." A way to group information so nothing overlaps and nothing is missing.
+        \item \textbf{Decomposition:} The art of slicing a big problem into small tasks.
+        \item \textbf{Chain-of-Thought (CoT):} Prompting the model to "think out loud" before answering.
+        \item \textbf{Tree of Thoughts (ToT):} Exploring multiple possible reasoning paths simultaneously.
+        \item \textbf{Self-Consistency:} Asking the model the same question multiple times to find the most stable answer.
+    \end{itemize}
+    \begin{block}{Mini example (MECE)}
+        Problem: "Improve university cafeteria experience".
+        MECE buckets: \textit{Food quality} vs. \textit{Service speed} vs. \textit{Price} vs. \textit{Seating/cleanliness}.
+    \end{block}
+\end{frame}
+
+\section{Problem Framing}
+
+\begin{frame}
+    \frametitle{Clarifying the Problem}
+    \begin{block}{Why it matters}
+        If you ask a vague question, you get a vague answer. Complex problems need strict boundaries.
+    \end{block}
+    \begin{itemize}
+        \item \textbf{Scope:} What is IN and what is OUT?
+        \item \textbf{Constraints:} Budget, time, technology, legal.
+        \item \textbf{Success Metrics:} How do we know we solved it?
+    \end{itemize}
+    \vspace{0.5cm}
+    \textbf{Tip:} Ask the model to interview \textit{you} before it starts solving.
+    \textit{"Before you answer, ask me 3 clarifying questions to better understand the context."}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Defining Success Criteria}
+    \begin{itemize}
+        \item \textbf{Qualitative Metrics:} Tone, clarity, adherence to brand voice.
+        \item \textbf{Quantitative Metrics:} Length (words/lines), complexity (reading level), format (JSON schema).
+        \item \textbf{Negative Constraints:} What should the model \textit{avoid}? (e.g., "Do not use jargon," "Do not assume unlimited budget").
+    \end{itemize}
+    \begin{block}{Prompt Pattern}
+        "Your solution will be evaluated on: 1) Feasibility (can we do it in 2 weeks?), 2) Cost (under \$100), 3) Impact (must touch 50\% of users)."
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Framework: SCQA}
+    \begin{itemize}
+        \item \textbf{Situation:} The stable context. ("We are a B2B SaaS company.")
+        \item \textbf{Complication:} The change or problem. ("Churn increased by 5\% after the last UI update.")
+        \item \textbf{Question:} The core problem to solve. ("Is the UI the cause, or is it coincidence? How do we fix it?")
+        \item \textbf{Answer:} The proposed solution (The LLM's job).
+    \end{itemize}
+    \begin{block}{Example Prompt}
+        "Context: [Situation]. Problem: [Complication]. Core Question: [Question]. Propose 3 distinct strategies."
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Decomposition Strategies}
+    \begin{itemize}
+        \item \textbf{Sequential Decomposition:} Step B depends on Step A.
+        \begin{itemize}
+            \item \textit{Example:} Research Topic $\to$ Outline Essay $\to$ Write Draft.
+        \end{itemize}
+        \item \textbf{Parallel Decomposition:} Steps can happen at the same time.
+        \item \textbf{Least-to-Most Prompting:}
+        \begin{enumerate}
+            \item Decompose problem into sub-questions.
+            \item Solve the simplest sub-question.
+            \item Use that answer to solve the next.
+        \end{enumerate}
+    \end{itemize}
+    \begin{block}{Least-to-Most Example}
+        Q: "Last letter of the name of the CEO of the company that made the iPhone?"
+        1. Who made the iPhone? (Apple)
+        2. Who is the CEO of Apple? (Tim Cook)
+        3. Last letter of Tim Cook? (k)
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Recursive Decomposition}
+    \begin{block}{For Massive Problems}
+        Sometimes a sub-task is still too big. You must recurse.
+    \end{block}
+    \begin{itemize}
+        \item \textbf{Level 1:} Build a Mobile App.
+        \item \textbf{Level 2 (Decomposed):} Backend, Frontend, Design.
+        \item \textbf{Level 3 (Recursive - Backend):} Database Schema, API Endpoints, Auth System.
+        \item \textbf{Level 4 (Recursive - Auth):} Login, Signup, Password Reset.
+    \end{itemize}
+    \textbf{Prompting Tip:} "Break this task into 3 sub-tasks. Then, for each sub-task, break it down further into actionable steps."
+\end{frame}
+
+\begin{frame}
+    \frametitle{Decomposition Example: Reduce Customer Churn}
+    \begin{block}{Start with a vague problem}
+        "How do we reduce customer churn?"
+    \end{block}
+    \begin{itemize}
+        \item \textbf{Clarify:} What is churn (monthly? yearly?), which customer segment, what timeframe?
+        \item \textbf{Break into sub-problems:}
+        \begin{itemize}
+            \item Diagnose \textit{why} people leave (pricing, product bugs, competitors).
+            \item Identify \textit{where} churn is highest (region, device, plan).
+            \item Propose interventions (onboarding, support, discounts).
+            \item Define measurement (A/B test, retention cohort).
+        \end{itemize}
+        \item \textbf{Integration:} Combine results into one plan with priorities and risks.
+    \end{itemize}
+\end{frame}
+
+\section{Reasoning Techniques}
+
+\begin{frame}
+    \frametitle{Chain-of-Thought (CoT)}
+    \begin{block}{The Concept}
+        LLMs are probabilistic. If you ask for the answer immediately, they guess. If you ask them to "show their work," they reason.
+    \end{block}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \textbf{Zero-Shot CoT}
+            \begin{itemize}
+                \item Just add magic words.
+                \item "Let's think step by step."
+                \item Good for general logic.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \textbf{Few-Shot CoT}
+            \begin{itemize}
+                \item Provide examples of reasoning.
+                \item Q: ... A: Step 1... Step 2... Answer.
+                \item Better for specific formats.
+            \end{itemize}
+        \end{column}
+    \end{columns}
+    \vspace{0.5cm}
+    \textbf{Why it works:} It forces the model to generate more tokens (computation) before committing to a final answer.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Tree of Thoughts (ToT)}
+    \begin{itemize}
+        \item \textbf{Linear Reasoning:} A $\to$ B $\to$ C. (If A is wrong, everything is wrong).
+        \item \textbf{Tree Reasoning:} Explore multiple branches.
+    \end{itemize}
+    \begin{block}{How to Prompt ToT}
+        \begin{enumerate}
+            \item \textbf{Brainstorm:} "Generate 3 distinct solutions to this problem."
+            \item \textbf{Evaluate:} "For each solution, list pros, cons, and probability of success."
+            \item \textbf{Select:} "Discard the worst two. Pick the best one and refine it."
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{ReAct Framework (Reason + Act)}
+    \begin{block}{Bridging Reasoning and Tools}
+        Reasoning alone is hallucination-prone. Action alone is unguided. ReAct combines them.
+    \end{block}
+    \begin{itemize}
+        \item \textbf{Thought:} The model analyzes the current situation. ("I need to find the CEO's age.")
+        \item \textbf{Action:} The model decides to use a tool. ("Search: CEO of Apple age")
+        \item \textbf{Observation:} The tool returns data. ("Tim Cook is 63.")
+        \item \textbf{Thought:} The model processes the data. ("Now I can answer the question.")
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Self-Consistency (Simple Checking)}
+    \begin{block}{Idea}
+        If one answer might be a guess, generate \textbf{multiple independent answers} and pick the most consistent one.
+    \end{block}
+    \begin{itemize}
+        \item Ask the model: "Answer the question 3 times. Each time use a different reasoning path." 
+        \item Compare answers. If they disagree, ask: "What assumption caused the difference?"
+        \item Useful for: estimation, ambiguous reasoning, and planning.
+    \end{itemize}
+    \begin{block}{Mini example}
+        "How long will a student take to learn Python basics?" $\to$ 3 estimates + assumptions (hours/week, prior experience).
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Debate and Critique (Finding Blind Spots)}
+    \begin{itemize}
+        \item \textbf{Debate:} Two personas argue different choices (e.g., "Build it" vs. "Buy it").
+        \item \textbf{Critique:} A reviewer checks logic: missing data, unrealistic assumptions, risks.
+        \item \textbf{Moderator:} Summarizes consensus + open questions.
+    \end{itemize}
+    \begin{block}{Example prompt}
+        "Persona A argues for option 1, Persona B argues for option 2.
+        Then a Moderator lists: pros/cons, key assumptions, what data would decide." 
+    \end{block}
+\end{frame}
+
+\section{Tool Augmentation}
+
+\begin{frame}
+    \frametitle{Why do we need tools?}
+    \begin{itemize}
+        \item \textbf{Math:} LLMs are "calculators for words," not numbers. They often fail at arithmetic (e.g., $234 \times 892$).
+        \item \textbf{Current Events:} Models have a "Knowledge Cutoff" (e.g., 2023). They don't know today's stock price.
+        \item \textbf{Private Data:} They don't know your company's internal documents.
+    \end{itemize}
+    \textbf{Solution:} Give the model "hands" (Tools) and "eyes" (Retrieval).
+\end{frame}
+
+\begin{frame}
+    \frametitle{Retrieval Augmented Generation (RAG)}
+    \begin{block}{The "Open Book Exam" Analogy}
+        Instead of asking the model to memorize everything (Closed Book), we give it the textbook (Context) and ask it to find the answer.
+    \end{block}
+    \begin{itemize}
+        \item \textbf{Step 1 (Chunking):} Break documents into small pieces (paragraphs).
+        \item \textbf{Step 2 (Retrieval):} Search your database for relevant text based on the user's question.
+        \item \textbf{Step 3 (Augment):} Paste that text into the prompt.
+        \item \textbf{Step 4 (Generate):} "Answer the user's question using ONLY the context above."
+    \end{itemize}
+    \textbf{Benefit:} Drastically reduces hallucinations and enables fact-checking.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Function Calling (Tool Use)}
+    \begin{block}{How it works}
+        You don't run the tool; the model \textit{asks} you to run it.
+    \end{block}
+    \begin{enumerate}
+        \item \textbf{User:} "What's the weather in Ankara?"
+        \item \textbf{Model (Thought):} I can't know this. I have a tool \texttt{get\_weather(city)}.
+        \item \textbf{Model (Output):} \texttt{CALL: get\_weather("Ankara")}
+        \item \textbf{System:} Runs the code, gets "25C, Sunny".
+        \item \textbf{Model (Final):} "It is 25 degrees and sunny in Ankara."
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Tool-Use Prompt Template}
+\begin{verbatim}
+Role: You are a careful assistant.
+Task: Solve the problem.
+Tools Available: [Calculator, Google Search, Python Interpreter]
+Rules:
+1) If calculation is needed, say: "I will use a calculator" and show the result.
+2) If a fact might be outdated, say: "I need to search" and cite the source.
+3) If you lack information, ask 2 clarifying questions.
+Output: Final answer + short assumptions list.
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Validation: How to reduce mistakes}
+    \begin{itemize}
+        \item \textbf{Check constraints:} Does the solution respect budget/time/legal limits?
+        \item \textbf{Ask for edge cases:} "What could go wrong?" / "Worst-case scenario?"
+        \item \textbf{Ask for tests:} For code, request test cases; for plans, request success metrics.
+        \item \textbf{Be honest about uncertainty:} If the model is guessing, it should say so.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Adversarial Prompting (Red Teaming)}
+    \begin{block}{Playing Devil's Advocate}
+        Ask the model to critique its own work to find flaws.
+    \end{block}
+    \begin{itemize}
+        \item \textbf{Prompt:} "You are a harsh critic. Review the plan above. Find 3 logical gaps, 2 risky assumptions, and 1 safety violation."
+        \item \textbf{Then:} "Now, act as the Architect again. Fix the plan based on the critic's feedback."
+    \end{itemize}
+\end{frame}
+
+\section{Worked Examples}
+
+\begin{frame}
+    \frametitle{Example 1: The Marketing Plan (Iterative Refinement)}
+    \begin{block}{The Scenario}
+        You are opening a new coffee shop in a university town with a low budget.
+    \end{block}
+    \textbf{Bad Prompt:} "Write a marketing plan for my coffee shop." \\
+    \vspace{0.3cm}
+    \textbf{Better Prompt (Context):} "We are opening near a university. Budget \$500/month. Target: Students." \\
+    \vspace{0.3cm}
+    \textbf{Best Prompt (Architected):}
+    \begin{itemize}
+        \item \textbf{Role:} "Act as a Senior Marketing Strategist."
+        \item \textbf{Task:} "Create a 4-week launch plan."
+        \item \textbf{Constraints:} "Focus on viral social media and campus partnerships. No paid ads."
+        \item \textbf{Output:} "Table format: Week | Channel | Activity | KPI | Estimated Cost."
+        \item \textbf{Validation:} "After the table, list 3 risks that could make this plan fail."
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Example 2: The Coding Architect}
+    \begin{block}{The Scenario}
+        You need a Python script to scrape a website, clean data, and save to CSV.
+    \end{block}
+    \textbf{Step 1 (Design):} "Act as a System Architect. Don't write code yet. Outline the structure for a Python scraper. What libraries should we use? How should we handle errors?" \\
+    \vspace{0.3cm}
+    \textbf{Step 2 (Implementation):} "Great plan. Now, write the code for the \texttt{fetch\_data} function using \texttt{requests} and \texttt{BeautifulSoup} as you proposed. Include error handling for 404 and 500 errors." \\
+    \vspace{0.3cm}
+    \textbf{Step 3 (Test):} "Write a unit test for this function using \texttt{pytest}. Mock the network response."
+\end{frame}
+
+\begin{frame}
+    \frametitle{Example 3: Explaining Complex Topics}
+    \begin{block}{The Scenario}
+        You need to explain Quantum Computing to a non-technical audience.
+    \end{block}
+    \textbf{Technique: Analogy + Simplification} \\
+    \vspace{0.5cm}
+    \textbf{Prompt:}
+    "Explain Quantum Computing to a 10-year-old.
+    \begin{itemize}
+        \item Use the analogy of a coin spinning on a table (vs. a coin lying flat).
+        \item Avoid jargon like 'superposition' or 'entanglement' unless you define them simply.
+        \item Focus on why it is faster than normal computers."
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Example 3: Debugging a Program (Structured Prompt)}
+    \begin{block}{The Scenario}
+        A student has a Python error but doesn't know where it comes from.
+    \end{block}
+        \textbf{Prompt pattern:} Give code + error + what you tried, then ask for a plan.\\
+    \vspace{0.3cm}
+    \begin{itemize}
+        \item \textbf{Context:} "I am using Python 3.11 and VS Code."
+        \item \textbf{Input:} Paste the error message and the minimal code snippet.
+        \item \textbf{Task:} "Explain the error in simple terms, propose 3 likely causes, and give step-by-step fixes."
+        \item \textbf{Output:} "Use a numbered list. Include a corrected code block." 
+    \end{itemize}
+\end{frame}
+
+\section{Wrap-up}
+
+\begin{frame}
+    \frametitle{Key Takeaways}
+    \begin{itemize}
+        \item \textbf{Don't be lazy:} Complex problems require complex prompts.
+        \item \textbf{Break it down:} If a problem is too big, split it into smaller pieces (Decomposition).
+        \item \textbf{Ask for logic:} Use "Let's think step by step" (Chain-of-Thought) to reduce errors.
+        \item \textbf{Give examples:} Show the model what you want (Few-Shot).
+    \end{itemize}
+    \begin{block}{Bonus takeaway}
+        Always add a \textbf{validation step}: ask for assumptions, risks, and how to test the solution.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Questions and Discussion}
+    \begin{center}
+    {\Huge Thank You!}
+    \vspace{1cm}
+
+        \textbf{Dr.\ Mehmet Ali Akyol}\\
+        \texttt{mehmetali.akyol@gmail.com}
+    \vspace{1cm}
+
+    {\large Questions?}
+    \end{center}
+\end{frame}
+
+\end{document}

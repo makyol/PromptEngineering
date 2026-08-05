@@ -1,0 +1,7 @@
+\beamer@sectionintoc {1}{Overview}{2}{0}{1}
+\beamer@sectionintoc {2}{Knowledge Synthesis}{4}{0}{2}
+\beamer@sectionintoc {3}{Self-Assessment}{6}{0}{3}
+\beamer@sectionintoc {4}{Integrated Challenges}{8}{0}{4}
+\beamer@sectionintoc {5}{Feedback and Planning}{10}{0}{5}
+\beamer@sectionintoc {6}{Assignment}{12}{0}{6}
+\beamer@sectionintoc {7}{Wrap-up}{14}{0}{7}

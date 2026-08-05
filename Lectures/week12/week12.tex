@@ -1,0 +1,361 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+
+% Encoding and fonts for pdfLaTeX
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{hyperref}
+
+\title{Prompt Engineering}
+\author{Mehmet Ali Akyol, PhD}
+\institute{Ankara Medipol University}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+    \begin{center}
+        \vspace{1cm}
+        \textbf{Week 12: Ethics, Copyright, and Responsible Use}
+    \end{center}
+\end{frame}
+
+\section{Overview}
+
+\begin{frame}
+    \frametitle{Why Responsibility Matters: Influence \& Impact}
+    \begin{itemize}
+        \item \textbf{Influence and Impact}: Prompt engineers design the inputs that shape AI behavior, directly influencing outputs that affect individuals, communities, and institutions.
+        \item \textbf{Consequences of Neglect}: Ethical lapses can lead to significant harm, including reputational damage, erosion of public trust, legal liabilities, and reinforcement of societal biases.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Why Responsibility Matters: Balance \& Sustainability}
+    \begin{itemize}
+        \item \textbf{Balancing Act}: Responsible practice requires a delicate balance between pushing the boundaries of innovation and maintaining strict accountability for the system's outputs.
+        \item \textbf{Long-term Sustainability}: Ethical AI development ensures the longevity and acceptance of AI technologies in society.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Weekly Learning Objectives}
+    \begin{itemize}
+        \item \textbf{Risk Identification}: Learn to identify potential ethical risks and vulnerabilities in various prompting workflows and use cases.
+        \item \textbf{IP Awareness}: Understand the complex landscape of intellectual property (IP) and copyright implications related to AI-generated content.
+        \item \textbf{Framework Application}: Apply established responsible AI frameworks (e.g., NIST, EU AI Act) and organizational policies to prompt engineering tasks.
+        \item \textbf{Ethical Design}: Design prompts that actively reinforce transparency, user consent, fairness, and explainability.
+        \item \textbf{Crisis Management}: Develop robust escalation paths and incident response plans to handle AI failures or misuse effectively.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Key Concepts}
+    \begin{itemize}
+        \item \textbf{Bias, Fairness, and Inclusivity}: Ensuring AI systems do not discriminate and are accessible to diverse user groups.
+        \item \textbf{Copyright, Licensing, Derivative Works}: Navigating the legalities of using copyrighted data and the status of AI-generated outputs.
+        \item \textbf{Data Privacy, Consent, and Confidentiality}: Protecting user data and ensuring informed consent for data usage.
+        \item \textbf{Responsible AI Principles}: Adhering to core principles such as transparency, accountability, safety, and reliability.
+        \item \textbf{Incident Response and Red-teaming}: Proactively testing for vulnerabilities and having a plan for when things go wrong.
+    \end{itemize}
+\end{frame}
+
+\section{The Nature of GenAI}
+
+\begin{frame}
+    \frametitle{The Source of AI Behavior: Illusion \& Data}
+    \begin{itemize}
+        \item \textbf{The Illusion of Sentience}: A common misconception is that GenAI produces sentient thought; in reality, it creates content based on patterns learned from training data.
+        \item \textbf{Data Provenance}: A significant portion of training data is sourced from the Internet, which serves as a "warehouse of misinformation," purposeful deception, and polarizing ideologies.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Source of AI Behavior: The Bias Feedback Loop}
+    \begin{itemize}
+        \item \textbf{The Bias Feedback Loop}:
+        \begin{itemize}
+            \item Uncurated web content introduces unintended biases (e.g., gender, racial, cultural) into AI systems.
+            \item \textbf{Recursive Contamination}: As the web fills with AI-generated content, new models trained on this data may amplify existing biases, potentially leading to "model collapse".
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\section{Ethical Risk Landscape}
+
+\begin{frame}
+    \frametitle{Common Risk Areas: Bias \& Misinformation}
+    \begin{itemize}
+        \item \textbf{Bias and Discrimination}: Generating harmful or biased outputs that target protected groups or reinforce stereotypes.
+        \item \textbf{Misinformation and Hallucination}: Creating fabricated citations, false facts, or spreading misinformation that can mislead users.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Common Risk Areas: Data, Automation \& Security}
+    \begin{itemize}
+        \item \textbf{Data Misuse}: Inadvertent exposure or misuse of personal identifiable information (PII) or sensitive corporate data.
+        \item \textbf{Automation Bias}: The tendency for humans to over-rely on AI outputs without critical verification, leading to errors in decision-making.
+        \item \textbf{Security Vulnerabilities}: Susceptibility to prompt injection attacks or jailbreaking attempts.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Step-Around Prompt Engineering (Adversarial)}
+    \begin{itemize}
+        \item \textbf{Definition}: The practice of crafting inputs to deliberately bypass AI safety protocols and filters.
+        \item \textbf{Purpose}:
+        \begin{itemize}
+            \item \textbf{Research Tool}: Acts like "red teaming" in cybersecurity to expose underlying vulnerabilities and biases.
+            \item \textbf{Identifying Gaps}: It reveals how Internet-derived biases persist despite content filtering.
+        \end{itemize}
+        \item \textbf{Risks}: If used maliciously, it can generate hate speech, disinformation, or aid in cyberattacks.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Risk Assessment Checklist}
+    \begin{itemize}
+        \item \textbf{Stakeholder Impact}: Who might be harmed, directly or indirectly, by this output or workflow? Consider marginalized communities.
+        \item \textbf{Safeguards}: What technical and procedural safeguards exist to detect and mitigate inaccuracies, bias, and toxicity?
+        \item \textbf{User Awareness}: Are users clearly informed that they are interacting with an AI? Do they understand the system's limitations?
+        \item \textbf{Monitoring and Auditing}: How are outputs monitored for quality and safety over time? Is there a feedback loop for corrections?
+        \item \textbf{Data Provenance}: Do we have the right to use the data being processed? Is the data representative and fair?
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Case Study: The "Woke" AI Scandal}
+    \begin{itemize}
+        \item \textbf{The Incident}: In early 2024, Google Gemini attempted to be inclusive but generated historically inaccurate images (e.g., diverse Founding Fathers, Nazi soldiers).
+        \item \textbf{The Cause}: An "overcorrection" in safety tuning aimed at mitigating bias.
+        \item \textbf{The Lesson}: A tangible example of how "responsible AI" interventions can backfire if not tested properly.
+        \item \textbf{Challenge}: Illustrates the difficulty of balancing bias mitigation with historical accuracy.
+    \end{itemize}
+\end{frame}
+
+\section{Copyright and IP}
+
+\begin{frame}
+    \frametitle{Understanding Copyright Basics: Core Question \& US Stance}
+    \begin{itemize}
+        \item \textbf{The Core Question}: Who owns AI-generated content?
+        \item \textbf{United States Stance}:
+        \begin{itemize}
+            \item \textbf{Human Authorship Requirement}: The US Copyright Office generally denies protection to works created solely by machines (e.g., \textit{Thaler v. Perlmutter}).
+            \item \textbf{Hybrid Works}: Copyright may be granted if there is sufficient human creativity involved in selecting or arranging the AI output.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Understanding Copyright Basics: UK Stance \& Litigation}
+    \begin{itemize}
+        \item \textbf{United Kingdom Stance}: Unique in protecting "computer-generated works," assigning authorship to the person who made the arrangements for the work's creation.
+        \item \textbf{Litigation Trends}: Major lawsuits (e.g., \textit{NY Times v. OpenAI}, \textit{Getty Images v. Stability AI}) focus on whether using copyrighted data for \textit{training} AI constitutes fair use or infringement.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Prompting with Copyright in Mind}
+    \begin{itemize}
+        \item \textbf{Avoid Direct Infringement}: Do not request the model to reproduce specific copyrighted text, lyrics, or images unless you hold the rights.
+        \item \textbf{Encourage Originality}: Structure prompts to encourage original synthesis, analysis, and transformation rather than simple duplication.
+        \item \textbf{Reference Material}: When grounding outputs in specific texts, ensure you have the appropriate license to use that material.
+        \item \textbf{Citation and Attribution}: Explicitly instruct the model to cite sources when summarizing or transforming external content to maintain academic and professional integrity.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Case Study: The "Monkey Selfie" Precedent}
+    \begin{itemize}
+        \item \textbf{The Story}: The US Copyright Office declared that works created by non-humans (like a monkey taking a selfie) cannot be copyrighted.
+        \item \textbf{The AI Connection}: In \textit{Thaler v. Perlmutter}, an AI system named DABUS was denied copyright for an image because it lacked a "human author".
+        \item \textbf{The Twist}: "A Single Piece of American Cheese" was registered as a "composite work" because the human author argued their selection and arrangement constituted sufficient creativity.
+        \item \textbf{Takeaway}: This highlights the subtle legal "grey areas" currently being fought over regarding human involvement.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Debate: The Ethics of "Style Mimicry"}
+    \begin{itemize}
+        \item \textbf{Context}: Class action lawsuits by artists (e.g., Sarah Andersen, Kelly McKernan) against Stability AI and Midjourney for training on scraped images without consent.
+        \item \textbf{Example}: Users generating "Ghiblification" images imitating Hayao Miyazaki’s style, despite his known dislike of AI.
+        \item \textbf{Discussion}: Where does the line lie between "inspiration" and "theft"? Is it ethical to prompt an AI to copy a living artist's style?
+    \end{itemize}
+\end{frame}
+
+\section{Responsible Prompt Design}
+
+\begin{frame}
+    \frametitle{Reflexive \& Responsible Prompt Engineering: Definition \& Design}
+    \begin{itemize}
+        \item \textbf{Definition}: A framework integrating ethical, legal, and social values into AI interactions.
+        \item \textbf{The 5 Components of Responsible Prompting (1-3)}:
+        \begin{enumerate}
+            \item \textbf{Prompt Design}: Systematically crafting instructions (e.g., using "chain-of-thought" reasoning) to maximize desired outcomes.
+            \item \textbf{System Selection}: Choosing the right model based on benchmarks and capabilities.
+            \item \textbf{System Configuration}: Adjusting parameters like "temperature" to balance creativity and predictability.
+        \end{enumerate}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Reflexive \& Responsible Prompt Engineering: Evaluation \& Management}
+    \begin{itemize}
+        \item \textbf{The 5 Components of Responsible Prompting (4-5)}:
+        \begin{enumerate}
+            \setcounter{enumi}{3}
+            \item \textbf{Performance Evaluation}: Using metrics and human assessment to check output quality and consistency.
+            \item \textbf{Prompt Management}: Documenting and version-controlling prompts for accountability.
+        \end{enumerate}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Embedding Guardrails}
+    \begin{itemize}
+        \item \textbf{Safety Disclaimers}: Include clear disclaimers about the AI's nature and scope limits within the system prompt.
+        \item \textbf{Refusal Mechanisms}: Instruct models to politely refuse sensitive, harmful, or out-of-scope requests (e.g., "I cannot assist with that request").
+        \item \textbf{Uncertainty Expression}: Encourage the model to express uncertainty when confidence is low: "If the answer is not in the context, state that you do not know."
+        \item \textbf{Policy Blocks}: Use specific instructions for sensitive topics: "Do not provide medical diagnoses; instead, recommend consulting a qualified healthcare professional."
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Transparency and Accountability}
+    \begin{itemize}
+        \item \textbf{Disclosure}: Clearly disclose AI assistance in all outputs where required by law or ethical standards.
+        \item \textbf{Logging and Auditing}: Maintain comprehensive logs of prompts, context, and generated outputs for audit trails and debugging.
+        \item \textbf{Documentation}: Document the rationale behind prompt design decisions and any human oversight actions taken.
+        \item \textbf{User Guidance}: Provide users with clear guidance on system limitations, review steps, and contact information for reporting issues.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Discussion: The "Illusion of Transparency"}
+    \begin{itemize}
+        \item \textbf{Topic}: When we ask AI to "think step-by-step" (Chain-of-Thought), is it telling the truth?
+        \item \textbf{Research}: Suggests explanations might be an "illusion of transparency"—plausible justifications that don't match the model's actual mathematical path.
+        \item \textbf{Implication}: Can we trust AI explanations in high-stakes fields (law, medicine) if the logic path is fabricated to sound convincing?
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Tangible Tip: "Step-Around" Prevention}
+    \begin{itemize}
+        \item \textbf{Advice}: Responsible prompting isn't just about good text; it's about checking for "Refusal" and "Hallucinations."
+        \item \textbf{Technique}: Use "Chain of Thought" prompting to force the model to evaluate its own biases.
+        \item \textbf{Example Prompt}: "Plan verification questions to fact-check this draft" or explicitly ask the model to review its output for specific biases before finalizing.
+    \end{itemize}
+\end{frame}
+
+\section{Governance and Policy}
+
+\begin{frame}
+    \frametitle{Responsible AI Frameworks: NIST AI RMF}
+    \begin{itemize}
+        \item \textbf{NIST AI Risk Management Framework (AI RMF)}:
+        \begin{itemize}
+            \item \textbf{Govern}: Cultivate a culture of risk management.
+            \item \textbf{Map}: Establish context and identify risks related to that context.
+            \item \textbf{Measure}: Assess, analyze, and track identified risks.
+            \item \textbf{Manage}: Prioritize and act upon risks based on projected impact.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Responsible AI Frameworks: The EU AI Act}
+    \begin{itemize}
+        \item \textbf{The EU AI Act}: The world’s first comprehensive AI law, adopting a risk-based approach.
+        \begin{itemize}
+            \item \textbf{Unacceptable Risk (Banned)}: Social scoring, manipulative cognitive techniques.
+            \item \textbf{High Risk (Regulated)}: Critical infrastructure, education, employment tools.
+            \item \textbf{Transparency Risk}: Chatbots and deepfakes must clearly disclose that content is AI-generated.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Incident Response}
+    \begin{itemize}
+        \item \textbf{Monitoring}: Actively monitor for policy violations, biased outputs, or user complaints using automated tools and human review.
+        \item \textbf{Escalation}: Establish clear channels to escalate incidents to responsible owners (legal, ethics, engineering) quickly.
+        \item \textbf{Post-Incident Review}: Conduct thorough post-incident reviews to identify root causes, implement remediation, and communicate findings.
+        \item \textbf{Iterative Improvement}: Update prompts, training data, and governance artifacts based on lessons learned from incidents.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Regulation Example: The "Social Scoring" Ban}
+    \begin{itemize}
+        \item \textbf{Context}: The EU AI Act bans "social scoring" (classifying people based on behavior/status) and real-time biometric identification in public spaces.
+        \item \textbf{High Risk}: Educational and vocational training AI is classified as "High Risk".
+        \item \textbf{Debate}: Should schools be allowed to use AI for "emotional surveillance" or predicting failure? Do you agree with these bans?
+    \end{itemize}
+\end{frame}
+
+
+
+
+
+\section{Academic Integrity}
+
+\begin{frame}
+    \frametitle{AI in Education: Plagiarism \& Pitfalls}
+    \begin{itemize}
+        \item \textbf{Plagiarism Definition}: Submitting AI-generated text as one's own work is generally considered plagiarism because it lacks the student's own analysis and critical thinking.
+        \item \textbf{Common Pitfalls}:
+        \begin{itemize}
+            \item \textbf{AI Hallucinations}: AI often fabricates academic citations that do not exist.
+            \item \textbf{Paraphrasing Tools}: Using AI to rewrite sources without citation is still academic misconduct.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{AI in Education: Detection \& Best Practices}
+    \begin{itemize}
+        \item \textbf{Detection}: Tools like Turnitin analyze sentence patterns and word probability, though they can produce false positives.
+        \item \textbf{Best Practices}: Use AI for brainstorming or grammar checks, but manually verify all citations and ensure the core arguments are your own.
+    \end{itemize}
+\end{frame}
+
+\section{Wrap-up}
+
+\begin{frame}
+    \frametitle{Future Outlook \& Recommendations}
+    \begin{itemize}
+        \item \textbf{Organizational Responsibility}: Companies need "Responsibility by Design"—embedding ethics into the development process rather than treating it as an afterthought.
+        \item \textbf{Transparency}: Developers should maintain detailed documentation of prompts and training data sources to ensure accountability.
+        \item \textbf{Human-in-the-Loop}: Hybrid collaboration, where humans oversee AI outputs, is essential for copyright protection and risk management.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Key Takeaways}
+    \begin{itemize}
+        \item \textbf{Integral Practice}: Ethics and compliance are not optional add-ons but are integral to the practice of professional prompt engineering.
+        \item \textbf{Protective Design}: Design prompts that actively protect users, respect intellectual property rights, and promote system transparency.
+        \item \textbf{Accountability}: Document all policies, incidents, and improvements to create a culture of accountability.
+        \item \textbf{Continuous Commitment}: Responsible AI is an ongoing commitment that requires constant vigilance and adaptation to new challenges.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Questions and Discussion}
+    \begin{center}
+    {\Huge Thank You!}
+    \vspace{1cm}
+
+        \textbf{Dr.\ Mehmet Ali Akyol}\\
+        \texttt{mehmetali.akyol@gmail.com}
+    \vspace{1cm}
+
+    {\large Questions?}
+    \end{center}
+\end{frame}
+
+\end{document}

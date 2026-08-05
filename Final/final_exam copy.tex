@@ -1,0 +1,462 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+% Header/Footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Prompt Engineering - Final Exam}
+\lhead{Ankara Medipol University}
+\rfoot{Page \thepage\ of \pageref{LastPage}}
+
+\title{\textbf{Prompt Engineering}\\\large Final Examination\\Spring 2025--2026}
+\author{Instructor: Mehmet Ali Akyol, PhD\\Ankara Medipol University}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\noindent\textbf{Student Name:} \underline{\hspace{6cm}} \hfill \textbf{Student ID:} \underline{\hspace{4cm}}
+
+\vspace{0.5cm}
+\noindent\textbf{Instructions:}
+\begin{itemize}[noitemsep]
+    \item This exam consists of 40 multiple-choice questions.
+    \item Each question is worth 2.5 points for a total of 100 points.
+    \item Select the \textbf{best} answer for each question.
+    \item You have 90 minutes to complete this exam.
+    \item No electronic devices or notes are permitted.
+\end{itemize}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\begin{enumerate}
+
+\item A \textbf{prompt} in the context of AI is best defined as:
+\begin{enumerate}[label=\Alph*)]
+    \item The internal memory of an LLM
+    \item The training data used to build the model
+    \item The hardware that runs the AI system
+    \item The input message you give to an AI system to elicit a response
+\end{enumerate}
+
+\item Which of the following is NOT one of the core elements that good prompts provide?
+\begin{enumerate}[label=\Alph*)]
+    \item Purpose
+    \item Context
+    \item Constraints
+    \item Source code
+\end{enumerate}
+
+\item What is \textbf{tokenization} in the context of LLMs?
+\begin{enumerate}[label=\Alph*)]
+    \item The process of encrypting user data
+    \item Generating authentication tokens for API access
+    \item Converting images into text descriptions
+    \item Breaking text into smaller chunks (tokens) that the model can process
+\end{enumerate}
+
+\item Modern LLMs like GPT-4 use subword tokenization primarily because:
+\begin{enumerate}[label=\Alph*)]
+    \item It makes the model run faster
+    \item It reduces the cost of training
+    \item It improves image recognition
+    \item It can handle new or rare words by combining familiar pieces
+\end{enumerate}
+
+\item What are \textbf{embeddings} in LLM architecture?
+\begin{enumerate}[label=\Alph*)]
+    \item Physical components of the computer running the model
+    \item The user interface elements of AI applications
+    \item Error logs generated during model training
+    \item Numerical representations of tokens that capture semantic meaning
+\end{enumerate}
+
+\item The 2017 paper ``Attention Is All You Need'' introduced which key innovation?
+\begin{enumerate}[label=\Alph*)]
+    \item Self-attention mechanism (Transformer architecture)
+    \item Tokenization
+    \item Recurrent neural networks
+    \item Convolutional neural networks
+\end{enumerate}
+
+\item \textbf{Hallucination} in LLMs refers to:
+\begin{enumerate}[label=\Alph*)]
+    \item The model refusing to answer questions
+    \item The model asking clarifying questions
+    \item The model generating plausible but incorrect or fabricated information
+    \item The model running out of memory
+\end{enumerate}
+
+\item Which statement about LLM capabilities is TRUE?
+\begin{enumerate}[label=\Alph*)]
+    \item LLMs have true understanding and consciousness
+    \item LLMs have unlimited context windows
+    \item LLMs are statistical pattern learners, not conscious reasoners
+    \item LLMs never produce biased outputs
+\end{enumerate}
+
+\item In the anatomy of a good prompt, which element specifies headings, JSON schema, or table columns?
+\begin{enumerate}[label=\Alph*)]
+    \item Task
+    \item Context
+    \item Constraints
+    \item Output Specification
+\end{enumerate}
+
+\item \textbf{Zero-shot prompting} is best described as:
+\begin{enumerate}[label=\Alph*)]
+    \item Giving just the task without any examples
+    \item Providing multiple examples before the task
+    \item Using images along with text
+    \item Chaining multiple prompts together
+\end{enumerate}
+
+\item \textbf{Few-shot prompting} is most useful when:
+\begin{enumerate}[label=\Alph*)]
+    \item You want to save tokens
+    \item The task is extremely simple
+    \item You need to steer style or format with specific examples
+    \item You want to reduce response time
+\end{enumerate}
+
+\item What is \textbf{role prompting}?
+\begin{enumerate}[label=\Alph*)]
+    \item Asking the model to play a video game
+    \item Defining database roles
+    \item Setting a persona, audience, and tone for the model's response
+    \item Assigning user permissions to the model
+\end{enumerate}
+
+\item Which is an example of a ``prompt anti-pattern''?
+\begin{enumerate}[label=\Alph*)]
+    \item Specifying output format clearly
+    \item Providing relevant context
+    \item Setting clear constraints
+    \item Including conflicting directives like ``be brief'' and ``include all details''
+\end{enumerate}
+
+\item In Retrieval-Augmented Generation (RAG), what is the primary purpose?
+\begin{enumerate}[label=\Alph*)]
+    \item To speed up model inference
+    \item To reduce the model size
+    \item To ground answers with provided excerpts or references
+    \item To train the model on new data
+\end{enumerate}
+
+\item The \textbf{CO-STAR} framework stands for:
+\begin{enumerate}[label=\Alph*)]
+    \item Code, Output, Style, Testing, Analysis, Review
+    \item Context, Objective, Style, Tone, Audience, Response
+    \item Constraint, Optimization, Structure, Target, Action, Result
+    \item Chain, Order, Sequence, Task, Answer, Repeat
+\end{enumerate}
+
+\item The \textbf{IDEA Loop} framework for prompt iteration consists of:
+\begin{enumerate}[label=\Alph*)]
+    \item Implement, Debug, Edit, Apply
+    \item Input, Design, Execute, Analyze
+    \item Initiate, Develop, Enhance, Archive
+    \item Identify, Draft, Evaluate, Adjust
+\end{enumerate}
+
+\item \textbf{Meta-prompting} refers to:
+\begin{enumerate}[label=\Alph*)]
+    \item Using prompts to have an LLM generate or refine other prompts
+    \item Prompting about metadata
+    \item Using multiple models simultaneously
+    \item Prompting in multiple languages
+\end{enumerate}
+
+\item In the context of tool use and function calling, the LLM typically:
+\begin{enumerate}[label=\Alph*)]
+    \item Directly executes code on the user's computer
+    \item Sends requests to arbitrary websites
+    \item Generates a structured object (e.g., JSON) specifying the tool and arguments
+    \item Modifies its own training data
+\end{enumerate}
+
+\item Which dimension of linguistic register controls terminology density?
+\begin{enumerate}[label=\Alph*)]
+    \item Tenor (Relationship)
+    \item Mode (Channel)
+    \item Field (Topic Domain)
+    \item Rhythm
+\end{enumerate}
+
+\item ``CEFR B1'' in prompt specifications refers to:
+\begin{enumerate}[label=\Alph*)]
+    \item A programming language version
+    \item A model architecture type
+    \item A security classification
+    \item A reading/language proficiency level
+\end{enumerate}
+
+\item \textbf{Brand Voice Fingerprinting} involves:
+\begin{enumerate}[label=\Alph*)]
+    \item Creating biometric authentication
+    \item Recording audio samples of brand representatives
+    \item Extracting measurable voice attributes from existing content to ensure AI outputs match brand style
+    \item Generating unique identifiers for users
+\end{enumerate}
+
+\item The \textbf{Critique Loop} in prompt refinement typically follows which sequence?
+\begin{enumerate}[label=\Alph*)]
+    \item Generate $\to$ Deploy $\to$ Monitor
+    \item Design $\to$ Test $\to$ Archive
+    \item Plan $\to$ Execute $\to$ Report
+    \item Generate $\to$ Critique $\to$ Revise
+\end{enumerate}
+
+\item ``Vibe Coding'' refers to:
+\begin{enumerate}[label=\Alph*)]
+    \item Writing code by describing desired behavior to an LLM and iterating based on output's look and feel
+    \item Writing code based on musical rhythms
+    \item A formal software development methodology
+    \item Debugging code using vibration sensors
+\end{enumerate}
+
+\item What is the main advantage of using ``LLM-as-a-Judge'' for evaluation?
+\begin{enumerate}[label=\Alph*)]
+    \item It is always 100\% accurate
+    \item It eliminates the need for any human review
+    \item It enables scalable evaluation of thousands of outputs quickly
+    \item It reduces model training costs
+\end{enumerate}
+
+\item The ``3 H's'' framework for AI output evaluation includes Helpful, Honest, and:
+\begin{enumerate}[label=\Alph*)]
+    \item Historical
+    \item Hypothetical
+    \item Harmless
+    \item Hierarchical
+\end{enumerate}
+
+\item A \textbf{Golden Dataset} in AI evaluation is:
+\begin{enumerate}[label=\Alph*)]
+    \item A curated set of inputs with ``perfect'' outputs used as benchmarks
+    \item The largest available training dataset
+    \item Data stored in a premium database
+    \item User feedback collected over time
+\end{enumerate}
+
+\item \textbf{Verbosity Bias} in LLM evaluation refers to:
+\begin{enumerate}[label=\Alph*)]
+    \item Models producing too few tokens
+    \item Preference for technical jargon
+    \item The tendency to rate longer answers as better, even if they contain fluff
+    \item Bias toward English-language responses
+\end{enumerate}
+
+\item In Vision-Language Models (VLMs), images are converted into:
+\begin{enumerate}[label=\Alph*)]
+    \item Audio signals
+    \item Database entries
+    \item Encrypted files
+    \item Patches that become ``visual tokens''
+\end{enumerate}
+
+\item \textbf{Set-of-Mark (SoM) Prompting} involves:
+\begin{enumerate}[label=\Alph*)]
+    \item Overlaying numbered tags or bounding boxes on images to improve grounding
+    \item Grading student assignments
+    \item Creating watermarks on AI-generated images
+    \item Setting bookmarks in long documents
+\end{enumerate}
+
+\item What is \textbf{Visual Hallucination}?
+\begin{enumerate}[label=\Alph*)]
+    \item The model refusing to process images
+    \item Image compression artifacts
+    \item The model describing objects or details that aren't present in the image
+    \item Creating optical illusions
+\end{enumerate}
+
+\item The \textbf{MECE Principle} stands for:
+\begin{enumerate}[label=\Alph*)]
+    \item Mutually Exclusive, Collectively Exhaustive
+    \item Maximum Efficiency, Controlled Execution
+    \item Model Evaluation, Context Enhancement
+    \item Multiple Examples, Chain Execution
+\end{enumerate}
+
+\item \textbf{Tree of Thoughts (ToT)} differs from Chain-of-Thought by:
+\begin{enumerate}[label=\Alph*)]
+    \item Using fewer tokens
+    \item Being faster to execute
+    \item Requiring no examples
+    \item Exploring multiple reasoning branches and allowing backtracking
+\end{enumerate}
+
+\item The \textbf{ReAct} framework combines:
+\begin{enumerate}[label=\Alph*)]
+    \item Recalling and Testing
+    \item Reading and Acting
+    \item Reasoning and Acting
+    \item Responding and Chatting
+\end{enumerate}
+
+\item In \textbf{Self-Consistency} prompting, you:
+\begin{enumerate}[label=\Alph*)]
+    \item Ask the model to repeat the same answer multiple times
+    \item Force the model to be consistent with previous conversations
+    \item Use the same prompt for different models
+    \item Generate multiple independent answers using different reasoning paths and pick the most consistent
+\end{enumerate}
+
+\item The \textbf{SOAP Note} format (Subjective, Objective, Assessment, Plan) is commonly used in which domain?
+\begin{enumerate}[label=\Alph*)]
+    \item Legal
+    \item Finance
+    \item Healthcare
+    \item Engineering
+\end{enumerate}
+
+\item The \textbf{IRAC} framework (Issue, Rule, Analysis, Conclusion) is specifically designed for:
+\begin{enumerate}[label=\Alph*)]
+    \item Medical diagnosis
+    \item Financial reporting
+    \item Software development
+    \item Legal reasoning and analysis
+\end{enumerate}
+
+\item A \textbf{Knowledge Pack} in domain-specific prompting typically includes:
+\begin{enumerate}[label=\Alph*)]
+    \item Definitions, acronyms, and style guides specific to the domain
+    \item Only training data
+    \item Password credentials
+    \item Model weights
+\end{enumerate}
+
+\item The term \textbf{Automation Bias} refers to:
+\begin{enumerate}[label=\Alph*)]
+    \item Bias in robotic systems
+    \item Preference for automated testing
+    \item The tendency for humans to over-rely on AI outputs without critical verification
+    \item AI systems preferring automated tasks
+\end{enumerate}
+
+\item What is \textbf{Prompt Injection}?
+\begin{enumerate}[label=\Alph*)]
+    \item Adding more tokens to a prompt
+    \item Injecting code into the model's training
+    \item A medical procedure
+    \item Crafting inputs to deliberately bypass AI safety protocols
+\end{enumerate}
+
+\item \textbf{Agentic AI} differs from traditional chatbots by being:
+\begin{enumerate}[label=\Alph*)]
+    \item Unable to use external tools
+    \item Text-only without multimodal capabilities
+    \item Proactive, multi-step, stateful, and capable of autonomous tool usage
+    \item Slower and less accurate
+\end{enumerate}
+
+\end{enumerate}
+
+\vspace{1cm}
+\hrule
+\vspace{0.5cm}
+
+\begin{center}
+\textbf{--- END OF EXAM ---}
+\end{center}
+
+\newpage
+%=============================================================================
+\section*{Answer Key (For Instructor Use Only)}
+%=============================================================================
+
+\begin{center}
+\begin{tabular}{|c|c||c|c||c|c||c|c|}
+\hline
+\textbf{Q} & \textbf{Ans} & \textbf{Q} & \textbf{Ans} & \textbf{Q} & \textbf{Ans} & \textbf{Q} & \textbf{Ans} \\
+\hline
+1 & D & 11 & C & 21 & C & 31 & A \\
+2 & D & 12 & C & 22 & D & 32 & D \\
+3 & D & 13 & D & 23 & A & 33 & C \\
+4 & D & 14 & C & 24 & C & 34 & D \\
+5 & D & 15 & B & 25 & C & 35 & C \\
+6 & A & 16 & D & 26 & A & 36 & D \\
+7 & C & 17 & A & 27 & C & 37 & A \\
+8 & C & 18 & C & 28 & D & 38 & C \\
+9 & D & 19 & C & 29 & A & 39 & D \\
+10 & A & 20 & D & 30 & C & 40 & C \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{1cm}
+
+\section*{Detailed Answer Key with Explanations}
+
+\begin{enumerate}
+    \item \textbf{D} - A prompt is the input message given to an AI system.
+    \item \textbf{D} - Source code is not a core element; purpose, context, and constraints are.
+    \item \textbf{D} - Tokenization breaks text into processable chunks.
+    \item \textbf{D} - Subword tokenization handles new/rare words flexibly.
+    \item \textbf{D} - Embeddings are numerical vectors capturing semantic meaning.
+    \item \textbf{A} - The Transformer architecture introduced self-attention.
+    \item \textbf{C} - Hallucination is generating plausible but incorrect information.
+    \item \textbf{C} - LLMs are pattern learners, not conscious reasoners.
+    \item \textbf{D} - Output Specification defines format like JSON, tables.
+    \item \textbf{A} - Zero-shot means no examples, just the task.
+    \item \textbf{C} - Few-shot steers style/format with examples.
+    \item \textbf{C} - Role prompting sets persona, audience, tone.
+    \item \textbf{D} - Conflicting directives are a common anti-pattern.
+    \item \textbf{C} - RAG grounds answers with provided context.
+    \item \textbf{B} - CO-STAR: Context, Objective, Style, Tone, Audience, Response.
+    \item \textbf{D} - IDEA Loop: Identify, Draft, Evaluate, Adjust.
+    \item \textbf{A} - Meta-prompting uses prompts to generate/refine prompts.
+    \item \textbf{C} - Tool use generates structured JSON for function calls.
+    \item \textbf{C} - Field (Topic Domain) controls terminology density.
+    \item \textbf{D} - CEFR B1 is a language proficiency level.
+    \item \textbf{C} - Brand Voice Fingerprinting extracts measurable attributes.
+    \item \textbf{D} - Critique Loop: Generate $\to$ Critique $\to$ Revise.
+    \item \textbf{A} - Vibe Coding is iterating on LLM output based on feel.
+    \item \textbf{C} - LLM-as-Judge enables scalable evaluation.
+    \item \textbf{C} - The 3 H's: Helpful, Honest, Harmless.
+    \item \textbf{A} - Golden Dataset is a curated benchmark set.
+    \item \textbf{C} - Verbosity Bias favors longer answers.
+    \item \textbf{D} - VLMs convert images into visual tokens.
+    \item \textbf{A} - Set-of-Mark overlays numbered markers on images.
+    \item \textbf{C} - Visual Hallucination describes non-existent details.
+    \item \textbf{A} - MECE: Mutually Exclusive, Collectively Exhaustive.
+    \item \textbf{D} - ToT explores multiple branches with backtracking.
+    \item \textbf{C} - ReAct combines Reasoning and Acting.
+    \item \textbf{D} - Self-Consistency generates multiple answers to find consensus.
+    \item \textbf{C} - SOAP Notes are used in Healthcare.
+    \item \textbf{D} - IRAC is for Legal reasoning.
+    \item \textbf{A} - Knowledge Packs include definitions, acronyms, style guides.
+    \item \textbf{C} - Automation Bias is over-reliance on AI outputs.
+    \item \textbf{D} - Prompt Injection bypasses AI safety protocols.
+    \item \textbf{C} - Agentic AI is proactive, multi-step, stateful.
+\end{enumerate}
+
+\vspace{1cm}
+
+\section*{Topic Coverage by Question}
+
+\begin{itemize}
+    \item Foundations: Q1--Q8
+    \item Prompt Design Principles: Q9--Q14
+    \item Patterns and Frameworks: Q15--Q18
+    \item Style, Tone, and Format Control: Q19--Q21
+    \item Iterative Refinement: Q22--Q24
+    \item Evaluation Methods: Q25--Q27
+    \item Multimodal Prompting: Q28--Q30
+    \item Complex Problem Solving: Q31--Q34
+    \item Domain-Specific Applications: Q35--Q37
+    \item Ethics, Responsible AI \& Emerging Trends: Q38--Q40
+\end{itemize}
+
+\end{document}

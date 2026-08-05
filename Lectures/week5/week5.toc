@@ -1,0 +1,7 @@
+\beamer@sectionintoc {1}{Overview}{2}{0}{1}
+\beamer@sectionintoc {2}{Controlling Style and Tone}{5}{0}{2}
+\beamer@sectionintoc {3}{Formatting Mastery}{15}{0}{3}
+\beamer@sectionintoc {4}{Quality Control}{19}{0}{4}
+\beamer@sectionintoc {5}{Worked Examples}{23}{0}{5}
+\beamer@sectionintoc {6}{Activities}{27}{0}{6}
+\beamer@sectionintoc {7}{Wrap-up}{28}{0}{7}

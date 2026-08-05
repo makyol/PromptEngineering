@@ -1,0 +1,384 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+
+% Encoding and fonts for pdfLaTeX
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{hyperref}
+
+\title{Prompt Engineering}
+\author{Mehmet Ali Akyol, PhD}
+\institute{Ankara Medipol University}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+    \begin{center}
+        \vspace{1cm}
+        \textbf{Week 9: Multimodal Prompting}
+    \end{center}
+\end{frame}
+
+\section{Overview}
+
+\begin{frame}
+    \frametitle{Weekly Learning Objectives}
+    \begin{itemize}
+        \item Understand capabilities and limits of popular multimodal models.
+        \item Craft prompts that fuse text with images, tables, or audio transcripts.
+        \item Plan verification strategies for non-text outputs.
+        \item Design accessibility-aware workflows (alt text, captions, transcripts).
+        \item Evaluate ethical considerations in multimodal use.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Introduction to Multimodality}
+    \begin{block}{One-sentence intuition}
+        	extbf{Modality} means the \textit{type of input}: text, image, audio, video, sensor data.
+        	extbf{Multimodality} means the model can use \textit{more than one} at the same time.
+    \end{block}
+    \begin{itemize}
+        \item \textbf{Defining Modality:} A specific mode of communication or sensory channel (e.g., text, vision, audio, sensor data).
+        \item \textbf{Human Perception:} Humans are inherently multimodal. We don't just read; we see, hear, and feel to build a complete world model.
+        \item \textbf{The Digital Evolution:}
+        \begin{itemize}
+            \item \textit{Web 1.0/2.0:} Primarily text-based (Search, Blogs).
+            \item \textit{Modern Web:} Rich media (Video, Images, Voice).
+        \end{itemize}
+        \item \textbf{The Gap:} Until recently, AI treated these modalities separately (CV for images, NLP for text). Multimodality bridges them.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Where do we actually use multimodal prompts?}
+    \begin{itemize}
+        \item \textbf{Photos:} A product photo, a broken device, a street scene.
+        \item \textbf{Screenshots:} App UI bugs, error dialogs, settings pages.
+        \item \textbf{Documents:} PDF pages, invoices, lab reports, forms.
+        \item \textbf{Charts/Tables:} A plot in a paper, a dashboard screenshot.
+        \item \textbf{Audio/Video:} Meeting recordings, lectures (often via transcript + key frames).
+    \end{itemize}
+    \begin{block}{Simple idea}
+        Your prompt should say \textbf{what to look at} and \textbf{what to produce} (summary, table, JSON, steps, etc.).
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{What is Multimodal AI?}
+    \begin{block}{Definition}
+        \textbf{Multimodal AI} refers to systems that can process, understand, and generate information using multiple types of data (modalities) simultaneously, such as text, images, audio, and video.
+    \end{block}
+    \begin{itemize}
+        \item \textbf{Unimodal:} Text-in $\to$ Text-out (e.g., original ChatGPT).
+        \item \textbf{Multimodal:} Image+Text-in $\to$ Text-out (e.g., GPT-4o, Gemini).
+        \item \textbf{Goal:} Mimic human perception by integrating diverse sensory inputs into a unified latent space.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Two common multimodal tasks}
+    \begin{itemize}
+        \item \textbf{Understanding:} "Describe what's in the image", "Extract fields from this invoice", "Explain the chart trend".
+        \item \textbf{Decision support:} "Given this screenshot and error log, propose likely causes and next debugging steps".
+        \item \textbf{Generation (less common in class prompts):} "Generate alt-text" or "Draft a report based on the image".
+    \end{itemize}
+    \begin{block}{}
+        If you want \textbf{accuracy}, ask for \textbf{observations first}, then ask for \textbf{interpretation}.
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Why Multimodal?}
+    \begin{itemize}
+        \item \textbf{Information Density:} An image is worth 1000 tokens. Visuals capture spatial relationships that text struggles to describe.
+        \item \textbf{Real-World Interaction:} The world is not just text. Robots, assistants, and tools need to ``see'' and ``hear.''
+        \item \textbf{Emergent Capabilities:} Reasoning across modalities (e.g., explaining a meme) requires understanding both the visual content and the cultural text context.
+    \end{itemize}
+    \begin{block}{Mini examples}
+        \begin{itemize}
+            \item "Here is a screenshot of my error. Explain what this message means and what to try next."
+            \item "Here is a graph. Is the trend increasing, decreasing, or seasonal?"
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Key Concepts}
+    \begin{itemize}
+        \item \textbf{Vision-Language Models (VLMs):} Models trained on massive datasets of image-text pairs to learn associations.
+        \item \textbf{Grounding:} The ability of the model to link textual concepts to specific pixels or regions in an image (e.g., drawing a bounding box around ``the cat'').
+        \item \textbf{Alignment:} Ensuring the model's visual understanding matches human intent and safety standards.
+        \item \textbf{Modality Gap:} The disconnect that can occur when a model is strong in text but weak in vision (or vice versa).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Key Concepts (continued)}
+    \begin{itemize}
+        \item \textbf{OCR vs. Understanding:} Reading text in an image is OCR; explaining what it means is understanding.
+        \item \textbf{Layout Understanding:} Tables, forms, headers/footers matter (document AI).
+        \item \textbf{Evidence:} Good prompts ask the model to \textit{quote} the text it read or point to the region.
+        \item \textbf{Uncertainty:} For hard images (tiny text), ask for "best guess" + "what is unclear".
+    \end{itemize}
+\end{frame}
+
+\section{Capabilities and Limits}
+
+\begin{frame}
+    \frametitle{How VLMs Work (Simplified)}
+    \begin{itemize}
+        \item \textbf{Tokenization:} Just as text is broken into tokens, images are broken into ``patches'' (e.g., 16x16 pixel squares).
+        \item \textbf{Encoding:} A Vision Encoder (like ViT) converts these patches into vectors.
+        \item \textbf{Projection:} A projection layer maps these visual vectors into the same ``language space'' as text tokens.
+        \item \textbf{Generation:} The LLM processes the sequence of [Image Vectors] + [Text Tokens] to predict the next text token.
+    \end{itemize}
+    \begin{block}{Analogy}
+        Think of an image as being converted into "visual tokens" so the model can process it similarly to words.
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Model Landscape}
+    \begin{itemize}
+        \item \textbf{Frontier Models (Closed) --- examples (2025 era):}
+        \begin{itemize}
+            \item \textbf{OpenAI GPT family (e.g., GPT-4o/4.1-class):} Strong image understanding + natural language interaction.
+            \item \textbf{Anthropic Claude 3.x:} Strong long-context reasoning; useful for document + image workflows.
+            \item \textbf{Google Gemini 1.5/2.0-class:} Strong multimodal context handling and tool integrations.
+        \end{itemize}
+        \item \textbf{Open Weights / Source --- examples:}
+        \begin{itemize}
+            \item \textbf{Llama vision-capable releases:} Popular for building prototypes with local inference.
+            \item \textbf{Qwen VL-family:} Strong document understanding and OCR-style tasks.
+            \item \textbf{DeepSeek VL-family:} Good performance/cost trade-offs for vision+language tasks.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Failure Modes \& Risks}
+    \begin{itemize}
+        \item \textbf{Visual Hallucination:} Describing objects that aren't there. (e.g., ``The man is wearing a red hat'' when it's blue).
+        \item \textbf{OCR Errors:} Misreading small text, handwriting, or rotated text in images.
+        \item \textbf{Spatial Confusion:} Struggling with ``left of'', ``behind'', or counting overlapping objects.
+        \item \textbf{Prompt Injection (Visual):} Hidden text in an image (steganography) that overrides system instructions (e.g., white text on white background saying ``Ignore safety rules'').
+    \end{itemize}
+    \begin{block}{Practical mitigations}
+        \begin{itemize}
+            \item Ask for \textbf{observations} first: "List what you can see".
+            \item For OCR: ask it to \textbf{quote the text} it read.
+            \item For counting: ask for a \textbf{count + uncertainty} ("I see about N").
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\section{Prompting Techniques}
+
+\begin{frame}
+    \frametitle{A simple multimodal prompt recipe (ROLE--CONTEXT--TASK--OUTPUT)}
+    \begin{itemize}
+        \item \textbf{Role:} Who should the model be? ("Act as a radiology assistant", "Act as a QA engineer")
+        \item \textbf{Context:} What is the image/document? What should it focus on?
+        \item \textbf{Task:} What exactly should it do? (extract, explain, compare, check)
+        \item \textbf{Output:} Format + constraints (bullet list, table, JSON; "If uncertain, say so")
+    \end{itemize}
+    \begin{block}{Key trick}
+        Add a line: \textit{"First describe what you observe. Then interpret."}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Technique 1: Set-of-Mark (SoM) Prompting}
+    \begin{block}{Definition}
+        Overlaying numbered tags or bounding boxes on an image \textit{before} feeding it to the model to improve grounding.
+    \end{block}
+    \begin{itemize}
+        \item \textbf{Problem:} Models struggle to say ``the third cup from the left.''
+        \item \textbf{Solution:} You (or a script) draw a red box labeled [1] on the cup.
+        \item \textbf{Prompt:} ``Describe the object in box [1].''
+        \item \textbf{Result:} Significantly higher accuracy in spatial reasoning.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{SoM mini-template (with a tagged image)}
+\begin{verbatim}
+Context: The image has numbered boxes [1], [2], [3].
+Task:
+1) For each box, describe what it contains.
+2) Answer: Which box contains the power button?
+Rules:
+- If you are not sure, say "uncertain" and explain why.
+Output: JSON
+{ "box_descriptions": {...}, "answer": "[n]", "confidence": 0-1 }
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Technique 2: Chain-of-Visual-Thought}
+    \begin{itemize}
+        \item \textbf{Standard CoT:} ``Let's think step by step.''
+        \item \textbf{Visual CoT:} Force the model to break down the visual analysis first.
+        \item \textbf{Prompt Structure:}
+        \begin{enumerate}
+            \item ``First, list all objects visible in the foreground.''
+            \item ``Second, describe the action taking place.''
+            \item ``Finally, speculate on the relationship between the people.''
+        \end{enumerate}
+        \item \textbf{Why?} Prevents the model from jumping to a conclusion without ``looking'' at the details.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Template: Extract structured data from a document screenshot}
+\begin{verbatim}
+Role: You are a careful data entry assistant.
+Input: A screenshot of an invoice.
+Task:
+1) Extract: vendor, date, invoice_id, total, line_items.
+2) Quote the exact text for vendor/date/total.
+Rules:
+- If any field is unreadable, set it to null.
+- Do not guess missing numbers.
+Output: JSON only.
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Prompt Template Example}
+\begin{verbatim}
+System role: You are an analyst reviewing lab results.
+Context: Patient is 42-year-old with Type 2 diabetes.
+Attachments: image_1 (glucose chart), image_2 (medication list)
+Tasks:
+1. Describe key trends in glucose chart.
+2. Identify medication conflicts.
+3. Highlight missing data to request.
+Output format: JSON with keys
+{"summary": string, "risks": [string], "follow_up": [string]}
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Combining Modalities}
+    \begin{itemize}
+        \item Chain modalities: image analysis \textrightarrow{} text reasoning \textrightarrow{} code generation.
+        \item Use tables to anchor structured data interpretation.
+        \item Provide alt text and plain-language descriptions for accessibility.
+        \item Maintain provenance: track which modality informed each claim.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Template: Audio (via transcript) + action items}
+\begin{verbatim}
+Input: Transcript of a 20-minute meeting.
+Task:
+1) Summarize in 5 bullets.
+2) List action items as: owner, task, due_date (if stated).
+3) List open questions.
+Rule: Only use information explicitly in the transcript.
+Output: Markdown.
+\end{verbatim}
+\end{frame}
+
+\section{Verification Strategies}
+
+\begin{frame}
+    \frametitle{Checking Visual Claims}
+    \begin{itemize}
+        \item \textbf{Self-Correction:} Ask the model to ``Double check the image. Are you sure the car is red?''
+        \item \textbf{Multi-Model Voting:} Ask GPT-4o, Claude 3.5, and Gemini to describe the same image. If they disagree, flag for human review.
+        \item \textbf{OCR Validation:} If the task involves reading text, use a specialized OCR tool (like Tesseract or Amazon Textract) to verify the VLM's reading.
+        \item \textbf{Provenance Tracking:} Require the model to output bounding box coordinates for its claims (e.g., ``Found a defect at [200, 400]'').
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{A quick verification checklist}
+    \begin{enumerate}
+        \item \textbf{Repeat the question:} Ask it twice with slightly different wording.
+        \item \textbf{Ask for evidence:} "Quote the text you read" or "Describe the region".
+        \item \textbf{Use a tool when needed:} OCR tool for small text; calculator for arithmetic.
+        \item \textbf{Human-in-the-loop:} If the decision is high-stakes, require review.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Accessibility Considerations}
+    \begin{itemize}
+        \item \textbf{Alt Text Generation:} Use VLMs to generate descriptive alt text for millions of images on the web.
+        \item \textbf{Video Captions:} Automated speech-to-text + speaker diarization (identifying who spoke when).
+        \item \textbf{Visual Interpreters:} Apps like Be My Eyes use VLMs to describe surroundings for blind users.
+        \item \textbf{Ethics:} Avoid making assumptions about gender, race, or emotion unless explicitly clear.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Prompting for Alt Text (practical)}
+    \begin{itemize}
+        \item \textbf{Short alt text (1 line):} For screen readers.
+        \item \textbf{Long description (2--4 lines):} Add context + important details.
+        \item \textbf{Avoid sensitive guesses:} Don't infer age, race, disability, or emotions unless clearly stated.
+    \end{itemize}
+    \begin{block}{Example prompt}
+        "Write (1) a one-line alt text and (2) a 3-line long description.
+        Do not guess identity attributes. Focus on objective details."
+    \end{block}
+\end{frame}
+
+\section{Applications}
+
+\begin{frame}
+    \frametitle{Industry Use Cases}
+    \begin{itemize}
+        \item \textbf{E-Commerce:} ``Generate a product description from this photo of a sneaker.'' (Visual Attribute Extraction).
+        \item \textbf{Insurance:} ``Analyze this photo of a car accident. Estimate repair costs and list damaged parts.'' (Damage Assessment).
+        \item \textbf{Robotics:} ``Look at this messy table. Plan a path to pick up the apple without hitting the cup.'' (Visual Planning).
+        \item \textbf{UI/UX Design:} ``Turn this napkin sketch of a website into HTML/Tailwind code.'' (Sketch-to-Code).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Research and Analysis}
+    \begin{itemize}
+        \item \textbf{Scientific Charts:} ``Extract the data points from this scatter plot into a CSV file.''
+        \item \textbf{Video Analysis:} ``Watch this 1-hour lecture. Give me timestamps for when the professor talks about 'Transformers'.'' (Video Retrieval).
+        \item \textbf{Digital Humanities:} Analyzing historical manuscripts or art styles at scale.
+    \end{itemize}
+\end{frame}
+
+\section{Wrap-up}
+
+\begin{frame}
+    \frametitle{Key Takeaways}
+    \begin{itemize}
+        \item Multimodal prompts expand capability but require careful design.
+        \item Describe inputs precisely and control for hallucinations.
+        \item Accessibility and ethics must be embedded from the start.
+        \item Evaluate new workflows rigorously before deployment.
+    \end{itemize}
+    \begin{block}{One last rule}
+        If the output matters, treat the model like a \textbf{student}: give instructions, examples, and a grading checklist.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Questions and Discussion}
+    \begin{center}
+    {\Huge Thank You!}
+    \vspace{1cm}
+
+        \textbf{Dr.\ Mehmet Ali Akyol}\\
+        \texttt{mehmetali.akyol@gmail.com}
+    \vspace{1cm}
+
+    {\large Questions?}
+    \end{center}
+\end{frame}
+
+\end{document}

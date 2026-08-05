@@ -1,0 +1,8 @@
+\beamer@sectionintoc {1}{Overview}{2}{0}{1}
+\beamer@sectionintoc {2}{The Nature of GenAI}{6}{0}{2}
+\beamer@sectionintoc {3}{Ethical Risk Landscape}{8}{0}{3}
+\beamer@sectionintoc {4}{Copyright and IP}{13}{0}{4}
+\beamer@sectionintoc {5}{Responsible Prompt Design}{18}{0}{5}
+\beamer@sectionintoc {6}{Governance and Policy}{24}{0}{6}
+\beamer@sectionintoc {7}{Academic Integrity}{28}{0}{7}
+\beamer@sectionintoc {8}{Wrap-up}{30}{0}{8}

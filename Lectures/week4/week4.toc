@@ -1,0 +1,6 @@
+\beamer@sectionintoc {1}{Overview}{2}{0}{1}
+\beamer@sectionintoc {2}{Pattern Library}{5}{0}{2}
+\beamer@sectionintoc {3}{Frameworks}{8}{0}{3}
+\beamer@sectionintoc {4}{Deep Dive}{11}{0}{4}
+\beamer@sectionintoc {5}{Worked Examples}{19}{0}{5}
+\beamer@sectionintoc {6}{Wrap-up}{22}{0}{6}

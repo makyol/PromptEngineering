@@ -1,0 +1,501 @@
+\documentclass{beamer}
+
+\usetheme{Madrid}
+\title{Prompt Engineering}
+\author{Mehmet Ali Akyol, PhD}
+\institute{Ankara Medipol University}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+    \begin{center}
+        \vspace{1cm}
+        \textbf{Week 2: How LLMs Work (A Non-Technical Primer)}
+    \end{center}
+\end{frame}
+
+\section{Overview}
+
+\begin{frame}
+    \frametitle{Weekly Learning Objectives}
+    \begin{itemize}
+        \item Explain an LLM as a next-word prediction engine using simple analogies.
+    \item Define ``tokenization'' and its role in how LLMs process text.
+        \item Describe the basic idea behind the Transformer architecture (self-attention).
+        \item Distinguish between the capabilities and inherent limitations of LLMs.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Key Concepts}
+    \begin{itemize}
+        \item Large Language Model (LLM)
+        \item Transformer Architecture \& Self-Attention
+        \item Tokenization \& Word Embeddings
+
+        \item Capabilities \& Limitations
+        \item Hallucination
+    \end{itemize}
+\end{frame}
+
+\section{Core Concepts of LLMs}
+
+\begin{frame}
+    \frametitle{The Core Idea: A Sophisticated Autocomplete}
+    \begin{itemize}
+        \item Think of how your phone suggests the next word as you type—LLMs work on the same principle, just vastly more sophisticated.
+    \item Instead of predicting just words, LLMs predict ``tokens'' (we'll explain this soon).
+        \item They're trained by reading trillions of words from books, websites, code, scientific papers, and more.
+        \item Through this reading, the model discovers patterns: grammar rules, common facts, writing styles, even cultural context.
+    \item What's remarkable: complex behaviors like answering questions or writing essays emerge from this simple ``predict the next piece'' mechanism.
+        \item \textbf{Key Insight:} No one explicitly programs these rules—the AI learns them by finding patterns in massive amounts of text.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Scale of Modern LLMs: How Big Are They?}
+    \begin{itemize}
+    \item \textbf{Parameters:} Think of these as the ``knobs'' the AI adjusts during learning. Modern LLMs have billions or even trillions of these adjustable values.
+        \item \textbf{To put this in perspective:}
+        \begin{itemize}
+            \item GPT-3: 175 billion parameters (like 175 billion adjustable settings)
+            \item GPT-4: Over 1 trillion parameters
+            \item LLaMA 2 70B: 70 billion parameters
+        \end{itemize}
+        \item \textbf{Training Data:} These models read hundreds of billions of text pieces during training—imagine reading millions of books.
+        \item \textbf{Cost:} Training cutting-edge models can cost millions of dollars in computing power and electricity.
+        \item Generally, bigger models perform better, though there are limits to this trend.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Small vs. Large Models: What's the Difference?}
+    \begin{itemize}
+        \item Think of it like comparing a high school student to a college professor—both can answer questions, but with different depth.
+        \item \textbf{Small Models (fewer parameters):}
+        \begin{itemize}
+            \item Faster and cheaper to run
+            \item Good for simple tasks (basic Q\&A, simple summaries)
+            \item May miss nuances or make more mistakes
+            \item Example response: ``Paris is the capital of France. It has many tourists.''
+        \end{itemize}
+        \item \textbf{Large Models (more parameters):}
+        \begin{itemize}
+            \item Better at complex reasoning and nuanced understanding
+            \item Can handle specialized topics and longer contexts
+            \item Example response: ``Paris, France's capital, is renowned for its art, culture, and history. The Eiffel Tower, Louvre Museum, and Notre-Dame Cathedral attract millions of visitors annually\ldots''
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{From Words to Numbers: Tokenization}
+    \begin{itemize}
+    \item Here's a crucial point: computers can't actually ``read'' text---they only understand numbers.
+    \item \textbf{Tokenization} is how we bridge this gap: breaking text into small chunks called ``tokens.''
+        \item A token might be:
+        \begin{itemize}
+            \item A complete word (like ``hello'')
+            \item Part of a word (like ``un'' and ``believable'')
+            \item Even a single character or punctuation mark
+        \end{itemize}
+    \item \textbf{Example:} The phrase ``Tokenization is important'' might be split into: [``Token'', ``ization'', `` is'', `` important''].
+        \item Each token is then converted to a number the computer can process.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Why Break Words Into Pieces?}
+    \begin{itemize}
+        \item \textbf{The Solution:} Modern LLMs use 32,000-100,000 ``sub-word'' pieces that can be combined flexibly.
+        \item \textbf{Why This Works:}
+        \begin{itemize}
+            \item Can handle new or rare words by combining familiar pieces (like building with LEGO blocks)
+            \item More efficient for the computer to process
+            \item Works especially well for languages like Turkish or Finnish where words can be very long
+        \end{itemize}
+        \item Different AI models may split text differently—like different people cutting a cake into different slice sizes.
+        \item This is why the same text might be slightly different lengths for different AI systems.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{From Tokens to Meaning: Embeddings}
+    \begin{itemize}
+        \item After splitting text into tokens, each token becomes a list of numbers called an \textbf{embedding}.
+        \item Think of it like GPS coordinates: just as latitude and longitude locate a place on Earth, embeddings locate words in ``meaning space.''
+        \item Each token gets represented by 768 to 12,288 numbers that capture its meaning and relationships to other words.
+        \item \textbf{The Magic:} Words with similar meanings end up close together in this mathematical space.
+        \item \textbf{Famous Example:} The relationship between "king" and "queen" is mathematically similar to the relationship between "man" and "woman."
+        \item The AI learns these relationships from data—no human explicitly teaches it that kings and queens are related!
+    \end{itemize}
+\end{frame}
+\begin{frame}
+    \frametitle{Visualizing Embeddings: Words in Space}
+    \begin{center}
+        \textbf{Imagine a Map of Word Meanings}
+    \end{center}
+    \begin{itemize}
+        \item If we could visualize this ``meaning space,'' related words would appear in neighborhoods together:
+        \begin{itemize}
+            \item Animal neighborhood: cat, dog, horse, elephant
+            \item Color district: red, blue, green, yellow
+            \item Action zone: run, walk, jump, sprint
+        \end{itemize}
+    \item \textbf{Context Matters:} Modern LLMs are smart---they understand that ``bank'' means something different in:
+        \begin{itemize}
+            \item ``I walked along the river bank'' (shoreline)
+            \item ``I deposited money at the bank'' (financial institution)
+        \end{itemize}
+    \item The same word gets different embeddings based on context!
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Brain of the LLM: The Transformer}
+    \begin{itemize}
+        \item In 2017, researchers published a breakthrough paper titled ``Attention Is All You Need'' that changed everything.
+        \item The key innovation: \textbf{self-attention}---a way for AI to understand which words are important for understanding other words.
+        \item \textbf{Think about this sentence:} ``The cat sat on the mat, and \textbf{it} was happy.''
+        \item You instantly know ``it'' refers to ``the cat'', not ``the mat''. How? You're paying attention to the relationship between words.
+        \item Self-attention lets the AI do the same thing: mathematically determine which words should influence the understanding of other words.
+        \item This replaced older approaches that read text one word at a time, making modern AI both faster and smarter.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{How Self-Attention Works (Simplified)}
+    \begin{itemize}
+    \item Imagine reading a sentence where each word asks: ``Which other words should I pay attention to?''
+        \item For each word, the system creates three pieces of information:
+        \begin{itemize}
+            \item \textbf{Query:} ``What am I looking for?''
+            \item \textbf{Key:} ``What information do I contain?''
+            \item \textbf{Value:} ``What information can I provide?''
+        \end{itemize}
+    \item The system compares all the Queries and Keys to calculate \textbf{attention scores}---essentially asking ``how relevant is each word to each other word?''
+        \item These scores determine how much each word influences the understanding of every other word.
+        \item \textbf{The Result:} Each word gets a rich, context-aware representation that incorporates information from the entire sentence.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Multi-Head Attention: Many Perspectives at Once}
+    \begin{itemize}
+        \item Here's where it gets even more interesting: the AI doesn't use just one attention mechanism—it uses many in parallel.
+    \item \textbf{Example:} GPT-3 uses 96 different ``attention heads'' in each layer, and has 96 layers! That's over 9,000 attention mechanisms working together.
+        \item Think of it like having multiple experts examining the same text:
+        \begin{itemize}
+            \item One expert focuses on grammar (subject-verb agreement, sentence structure)
+            \item Another on meaning (synonyms, related concepts)
+            \item Another on long-distance connections (what ``it'' refers to paragraphs earlier)
+        \end{itemize}
+        \item All these perspectives get combined to create a rich, nuanced understanding of the text.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Transformer Architecture: Putting It All Together}
+    \begin{itemize}
+        \item \textbf{Step 1 - Input:} Text is converted to embeddings (those number lists we discussed)
+        \item \textbf{Step 2 - Position Information:} The system adds information about word order (first word, second word, etc.)
+        \item \textbf{Step 3 - Processing Layers:} The text flows through many layers (12 to 96+ in modern models)
+        \begin{itemize}
+            \item Each layer applies multi-head attention (understanding word relationships)
+            \item Then applies additional processing to refine understanding
+        \end{itemize}
+        \item \textbf{Step 4 - Output:} Finally, the system produces probabilities for what token should come next
+        \item Think of it as multiple stages of increasingly sophisticated reading comprehension.
+    \end{itemize}
+\end{frame}
+
+\section{Training and Fine-Tuning}
+
+\begin{frame}
+    \frametitle{The Training Process: How Do They Learn?}
+    \begin{itemize}
+        \item \textbf{Pre-training:} The AI reads massive amounts of text—books, websites, articles, code, and more.
+        \item \textbf{The Learning Game:} For each piece of text, try to predict the next word. Get it wrong? Adjust those billions of parameters slightly. Repeat trillions of times.
+        \item It's like learning a language by reading millions of books and constantly testing yourself on what word comes next.
+        \item \textbf{Time \& Resources:} This process takes weeks to months, running on thousands of powerful computers working together.
+        \item \textbf{The Result:} A "foundation model"—an AI with broad knowledge about language, facts, reasoning patterns, and more.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Fine-Tuning: Making Them Useful and Safe}
+    \begin{itemize}
+        \item After basic training, the AI isn't ready for public use—it needs refinement.
+        \item \textbf{Fine-Tuning:} Additional training on carefully selected examples to specialize the model's behavior.
+        \item \textbf{Instruction Tuning:} Teaching the AI to follow instructions by showing it many examples of questions and good answers.
+        \item \textbf{Learning from Human Feedback:}
+        \begin{itemize}
+            \item Humans review and rank different AI responses
+            \item The AI learns to produce responses that humans find helpful, harmless, and honest
+            \item This helps align the AI with human values and expectations
+        \end{itemize}
+        \item Systems like ChatGPT, Claude, and Gemini all go through extensive fine-tuning before public release.
+    \end{itemize}
+\end{frame}
+
+\section{Capabilities, Limitations, and Activities}
+
+\begin{frame}
+    \frametitle{Capabilities and Limitations}
+    \begin{block}{What LLMs Are Remarkably Good At:}
+        LLMs are remarkably flexible—they can write, summarize, translate, analyze, code, and more without being explicitly programmed for each task. This general-purpose adaptability is revolutionary.
+    \end{block}
+    
+    \begin{block}{Key Limitations to Keep in Mind:}
+        \begin{itemize}
+            \item Hallucination: can produce plausible but incorrect or fabricated facts.
+            \item Biases: reflect stereotypes and biases present in training data.
+            \item No-true understanding: statistical pattern learners, not conscious reasoners.
+            \item Outdated/incomplete knowledge: training cutoff and dataset gaps.
+            \item Context-window limits: cannot attend to arbitrarily long documents.
+            \item Sensitivity to phrasing: small prompt changes produce different outputs.
+            \item Privacy \& safety risks: may leak training artifacts or be misused.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Emergent Abilities: Unexpected Superpowers}
+    \begin{itemize}
+        \item Something fascinating happens as models get bigger: new abilities suddenly appear that smaller models didn't have.
+        \item \textbf{Examples of emergent abilities:}
+        \begin{itemize}
+            \item Learning from just a few examples (like humans do)
+            \item Explaining step-by-step reasoning
+            \item Following complex, multi-part instructions
+            \item Solving problems they've never seen before
+        \end{itemize}
+        \item Here's what's remarkable: nobody explicitly programmed these abilities—they spontaneously emerged when the models reached a certain size.
+        \item \textbf{Open Question:} Are these truly new abilities, or are we just measuring things differently?
+        \item Understanding this helps us anticipate what even larger future models might be capable of.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{In-Class Activities}
+    \begin{block}{Activity 1: Breaking Down Sentences Into Tokens}
+        Let's experiment with tokenization! We'll take several sentences and first predict how an AI might break them into tokens. Then we'll use an online tokenizer tool (platform.openai.com/tokenizer) to see the actual breakdown. How close were our predictions? What surprises us?
+    \end{block}
+    \begin{block}{Activity 2: Spot the Hallucination}
+        Time to be AI detectives! We'll examine AI-generated paragraphs that contain subtle factual errors. Using fact-checking and search engines, we'll work together to identify which information is hallucinated and discuss why the AI might have made these mistakes.
+    \end{block}
+\end{frame}
+
+% --- Activity 2: Spot the Hallucination ---
+% AI & Technology
+\begin{frame}{Activity 2: Spot the Hallucination}
+    	\textbf{Domain:} [AI] AI \& Technology
+    \vspace{0.3cm}
+    	\textit{Hallucination:}
+    \begin{quote}
+        ``OpenAI released GPT-5 in 2018, and it quickly became the first model capable of passing the Turing test and operating fully without any training data''.
+    \end{quote}
+    \vspace{0.3cm}
+    	\textbf{Can you spot the error(s)?}
+\end{frame}
+
+\begin{frame}{Activity 2: AI \& Technology — Reveal}
+    	\textbf{What’s Wrong:}
+    \begin{itemize}
+        \item GPT-5 wasn’t released in 2018 (GPT-2 came in 2019).
+        \item No AI model has definitively passed the Turing test.
+        \item All models require training data.
+    \end{itemize}
+    	\textbf{Correct Fact:}
+    \begin{itemize}
+        \item GPT-2 was released in 2019, GPT-3 in 2020, GPT-4 in 2023.
+        \item None have conclusively passed the Turing test.
+        \item All are trained on large datasets.
+    \end{itemize}
+\end{frame}
+
+% Medical (1)
+\begin{frame}{Activity 2: Spot the Hallucination}
+    	\textbf{Domain:} [MED] Medical
+    \vspace{0.3cm}
+    	\textit{Hallucination:}
+    \begin{quote}
+        ``The hormone insulin was first discovered in the 1970s by Edward Jenner, who used it to successfully treat smallpox patients''.
+    \end{quote}
+    \vspace{0.3cm}
+    	\textbf{Can you spot the error(s)?}
+\end{frame}
+
+\begin{frame}{Activity 2: Medical — Reveal}
+    	\textbf{What’s Wrong:}
+    \begin{itemize}
+        \item Insulin was discovered in 1921 by Banting and Best.
+        \item Jenner lived much earlier and developed the smallpox vaccine.
+    \end{itemize}
+    	\textbf{Correct Fact:}
+    \begin{itemize}
+        \item Insulin was discovered in 1921 and is used to treat diabetes.
+        \item Jenner developed the smallpox vaccine in the late 18th century.
+    \end{itemize}
+\end{frame}
+
+% Medical (2)
+\begin{frame}{Activity 2: Spot the Hallucination}
+    	\textbf{Domain:} [MED] Medical
+    \vspace{0.3cm}
+    	\textit{Hallucination:}
+    \begin{quote}
+        ``The human heart pumps blue blood to the lungs, where it turns red after mixing with carbon dioxide, which provides oxygen to body tissues''.
+    \end{quote}
+    \vspace{0.3cm}
+    	\textbf{Can you spot the error(s)?}
+\end{frame}
+
+\begin{frame}{Activity 2: Medical — Reveal}
+    	\textbf{What’s Wrong:}
+    \begin{itemize}
+        \item Blood is never blue; it just appears that way under the skin.
+        \item Blood releases CO$_2$ in the lungs and binds oxygen — it doesn’t mix with CO$_2$ to gain oxygen.
+    \end{itemize}
+    	\textbf{Correct Fact:}
+    \begin{itemize}
+        \item Deoxygenated blood is dark red and becomes bright red when oxygen binds to hemoglobin in the lungs.
+    \end{itemize}
+\end{frame}
+
+% Space & Astronomy
+\begin{frame}{Activity 2: Spot the Hallucination}
+    	\textbf{Domain:} [SPACE] Space \& Astronomy
+    \vspace{0.3cm}
+    	\textit{Hallucination:}
+    \begin{quote}
+        ``Jupiter is the smallest planet in our solar system and completes one orbit around the Sun every 12 days, which makes its years much shorter than Earth’s''.
+    \end{quote}
+    \vspace{0.3cm}
+    	\textbf{Can you spot the error(s)?}
+\end{frame}
+
+\begin{frame}{Activity 2: Space \& Astronomy — Reveal}
+    	\textbf{What’s Wrong:}
+    \begin{itemize}
+        \item Jupiter is the largest planet, not the smallest.
+        \item Its orbital period is about 12 Earth years, not 12 days.
+    \end{itemize}
+    	\textbf{Correct Fact:}
+    \begin{itemize}
+        \item Jupiter is the largest planet in the solar system and orbits the Sun roughly every 12 Earth years.
+    \end{itemize}
+\end{frame}
+
+% History
+\begin{frame}{Activity 2: Spot the Hallucination}
+    	\textbf{Domain:} [HIST] History
+    \vspace{0.3cm}
+    	\textit{Hallucination:}
+    \begin{quote}
+        ``The Berlin Wall was built in 1945 immediately after World War II to separate democratic East Germany from communist West Germany''.
+    \end{quote}
+    \vspace{0.3cm}
+    	\textbf{Can you spot the error(s)?}
+\end{frame}
+
+\begin{frame}{Activity 2: History — Reveal}
+    	\textbf{What’s Wrong:}
+    \begin{itemize}
+        \item The Berlin Wall was built in 1961, not 1945.
+        \item It separated communist East Berlin (and East Germany) from democratic West Berlin.
+    \end{itemize}
+    	\textbf{Correct Fact:}
+    \begin{itemize}
+        \item The wall was constructed in 1961 by East Germany to stop citizens from fleeing to West Berlin.
+    \end{itemize}
+\end{frame}
+
+% Economy
+\begin{frame}{Activity 2: Spot the Hallucination}
+    	\textbf{Domain:} [ECON] Economy
+    \vspace{0.3cm}
+    	\textit{Hallucination:}
+    \begin{quote}
+        ``The Great Depression began in 1969 after the collapse of the European Union’s single currency, causing global GDP to shrink by 70\% within a single year''.
+    \end{quote}
+    \vspace{0.3cm}
+    	\textbf{Can you spot the error(s)?}
+\end{frame}
+
+\begin{frame}{Activity 2: Economy — Reveal}
+    	\textbf{What’s Wrong:}
+    \begin{itemize}
+        \item The Great Depression began in 1929.
+        \item The EU and the euro did not exist then.
+        \item Global GDP didn’t shrink by 70\% in one year — the U.S. GDP dropped ~30\% over several years.
+    \end{itemize}
+    	\textbf{Correct Fact:}
+    \begin{itemize}
+        \item The Great Depression started in 1929 after the U.S. stock market crash.
+        \item The EU and euro were established decades later.
+    \end{itemize}
+\end{frame}
+
+% End of Activity 2
+
+\begin{frame}
+    \frametitle{Discussion Questions}
+    \begin{itemize}
+        \item If an LLM is just predicting the next word, why does it feel like it understands our questions?
+        \item Now that we know LLMs can hallucinate, how should this change the way we use them for academic research?
+        \item What dangers might arise if people aren't aware of the biases embedded in LLMs?
+        \item Does the concept of "emergent abilities" challenge our understanding of what intelligence really is?
+        \item If LLMs can only "read" limited amounts of text at once, what creative strategies could we use to analyze very long documents?
+        \item Should we trust AI-generated content differently than human-written content? Why or why not?
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Key Takeaways}
+    \begin{itemize}
+        \item LLMs are sophisticated pattern-matching systems that learn from enormous amounts of text—think of them as "autocomplete on steroids."
+        \item Tokens are the building blocks of text (like LEGO bricks), and understanding tokenization helps explain why AI sometimes behaves unexpectedly.
+        \item The Transformer architecture's self-attention mechanism is what enables them to understand context and relationships between words.
+        \item Bigger models generally perform better, but there are trade-offs in cost, speed, and complexity.
+        \item LLMs are powerful tools, but they have real limitations—hallucinations, biases, and knowledge gaps—that we must be aware of.
+        \item Context windows limit how much text an LLM can "see" at once—this matters for long documents.
+        \item Understanding how LLMs work helps us write better prompts and use AI more effectively in our own fields.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Reflection for Next Week}
+    \begin{block}{Think About This Before Our Next Class}
+        \textbf{Reflection Prompt:} "If LLMs are just predicting the next word based on patterns, does that mean they're truly 'intelligent' or just very sophisticated calculators?"
+        
+        \vspace{0.3cm}
+        \textbf{Consider:}
+        \begin{itemize}
+            \item What does 'understanding' really mean?
+            \item Can pattern recognition alone produce intelligent behavior?
+            \item How is this different from (or similar to) how humans learn and think?
+            \item What are the philosophical implications for AI in society?
+        \end{itemize}
+        \vspace{0.3cm}
+        \textbf{Next Class:} We'll share our thoughts and perspectives.
+    \end{block}
+\end{frame}
+
+% Thank You Slide
+\begin{frame}{Questions and Discussion}
+    \begin{center}
+    {\Huge Thank You!}
+    \vspace{1cm}
+
+    	\textbf{Dr.\ Mehmet Ali Akyol}\\
+    	\texttt{mehmetali.akyol@gmail.com}
+    \vspace{1cm}
+    
+    {\large Questions?}
+    \end{center}
+\end{frame}
+\end{document}

@@ -1,0 +1,6 @@
+\beamer@sectionintoc {1}{Overview}{2}{0}{1}
+\beamer@sectionintoc {2}{Capabilities and Limits}{10}{0}{2}
+\beamer@sectionintoc {3}{Prompting Techniques}{13}{0}{3}
+\beamer@sectionintoc {4}{Verification Strategies}{21}{0}{4}
+\beamer@sectionintoc {5}{Applications}{25}{0}{5}
+\beamer@sectionintoc {6}{Wrap-up}{27}{0}{6}

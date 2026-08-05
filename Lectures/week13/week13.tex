@@ -1,0 +1,349 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+
+% Encoding and fonts for pdfLaTeX
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{booktabs}
+
+\title{Prompt Engineering}
+\author{Mehmet Ali Akyol, PhD}
+\institute{Ankara Medipol University}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+    \begin{center}
+        \vspace{1cm}
+        \textbf{Week 13: Emerging Trends in Prompt Engineering}
+    \end{center}
+\end{frame}
+
+\section{The Shift to Agentic AI}
+
+\begin{frame}
+    \frametitle{The Agentic Era (2025--2026 Landscape)}
+    \begin{itemize}
+        \item \textbf{From Chatbots to Agents}: Moving beyond reactive chatbots to proactive \textbf{Agentic AI} that plans and executes multi-step tasks autonomously.
+        \item \textbf{Market Reality}: Enterprise AI market projected to reach \$229.3B by 2030 (McKinsey, 2024). However, Gartner predicts \textbf{40\% failure rate} by 2027 due to orchestration complexity.
+        \item \textbf{Engineering Discipline}: Prompt engineering has evolved from a ``heuristic art'' to a rigorous engineering discipline with formal methodologies.
+        \item \textbf{Key Shift}: From \textit{prompt crafting} $\rightarrow$ \textit{system architecture} with prompts as configurable components.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Evolution of LLM Capabilities}
+    \begin{itemize}
+        \item \textbf{Context Windows}: From 4K tokens (GPT-3) to 2M+ tokens (Gemini 1.5, Claude 3.5)---enabling ``infinite memory'' workflows.
+        \item \textbf{Reasoning Models}: OpenAI o1/o3, DeepSeek-R1, and Claude 3.5 with native chain-of-thought reasoning baked into training.
+        \item \textbf{Tool Use Maturity}: Function calling evolved from experimental to production-grade with structured outputs (JSON mode).
+        \item \textbf{Cost Reduction}: 99\% cost reduction since 2022---enabling complex multi-agent architectures at scale.
+    \end{itemize}
+\end{frame}
+
+\section{Advanced Architectures \& Models}
+
+\begin{frame}
+    \frametitle{Advanced Reasoning Architectures}
+    \begin{itemize}
+        \item \textbf{Chain-of-Thought (CoT)}: Models generate intermediate reasoning steps. Improves math accuracy by \textbf{+15--40\%} (Wei et al., 2022) but increases latency 2--3x.
+        \item \textbf{Tree of Thoughts (ToT)}: Explores multiple reasoning branches, self-evaluates, and backtracks. Up to \textbf{74\%} improvement on creative tasks (Yao et al., 2023).
+        \item \textbf{Graph of Thoughts (GoT)}: Models thought processes as a DAG, enabling non-linear reasoning and merging disparate paths. \textbf{62\%} quality improvement on sorting tasks (Besta et al., 2024).
+        \item \textbf{Meta-CoT}: Dynamically selects reasoning strategy based on problem characteristics.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Reasoning Architecture Comparison}
+    \begin{center}
+    \begin{tabular}{lccc}
+    \toprule
+    \textbf{Method} & \textbf{Structure} & \textbf{Backtrack?} & \textbf{Best For} \\
+    \midrule
+    CoT & Linear & No & Math, Logic \\
+    Self-Consistency & Parallel & No & Ambiguous problems \\
+    ToT & Tree & Yes & Planning, Games \\
+    GoT & Graph & Yes & Complex synthesis \\
+    \bottomrule
+    \end{tabular}
+    \end{center}
+    \vspace{0.3cm}
+    \textbf{Trade-off}: Complexity $\uparrow$ = Quality $\uparrow$ but Cost \& Latency $\uparrow\uparrow$
+\end{frame}
+
+\begin{frame}
+    \frametitle{Efficiency \& Latency Optimization}
+    \begin{itemize}
+        \item \textbf{Skeleton-of-Thought (SoT)}: Generates outline first, expands in parallel. Reduces latency by \textbf{2.4x} while maintaining quality (Ning et al., 2024).
+        \item \textbf{Chain of Draft (CoD)}: Minimalistic reasoning (like expert notes). Reduces token usage by up to \textbf{92\%} with minimal accuracy loss.
+        \item \textbf{Speculative Decoding}: Draft model generates candidates; main model verifies. \textbf{2--3x} speedup without quality degradation.
+        \item \textbf{Prompt Caching}: Reuse computed prefixes across requests. Up to \textbf{90\%} cost reduction for similar queries (Anthropic, OpenAI native support).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Structured Output \& Constrained Generation}
+    \begin{itemize}
+        \item \textbf{JSON Mode}: Guaranteed valid JSON output---essential for production pipelines and tool integration.
+        \item \textbf{Grammar-Constrained Decoding}: Force outputs to match formal grammars (CFG, regex). Tools: Outlines, Guidance, LMQL.
+        \item \textbf{Pydantic Integration}: Define output schemas as Python classes; automatic validation and retry logic.
+        \item \textbf{Why It Matters}: Reduces parsing failures from \textbf{15--20\%} to \textbf{<1\%} in production systems.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Multimodal Prompting}
+    \begin{itemize}
+        \item \textbf{New Standard}: Multimodal models (text, image, audio, video) are the norm (Gemini 2.0, GPT-4o, Claude 3.5 Vision).
+        \item \textbf{Core Techniques}:
+        \begin{itemize}
+            \item \textbf{Region-of-Interest}: ``Focus on the top-left quadrant where the chart appears.''
+            \item \textbf{Visual CoT}: ``First describe what you see, then answer''---reduces hallucinations by \textbf{23\%}.
+            \item \textbf{Set-of-Mark Prompting}: Overlay numbered markers on images for precise reference.
+        \end{itemize}
+        \item \textbf{Emerging}: Video understanding, real-time audio agents (GPT-4o voice mode).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Retrieval-Augmented Generation (RAG) 2.0}
+    \begin{itemize}
+        \item \textbf{Beyond Basic RAG}: Moving from simple vector search to sophisticated retrieval pipelines.
+        \item \textbf{Advanced Patterns}:
+        \begin{itemize}
+            \item \textbf{Agentic RAG}: LLM decides what/when to retrieve, reformulates queries.
+            \item \textbf{GraphRAG}: Combines knowledge graphs with vector retrieval for relational reasoning.
+            \item \textbf{Corrective RAG (CRAG)}: Self-evaluates retrieval quality; falls back to web search if needed.
+        \end{itemize}
+        \item \textbf{Hybrid Search}: Combining dense vectors + sparse (BM25) + reranking for \textbf{+15\%} recall.
+    \end{itemize}
+\end{frame}
+
+\section{Agentic AI \& Orchestration}
+
+\begin{frame}
+    \frametitle{Agentic Workflows vs. Standard Chatbots}
+    \begin{itemize}
+        \item \textbf{Core Distinction}:
+        \begin{itemize}
+            \item \textbf{Assistants}: Reactive, single-turn, stateless, rely on explicit user input.
+            \item \textbf{Agents}: Proactive, multi-step, stateful, autonomous tool usage with goal persistence.
+        \end{itemize}
+        \item \textbf{Cognitive Architecture}: Perception $\rightarrow$ Memory $\rightarrow$ Planning $\rightarrow$ Action $\rightarrow$ Reflection loop.
+        \item \textbf{Multi-Agent Systems}: Specialized agents (Researcher, Critic, Executor) with emergent collaboration.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Agent Design Patterns}
+    \begin{itemize}
+        \item \textbf{ReAct} (Yao et al., 2023): Interleaved Reasoning + Acting. Most common production pattern.
+        \item \textbf{Plan-and-Execute}: Generate full plan upfront, then execute steps. Better for complex tasks.
+        \item \textbf{Reflexion} (Shinn et al., 2023): Agent reflects on failures, updates strategy. Enables learning from mistakes.
+        \item \textbf{LATS} (Language Agent Tree Search): Combines ToT with ReAct for strategic exploration.
+        \item \textbf{Critique Pattern}: Separate ``actor'' and ``critic'' agents for self-improvement.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Orchestration Frameworks}
+    \begin{itemize}
+        \item \textbf{LangGraph}: Stateful, cyclical workflows with persistence. Best for complex reasoning loops.
+        \item \textbf{CrewAI}: Role-based multi-agent collaboration with built-in delegation.
+        \item \textbf{AutoGen} (Microsoft): Conversational agents with human-in-the-loop support.
+        \item \textbf{Semantic Kernel}: Enterprise-grade with .NET/Python, strong Azure integration.
+        \item \textbf{Model Context Protocol (MCP)}: Anthropic's standard for agent-tool connections---``USB-C for AI.''
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Reliability \& Production Challenges}
+    \begin{itemize}
+        \item \textbf{Reliability Crisis}: Multi-agent systems face cascading failures; 10-step agents with 95\% step accuracy = only \textbf{60\%} end-to-end success.
+        \item \textbf{Durable Execution}: \textbf{Temporal}, \textbf{Inngest} provide crash-resistant workflow engines with automatic retry.
+        \item \textbf{Observability}: Essential tools---\textbf{LangSmith}, \textbf{Langfuse}, \textbf{Arize} for tracing agent decisions.
+        \item \textbf{Guardrails}: \textbf{NeMo Guardrails}, \textbf{Guardrails AI} for runtime constraint enforcement.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Memory Systems for Agents}
+    \begin{itemize}
+        \item \textbf{Short-term}: Conversation buffer within context window.
+        \item \textbf{Long-term}: Vector databases (Pinecone, Weaviate, Chroma) for semantic retrieval.
+        \item \textbf{Episodic}: Store and retrieve past interaction summaries for personalization.
+        \item \textbf{Procedural}: Learned skills/tool usage patterns (emerging research).
+        \item \textbf{Memory Consolidation}: Periodic summarization to manage growing context.
+    \end{itemize}
+\end{frame}
+
+\section{Prompt Engineering Lifecycle \& Tooling}
+
+\begin{frame}
+    \frametitle{Programmatic Prompting (DSPy)}
+    \begin{itemize}
+        \item \textbf{The Problem}: Hand-tuning prompts is brittle; model updates break carefully crafted prompts.
+        \item \textbf{DSPy Paradigm} (Khattab et al., Stanford):
+        \begin{itemize}
+            \item \textbf{Signatures}: Declarative input/output specifications.
+            \item \textbf{Modules}: Composable prompt patterns (ChainOfThought, ReAct).
+            \item \textbf{Optimizers}: MIPROv2, BootstrapFewShot auto-tune prompts.
+        \end{itemize}
+        \item \textbf{Result}: \textbf{+10--25\%} accuracy gains; prompts portable across GPT-4, Claude, Llama.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Prompt Optimization Techniques}
+    \begin{itemize}
+        \item \textbf{Automatic Prompt Engineering (APE)}: LLM generates and scores prompt candidates.
+        \item \textbf{OPRO} (Google): Optimization by Prompting---LLM iteratively improves its own prompts.
+        \item \textbf{Prompt Breeding}: Evolutionary algorithms mutate and crossover prompts.
+        \item \textbf{Soft Prompts}: Learnable continuous embeddings (requires fine-tuning access).
+        \item \textbf{Practical Tip}: Start with DSPy or manual A/B testing before complex optimization.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Lifecycle Management}
+    \begin{itemize}
+        \item \textbf{Versioning}: Prompts are code---use Git, semantic versioning, and prompt registries.
+        \item \textbf{Evaluation-Driven Development}: Systematic testing replaces ``vibes-based'' checking.
+        \item \textbf{LLM-as-Judge}: Use stronger models to evaluate weaker model outputs (GPT-4 judging GPT-3.5).
+        \item \textbf{Platform Landscape}:
+        \begin{itemize}
+            \item \textbf{Braintrust, Promptfoo}: CI/CD + evaluation pipelines.
+            \item \textbf{LangSmith, Langfuse}: Tracing + observability.
+            \item \textbf{Weights \& Biases Prompts}: Experiment tracking for prompts.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Evaluation Metrics \& Benchmarks}
+    \begin{itemize}
+        \item \textbf{Task-Specific}: Accuracy, F1, BLEU, ROUGE, BERTScore.
+        \item \textbf{LLM-as-Judge Criteria}: Relevance, coherence, faithfulness, harmlessness.
+        \item \textbf{Agent Benchmarks}:
+        \begin{itemize}
+            \item \textbf{SWE-bench}: Real GitHub issues---tests coding agents.
+            \item \textbf{GAIA}: General AI assistants benchmark.
+            \item \textbf{AgentBench}: Multi-environment agent evaluation.
+        \end{itemize}
+        \item \textbf{Custom Evals}: Domain-specific test suites are essential for production.
+    \end{itemize}
+\end{frame}
+
+\section{AI Security \& Risks}
+
+\begin{frame}
+    \frametitle{Security Vulnerabilities (OWASP LLM Top 10)}
+    \begin{itemize}
+        \item \textbf{LLM01: Prompt Injection}: Direct manipulation of model behavior---\#1 risk.
+        \item \textbf{LLM02: Insecure Output Handling}: Unvalidated LLM outputs executed as code/queries.
+        \item \textbf{LLM03: Training Data Poisoning}: Malicious data influencing model behavior.
+        \item \textbf{LLM07: Indirect Prompt Injection}: Agents reading malicious content from external sources (websites, emails, documents).
+        \item \textbf{LLM09: Over-Reliance}: Trusting LLM outputs without verification.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Defense-in-Depth Strategies}
+    \begin{itemize}
+        \item \textbf{Input Validation}: Sanitize, length-limit, and classify user inputs before LLM processing.
+        \item \textbf{Prompt Scaffolding}: Rigid delimiters, role separation (\texttt{<user>}, \texttt{<system>}).
+        \item \textbf{Output Filtering}: Constitutional classifiers, content moderation APIs.
+        \item \textbf{Least Privilege}: Agents should have minimal permissions; no direct DB/shell access.
+        \item \textbf{Human-in-the-Loop}: Require approval for high-risk actions (payments, deletions).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Emerging Security Considerations}
+    \begin{itemize}
+        \item \textbf{Data Privacy}: PII leakage in prompts, training data extraction attacks.
+        \item \textbf{Model Extraction}: Adversarial queries to reverse-engineer proprietary models.
+        \item \textbf{Supply Chain}: Third-party prompts, plugins, and MCP servers as attack vectors.
+        \item \textbf{Regulatory Compliance}: EU AI Act, NIST AI RMF require documented risk management.
+        \item \textbf{Red Teaming}: Proactive adversarial testing is becoming standard practice.
+    \end{itemize}
+\end{frame}
+
+\section{Strategic Recommendations}
+
+\begin{frame}
+    \frametitle{Strategic Recommendations for 2025--2026}
+    \begin{itemize}
+        \item \textbf{Think Systems, Not Prompts}: Move from single prompts to modular, testable architectures.
+        \item \textbf{Embrace Compound AI}: Combine multiple models, retrievers, and tools for robust solutions.
+        \item \textbf{Invest in Evaluation}: Build comprehensive eval suites before scaling.
+        \item \textbf{Optimize Strategically}: Balance quality, latency, and cost for your use case.
+        \item \textbf{Security by Design}: Assume adversarial inputs; implement defense-in-depth.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Prompt Engineer's Evolving Role}
+    \begin{itemize}
+        \item \textbf{2023}: Prompt Crafter---writing clever prompts for single tasks.
+        \item \textbf{2024}: Prompt Engineer---systematic testing, versioning, optimization.
+        \item \textbf{2025}: AI Systems Architect---designing multi-agent workflows, RAG pipelines.
+        \item \textbf{2026+}: AI Product Engineer---end-to-end ownership of AI-native products.
+        \item \textbf{Key Skills}: Systems thinking, evaluation design, security awareness, domain expertise.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{What to Watch: 2026 Predictions}
+    \begin{itemize}
+        \item \textbf{Reasoning Models}: Native CoT in base models (o1-style) becomes standard.
+        \item \textbf{Agent Frameworks}: Consolidation around 2--3 dominant orchestration platforms.
+        \item \textbf{Prompt Commoditization}: Basic prompting becomes automated; focus shifts to architecture.
+        \item \textbf{Multimodal Agents}: Video understanding + real-time audio enables new use cases.
+        \item \textbf{Regulation}: AI governance frameworks impact deployment practices.
+    \end{itemize}
+\end{frame}
+
+\section{Wrap-up}
+
+\begin{frame}
+    \frametitle{Key Takeaways}
+    \begin{itemize}
+        \item \textbf{Paradigm Shift}: From prompt crafting to AI systems architecture.
+        \item \textbf{Compound AI}: Future systems combine multiple models, tools, and retrieval.
+        \item \textbf{Reliability Engineering}: Evaluation, observability, and guardrails are essential.
+        \item \textbf{Security Imperative}: Adversarial thinking must be embedded in design.
+        \item \textbf{Continuous Learning}: The field evolves monthly---stay curious and adaptive.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Recommended Resources}
+    \begin{itemize}
+        \item \textbf{Papers}: ``DSPy'' (Khattab et al.), ``ReAct'' (Yao et al.), ``Tree of Thoughts'' (Yao et al.)
+        \item \textbf{Courses}: DeepLearning.AI ``Building Agentic AI'', Anthropic Prompt Engineering Guide
+        \item \textbf{Newsletters}: The Batch (Andrew Ng), Simon Willison's Blog, Latent Space Podcast
+        \item \textbf{Communities}: r/LocalLLaMA, AI Discord servers, LangChain/LlamaIndex communities
+        \item \textbf{Benchmarks}: SWE-bench, GAIA, MMLU, HumanEval for tracking progress
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Questions and Discussion}
+    \begin{center}
+    {\Huge Thank You!}
+    \vspace{1cm}
+
+        \textbf{Dr.\ Mehmet Ali Akyol}\\
+        \texttt{mehmetali.akyol@gmail.com}
+    \vspace{1cm}
+
+    {\large Questions?}
+    \end{center}
+\end{frame}
+
+\end{document}

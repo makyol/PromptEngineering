@@ -1,0 +1,287 @@
+\documentclass[11pt]{beamer}
+\usetheme{Madrid}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{amsmath, amssymb}
+\usepackage{xcolor}
+
+% Metadata
+\title[Week 1]{Prompt Engineering: Week 1\\Introduction to Prompt Engineering}
+\author{Mehmet Ali Akyol, PhD}
+\institute{Ankara Medipol University}
+\date{\\}
+
+\begin{document}
+
+% Title
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Overview
+\begin{frame}
+  \frametitle{Today: What We'll Explore}
+  \begin{itemize}
+    \item What is a "prompt"? A friendly, everyday definition
+    \item Why prompts matter for everyone (not just programmers)
+    \item Core terms: Prompt, LLM, Generative AI, Context
+    \item Examples across fields: creative writing, law, marketing, engineering, education, medicine
+    \item In-class activity: vague vs detailed prompts
+    \item Common pitfalls and quick wins
+    \item Assignment for next week
+  \end{itemize}
+\end{frame}
+
+% What is a prompt?
+\section{What is a Prompt?}
+\begin{frame}
+  \frametitle{What is a "Prompt"?}
+  \begin{itemize}
+    \item A \textbf{prompt} is how you talk to an AI system. It's the instruction, question, or example you give it.
+    \item Everyday analogy: asking Google vs asking a friend. The way you ask changes the answer you get.
+    \item Think of a prompt as a \textbf{brief} you give to a creative assistant.
+    \item Good prompts provide: \textbf{purpose}, \textbf{context}, and \textbf{constraints}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Why Prompting Matters in 2025}
+  \begin{itemize}
+    \item AI is a general-purpose tool: writing, summarizing, analyzing, creating.
+    \item Prompting is a new form of \textbf{digital literacy}.
+    \item Every discipline benefits:
+    \begin{itemize}
+      \item Medicine: summarizing patient histories, drafting patient education.
+      \item Law: drafting clauses, summarizing cases, spotting issues.
+      \item Business: market research, pitch drafts, customer support.
+      \item Engineering: code generation, documentation, debugging help.
+      \item Design: brainstorming, mood boards, content ideas.
+    \end{itemize}
+    \item With better prompting, you get \textbf{clearer, safer, more useful} outputs.
+  \end{itemize}
+\end{frame}
+
+% Core terms
+\section{Core Terms}
+\begin{frame}
+  \frametitle{Key Terms (Plain English)}
+  \begin{itemize}
+    \item \textbf{Prompt}: The input message you give the AI.
+    \item \textbf{LLM (Large Language Model)}: A system trained on lots of text to predict the next word.
+    \item \textbf{Generative AI}: AI that can create new content (text, images, code) based on patterns it learned.
+    \item \textbf{Context}: The information the AI considers for a response, including your conversation history.
+  \end{itemize}
+\end{frame}
+
+% Examples
+\section{Examples Across Fields}
+\begin{frame}
+  \frametitle{Example: Creative Writing}
+  \begin{block}{Vague}
+  Write a story about a journey.
+  \end{block}
+  \begin{block}{Better}
+  You are a literary author. Write a 500-word short story in the style of magical realism about a paramedic in Istanbul who discovers time pauses whenever it rains. Use vivid sensory detail and a hopeful tone.
+  \end{block}
+  \begin{itemize}
+    \item Why it's better: role, style, length, setting, tone, constraint.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example: Legal Drafting}
+  \begin{block}{Vague}
+  Draft a contract.
+  \end{block}
+  \begin{block}{Better}
+  You are a contract lawyer. Draft a one-page independent contractor agreement for a freelance graphic designer in Turkey. Include scope of work, payment schedule (milestones), IP ownership (work-for-hire), confidentiality, and termination clauses. Use clear, plain language.
+  \end{block}
+  \begin{itemize}
+    \item Why it's better: role, jurisdiction, length, required clauses, language.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example: Marketing}
+  \begin{block}{Vague}
+  Create a slogan for a coffee shop.
+  \end{block}
+  \begin{block}{Better}
+  You are a brand strategist. Generate 10 short, punchy slogans for a student-friendly specialty coffee shop near a university in Ankara. Emphasize affordability, community, and late-night study vibes. Return as a numbered list.
+  \end{block}
+  \begin{itemize}
+    \item Why it's better: role, audience, location, values, format.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example: Business}
+  \begin{block}{Vague}
+  Write a business plan.
+  \end{block}
+  \begin{block}{Better}
+  You are a startup advisor. Draft a one-page business brief for a campus coffee cart at Ankara Medipol University. Include sections: problem, solution, target customers, value proposition, pricing, go-to-market (2 channels), basic cost estimate, and key risks with mitigations. Use bullet points.
+  \end{block}
+  \begin{itemize}
+    \item Why it's better: scope and structure, audience, length, concrete sections, risk awareness.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example: Data Analysis}
+  \begin{block}{Vague}
+  Analyze this sales data.
+  \end{block}
+  \begin{block}{Better}
+  You are a data analyst. Given a CSV with columns \texttt{date}, \texttt{product}, \texttt{region}, and \texttt{revenue}, compute monthly revenue by region for the last 12 months, identify any months more than 2 standard deviations from the 12-month regional mean, and return: (1) a 4-row table (one per region) with monthly totals, (2) a brief 80--120 word summary of anomalies, and (3) recommendations in 3 bullets.
+  \end{block}
+  \begin{itemize}
+    \item Why it's better: clear inputs, time window, statistical rule, deliverables, and output format.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example: Engineering}
+  \begin{block}{Vague}
+  Write Python code to process data.
+  \end{block}
+  \begin{block}{Better}
+  You are a software engineer. Write a Python function that reads a CSV file with columns \texttt{time} and \texttt{voltage}; compute a rolling average over a 5-second window; handle missing values by forward fill; include a docstring and type hints; return a pandas DataFrame; and show a short usage example.
+  \end{block}
+  \begin{itemize}
+    \item Why it's better: role, file format, library, requirements, error handling, output spec, example.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example: Education}
+  \begin{block}{Vague}
+  Explain photosynthesis.
+  \end{block}
+  \begin{block}{Better}
+  You are a high-school biology teacher. Explain photosynthesis for 9th graders in simple language using exactly 3 bullet points and one everyday analogy. Keep it under 120 words. End with two multiple-choice quiz questions (A--D) and the answer key.
+  \end{block}
+  \begin{itemize}
+    \item Why it's better: role, audience level, structure, length, checks for understanding.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example: Medicine}
+  \begin{block}{Vague}
+  Summarize this patient case.
+  \end{block}
+  \begin{block}{Better}
+  You are a clinical assistant. Given a patient note, produce a concise summary with sections: HPI, PMH, meds, allergies, vitals, key labs/imaging, assessment, and suggested next steps. Use neutral, non-diagnostic language; do not fabricate missing details; add a one-line disclaimer that this is not medical advice.
+  \end{block}
+  \begin{itemize}
+    \item Why it's better: role, structured output, safety constraints, scope limits, disclaimer.
+  \end{itemize}
+\end{frame}
+
+% Principles
+\section{Principles of Good Prompts}
+\begin{frame}
+  \frametitle{Core Principles}
+  \begin{itemize}
+    \item \textbf{Clarity}: Make the goal explicit. What do you want?
+    \item \textbf{Specificity}: Provide details: role, audience, length, style, format.
+    \item \textbf{Context}: Give background, constraints, and examples.
+    \item \textbf{Format}: Ask for structured output (bullets, table, JSON) when useful.
+    \item \textbf{Tone}: Specify formal, friendly, persuasive, etc.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Common Mistakes and Fixes}
+  \begin{itemize}
+    \item Too vague \textrightarrow{} add role, audience, and constraints
+    \item Asking for everything at once \textrightarrow{} break into steps
+    \item No examples \textrightarrow{} add 1--2 samples to guide style
+    \item No format \textrightarrow{} request bullets or a template
+    \item Ignoring limitations \textrightarrow{} ask for sources or confidence notes when needed
+  \end{itemize}
+\end{frame}
+
+% Activity
+\section{In-Class Activity}
+\begin{frame}
+  \frametitle{Activity: Vague vs Detailed Prompt}
+  \begin{block}{How we'll run it}
+    \begin{itemize}
+      \item Pair up. Pick one task (e.g., summarize a news article, write an email, explain a concept).
+      \item Write a \textbf{vague} prompt and run it.
+      \item Improve it with role, audience, context, constraints, and format. Run again.
+      \item Compare the outputs. What improved? What surprised you?
+    \end{itemize}
+  \end{block}
+  \begin{block}{Debrief}
+    Share one improvement that made the biggest difference.
+  \end{block}
+\end{frame}
+
+% Discussion
+\section{Discussion}
+\begin{frame}
+  \frametitle{Discussion Questions}
+  \begin{itemize}
+    \item Where in your field could prompting save time or improve quality?
+    \item What risks or ethical concerns should we watch out for?
+    \item How might you evaluate whether an AI output is "good enough" for your use?
+  \end{itemize}
+\end{frame}
+
+% Key Takeaways
+\section{Key Takeaways}
+\begin{frame}
+  \frametitle{Key Takeaways}
+  \begin{itemize}
+    \item Prompts are briefs: goal, context, constraints.
+    \item Better prompts \textbf{consistently} lead to better outputs.
+    \item Anyone can learn this skill with practice and iteration.
+    \item Start simple, then refine with feedback from the output.
+  \end{itemize}
+\end{frame}
+
+% Assignment
+\section{Assignment}
+\begin{frame}
+  \frametitle{Assignment for Next Week}
+  \begin{block}{Design 3 Prompts for the Same Task}
+    \textbf{Task suggestion:} Summarize a news article or explain a concept from your field.
+    \begin{itemize}
+      \item Prompt 1: your first attempt (vague is fine)
+      \item Prompt 2: refined with role, audience, constraints
+      \item Prompt 3: add examples or a specific output format
+    \end{itemize}
+    Submit the 3 prompts and the 3 outputs as a single PDF with a short reflection (150--250 words) on what changed and why.
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Assignment Rubric (100\%)}
+  \begin{itemize}
+    \item \textbf{Clarity of task and prompts (25\%):} Goals are explicit; instructions are unambiguous.
+    \item \textbf{Use of prompting levers (30\%):} Role, audience, context, constraints, and format are used effectively.
+    \item \textbf{Iteration quality and reflection (25\%):} Clear progression from Prompt 1 to 3; reflection explains what improved and why.
+    \item \textbf{Professionalism and formatting (10\%):} Clean structure; readable; outputs and prompts labeled.
+    \item \textbf{Originality and appropriateness (10\%):} Creative yet suitable for the chosen task and audience.
+  \end{itemize}
+\end{frame}
+
+% Thank You Slide
+\begin{frame}{Questions and Discussion}
+    \begin{center}
+    {\Huge Thank You!}
+    \vspace{1cm}
+
+      \textbf{Dr.\\ Mehmet Ali Akyol}\\
+      \texttt{mehmetali.akyol@gmail.com}
+    \vspace{1cm}
+    
+    {\large Questions?}
+    \end{center}
+\end{frame}
+
+\end{document}

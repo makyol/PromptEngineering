@@ -1,0 +1,36 @@
+% Answer Key: Prompt Engineering — Quiz (20 MCQs)
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{margin=1in}
+\begin{document}
+\begin{center}
+  {\LARGE Answer Key — Prompt Engineering Quiz}\\[6pt]
+\end{center}
+\vspace{0.5cm}
+\begin{enumerate}
+  \item B — The textual instruction, question, or example you give an AI system.
+  \item B — They predict the next token based on patterns learned from large text corpora.
+  \item A — True; tokenizers commonly split long words into sub-word tokens.
+  \item A — Self-attention compares and weights other tokens so representations become context-aware.
+  \item C — Embeddings are numeric vectors in a meaning space.
+  \item B — Hallucination: plausible-sounding but incorrect or fabricated information.
+  \item B — False; larger size helps but does not guarantee no hallucinations or errors.
+  \item D — All of the above (role, format, audience are useful levers).
+  \item A — Query/Key/Value mapping: Query = what I'm looking for; Key = what I contain; Value = what I provide.
+  \item B — Fine-tuning: additional training on curated examples to specialize behavior.
+  \item B — Emergent ability example: few-shot learning appearing in larger models.
+  \item A — Position embeddings encode token order since attention is permutation-invariant.
+  \item C — Unlimited context-window is NOT a typical capability; it's a limitation when claiming it's unlimited.
+  \item A — Tokenization allows handling rare or long words by splitting into subparts.
+  \item B — Example of effective constrained prompt is the teacher + format + length example.
+  \item A — Embedding metric: high-dimensional numeric vector; nearby vectors = semantic similarity.
+  \item A — Instruction tuning teaches the model to follow human instructions better.
+  \item A — Verifying facts with reliable external sources or retrieval helps reduce hallucinations.
+  \item A — Multi-head attention allows attending to multiple representation subspaces and capture different relationships.
+  \item A — Purpose, context, and constraints are the three elements good prompts typically provide.
+\end{enumerate}
+
+\vspace{0.5cm}
+  extbf{Notes for graders:} Each MCQ = 1 point. For any ambiguous phrasing, use the explanation above as the authoritative key; award partial credit only if a student shows clear correct reasoning in comments.
+\end{document}

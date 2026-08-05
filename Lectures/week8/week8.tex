@@ -1,0 +1,306 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+
+% Encoding and fonts for pdfLaTeX
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{hyperref}
+
+\title{Prompt Engineering}
+\author{Mehmet Ali Akyol, PhD}
+\institute{Ankara Medipol University}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+    \begin{center}
+        \vspace{1cm}
+        \textbf{Week 8: Evaluating AI Outputs}
+    \end{center}
+\end{frame}
+
+\section{Overview}
+
+\begin{frame}
+    \frametitle{The Evaluation Gap}
+    \begin{block}{The Paradox of Generative AI}
+        It is significantly easier to \textbf{generate} text than to \textbf{verify} it.
+    \end{block}
+    \begin{itemize}
+        \item \textbf{Generation:} Low effort, high speed, infinite variability.
+        \item \textbf{Verification:} High effort, requires domain expertise, slow.
+        \item \textbf{The Risk:} Without rigorous evaluation, we scale errors, not solutions.
+        \item \textbf{The Goal:} Close the gap by automating verification where possible and focusing human effort where necessary.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Why Evaluation Matters}
+    \begin{itemize}
+        \item \textbf{Reliability:} Moving from ``it looks good'' to ``it works 99\% of the time.''
+        \item \textbf{Safety:} Detecting edge cases, jailbreaks, and harmful outputs before deployment.
+        \item \textbf{Iterative Improvement:} You cannot improve what you cannot measure. Evaluation provides the signal for the refinement loop.
+        \item \textbf{Model Selection:} Data-driven decisions on which model (GPT-4 vs. Llama 3) offers the best cost/performance ratio.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Weekly Learning Objectives}
+    \begin{itemize}
+        \item Define evaluation criteria aligned with task goals.
+        \item Apply qualitative and quantitative assessment methods.
+        \item Design human-in-the-loop review pipelines.
+        \item Use automation (judge models, checklists) responsibly.
+        \item Interpret evaluation results to guide refinement.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Key Concepts}
+    \begin{itemize}
+        \item Quality dimensions (accuracy, completeness, tone, compliance)
+        \item Intrinsic vs. extrinsic evaluation
+        \item Rubrics, scorecards, and annotation protocols
+        \item Sampling strategies (random, risk-based, stratified)
+        \item Inter-rater reliability and bias mitigation
+    \end{itemize}
+\end{frame}
+
+\section{Designing Evaluation Criteria}
+
+\begin{frame}
+    \frametitle{Framework: The 3 H's of Evaluation}
+    \begin{columns}[T]
+        \column{0.33\textwidth}
+        \textbf{1. Helpful}
+        \begin{itemize}
+            \item Does it solve the user's problem?
+            \item Is the format correct?
+            \item Is the tone appropriate?
+        \end{itemize}
+        
+        \column{0.33\textwidth}
+        \textbf{2. Honest}
+        \begin{itemize}
+            \item Is it factually accurate?
+            \item Does it admit uncertainty?
+            \item No hallucinations?
+        \end{itemize}
+        
+        \column{0.33\textwidth}
+        \textbf{3. Harmless}
+        \begin{itemize}
+            \item No toxicity or bias.
+            \item No dangerous content.
+            \item Resists jailbreaks.
+        \end{itemize}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{From Task to Metrics}
+    \begin{itemize}
+        \item \textbf{Clarify Intent:} What is the ``Job to be Done''? (e.g., Summarize vs. Analyze).
+        \item \textbf{Define Failure Modes:} What does a \textit{bad} response look like? (e.g., Missing citations, wrong JSON format).
+        \item \textbf{Balance Metrics:}
+        \begin{itemize}
+            \item \textit{Hard Metrics:} Syntax, length, forbidden words (Deterministic).
+            \item \textit{Soft Metrics:} Creativity, empathy, flow (Probabilistic).
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Rubric Construction: Best Practices}
+    \begin{itemize}
+        \item \textbf{Binary Checklists:} Best for strict constraints.
+        \begin{itemize}
+            \item ``Does the output contain a disclaimer?'' (Yes/No)
+        \end{itemize}
+        \item \textbf{Likert Scales (1--5):} Best for nuance.
+        \begin{itemize}
+            \item 1 = Completely wrong.
+            \item 3 = Mostly correct but requires editing.
+            \item 5 = Perfect, ready to publish.
+        \end{itemize}
+        \item \textbf{Comparative Ranking:} Best for preference.
+        \begin{itemize}
+            \item ``Is Output A better than Output B?''
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\section{Evaluation Methods}
+
+\begin{frame}
+    \frametitle{The Golden Dataset (Ground Truth)}
+    \begin{block}{Definition}
+        A curated set of inputs and their corresponding ``perfect'' outputs, used as a benchmark for testing.
+    \end{block}
+    \begin{itemize}
+        \item \textbf{Creation:} Hand-written by experts or verified high-quality model outputs.
+        \item \textbf{Size:} Start small (10--50 examples) but high diversity.
+        \item \textbf{Usage:} Run every prompt version against this set to detect regression.
+        \item \textbf{Maintenance:} Update the dataset as new edge cases are discovered in production.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Qualitative Techniques (Human-Centric)}
+    \begin{itemize}
+        \item \textbf{Expert Review:} Subject Matter Experts (SMEs) grade outputs. High cost, high accuracy.
+        \item \textbf{Crowdsourcing:} Non-experts rate for general feel/fluency. Lower cost, variable quality.
+        \item \textbf{Red Teaming:} Adversarial testing to find safety flaws.
+        \item \textbf{User Feedback:} Thumbs up/down, ``Regenerate'' rate in production.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Quantitative Techniques (Metric-Centric)}
+    \begin{itemize}
+        \item \textbf{N-gram Metrics (BLEU, ROUGE):} Measures word overlap. Good for translation, bad for reasoning.
+        \item \textbf{Embedding Similarity:} Measures semantic closeness to the Golden Dataset using vector distance (Cosine Similarity).
+        \item \textbf{Code Execution:} Does the generated code run? Does it pass unit tests?
+        \item \textbf{Factuality Scores:} Using search engines to verify claims (e.g., RAGAS metrics).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sampling Strategies}
+    \begin{itemize}
+        \item Random sampling for baseline quality tracking.
+        \item Risk-based sampling (e.g., high-stakes domains, new templates).
+        \item Stratified sampling across personas, use cases, data segments.
+        \item Event-driven sampling after major prompt or model changes.
+    \end{itemize}
+\end{frame}
+
+\section{Automation and Tooling}
+
+\begin{frame}
+    \frametitle{LLM-as-a-Judge Architectures}
+    \begin{itemize}
+        \item \textbf{Direct Scoring:} ``Rate this response from 1 to 5 based on clarity.''
+        \item \textbf{Pairwise Comparison:} ``Which response is better, A or B?'' (Often more reliable than scoring).
+        \item \textbf{Reference-Based:} ``Compare the response to this Golden Answer. Is it factually consistent?''
+        \item \textbf{Rubric-Based:} ``Does the response meet criteria X, Y, and Z? Answer Yes/No for each.''
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Judge Models and Checklists}
+    \begin{itemize}
+        \item \textbf{The Judge:} A stronger model (e.g., GPT-4) evaluates a weaker model (e.g., Llama-7B).
+        \item \textbf{Deterministic Checks:} Regex for phone numbers, JSON validation, forbidden word lists.
+        \item \textbf{Hybrid Pipelines:}
+        \begin{enumerate}
+            \item Fast automated checks (Syntax).
+            \item LLM Judge (Semantics).
+            \item Human Review (Edge cases/Low confidence scores).
+        \end{enumerate}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Dashboards and Reporting}
+    \begin{itemize}
+        \item Track key metrics over time (accuracy, adherence, response time).
+        \item Segment by task, persona, channel for targeted insights.
+        \item Highlight trends, anomalies, and top failure modes.
+        \item Share reports with stakeholders to drive accountability.
+    \end{itemize}
+\end{frame}
+
+\section{Bias and Reliability}
+
+\begin{frame}
+    \frametitle{Common Evaluator Biases}
+    \begin{itemize}
+        \item \textbf{Verbosity Bias:} Models (and humans) tend to rate longer answers as better, even if they are fluff.
+        \item \textbf{Egocentric Bias:} LLMs prefer outputs generated by themselves or models from the same family.
+        \item \textbf{Position Bias:} In pairwise comparison, the first option (Option A) is often preferred.
+        \item \textbf{Fix:} Swap positions (A/B testing), force brevity penalties, and use blind grading.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Reducing Reviewer Bias}
+    \begin{itemize}
+        \item \textbf{Blind Reviews:} Hide the model name/version from the human reviewer.
+        \item \textbf{Calibration Sessions:} Have all reviewers grade the same 5 examples and discuss discrepancies.
+        \item \textbf{Rotation:} Rotate reviewers to prevent fatigue and ``anchoring'' to a specific style.
+        \item \textbf{Gold Standard Injection:} Slip known ``bad'' examples into the queue to check if reviewers are paying attention.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Inter-Rater Reliability}
+    \begin{itemize}
+        \item Measure agreement (Cohen's kappa, Krippendorff's alpha).
+        \item Investigate disagreements to refine rubrics.
+        \item Provide refresher training and updated exemplars.
+        \item Automate alerts when reliability drops below threshold.
+    \end{itemize}
+\end{frame}
+
+\section{Worked Examples}
+
+\begin{frame}
+    \frametitle{Legal Draft Review}
+    \begin{itemize}
+        \item Criteria: accuracy, completeness, tone, compliance.
+        \item Process: human review + policy checklist + judge model.
+        \item Report: monthly dashboard highlighting clause omissions.
+        \item Outcome: 30\% reduction in manual escalations.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Marketing Campaign QA}
+    \begin{itemize}
+        \item Criteria: brand voice, CTA clarity, localization quality.
+        \item Use A/B testing metrics (CTR, conversion) for extrinsic evaluation.
+        \item Sample high-risk markets at higher frequency.
+        \item Share scorecards with creative team for continuous improvement.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Academic Summaries}
+    \begin{itemize}
+        \item Criteria: factual accuracy, citation fidelity, coverage of sections.
+        \item Workflow: human subject matter expert review + fact-check prompts.
+        \item Use question-answer pairs to probe understanding.
+        \item Publish evaluation logs with each delivered summary.
+    \end{itemize}
+\end{frame}
+
+\section{Wrap-up}
+
+\begin{frame}
+    \frametitle{Key Takeaways}
+    \begin{itemize}
+        \item Evaluation turns AI outputs into dependable deliverables.
+        \item Combine qualitative judgment with quantitative tracking.
+        \item Automate selectively; keep humans where nuance matters.
+        \item Use evaluation insights to steer prompt and process refinements.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Questions and Discussion}
+    \begin{center}
+    {\Huge Thank You!}
+    \vspace{1cm}
+
+        \textbf{Dr.\ Mehmet Ali Akyol}\\
+        \texttt{mehmetali.akyol@gmail.com}
+    \vspace{1cm}
+
+    {\large Questions?}
+    \end{center}
+\end{frame}
+
+\end{document}

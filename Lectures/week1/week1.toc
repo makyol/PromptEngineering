@@ -1,0 +1,8 @@
+\beamer@sectionintoc {1}{What is a Prompt?}{3}{0}{1}
+\beamer@sectionintoc {2}{Core Terms}{5}{0}{2}
+\beamer@sectionintoc {3}{Examples Across Fields}{6}{0}{3}
+\beamer@sectionintoc {4}{Principles of Good Prompts}{14}{0}{4}
+\beamer@sectionintoc {5}{In-Class Activity}{16}{0}{5}
+\beamer@sectionintoc {6}{Discussion}{17}{0}{6}
+\beamer@sectionintoc {7}{Key Takeaways}{18}{0}{7}
+\beamer@sectionintoc {8}{Assignment}{19}{0}{8}

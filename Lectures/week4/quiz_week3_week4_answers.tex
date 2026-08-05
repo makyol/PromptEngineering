@@ -1,0 +1,59 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+\title{Prompt Engineering Quiz: Week 3 \& 4 (Answer Key)}
+\author{Ankara Medipol University}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Answer Key}
+
+\begin{enumerate}
+
+    \item \textbf{c) Role/Audience} \\
+    \textit{Explanation: This component sets the persona for the AI and defines who the response is intended for, which controls tone and complexity.}
+
+    \item \textbf{b) Few-shot prompting} \\
+    \textit{Explanation: Few-shot prompting provides a small number of examples (shots) to guide the model's output style and format.}
+
+    \item \textbf{b) To ground the model's answers in provided, specific context.} \\
+    \textit{Explanation: RAG connects the LLM to an external knowledge source, ensuring its answers are based on that specific data rather than its general training.}
+
+    \item \textbf{b) Zero-shot Chain-of-Thought (CoT)} \\
+    \textit{Explanation: This simple phrase encourages the model to "show its work" and output its reasoning process, which often improves accuracy on complex tasks, even without prior examples.}
+
+    \item \textbf{c) They clearly separate instructions from data or context, reducing ambiguity.} \\
+    \textit{Explanation: Delimiters help the model understand which part of the prompt is the instruction and which part is the content it should work on.}
+
+    \item \textbf{d) Conflicting directives} \\
+    \textit{Explanation: This is a classic anti-pattern where the prompt gives two mutually exclusive instructions, confusing the model.}
+
+    \item \textbf{d) CO-STAR} \\
+    \textit{Explanation: CO-STAR is a framework designed to ensure all key components of a good prompt are considered.}
+
+    \item \textbf{b) Frameworks package multiple patterns into a reusable, structured template for a workflow.} \\
+    \textit{Explanation: Patterns are the individual building blocks (like role or format), while frameworks are the recipes that combine them for a specific purpose.}
+
+    \item \textbf{b) Meta-Prompting} \\
+    \textit{Explanation: Meta-prompting is the practice of using prompts to reason about or generate other prompts.}
+
+    \item \textbf{c) Generate a structured JSON object specifying a function to be called and its arguments.} \\
+    \textit{Explanation: The model doesn't execute the tool itself; it signals its intent for your code to run a specific function with specific parameters.}
+
+    \item \textbf{c) Prompt Playbook} \\
+    \textit{Explanation: A playbook is the most comprehensive asset, detailing an entire process that includes multiple prompts, human checkpoints, and operational guidelines.}
+
+    \item \textbf{b) Adjust} \\
+    \textit{Explanation: The IDEA loop consists of Identify, Draft, Evaluate, and Adjust, representing a full cycle of prompt refinement.}
+
+\end{enumerate}
+
+\end{document}

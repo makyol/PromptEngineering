@@ -1,0 +1,257 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+
+% Encoding and fonts for pdfLaTeX
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{hyperref}
+
+\title{Prompt Engineering}
+\author{Mehmet Ali Akyol, PhD}
+\institute{Ankara Medipol University}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+    \begin{center}
+        \vspace{1cm}
+        \textbf{Week 6: Iterative Prompt Refinement}
+    \end{center}
+\end{frame}
+
+\section{Overview}
+
+\begin{frame}
+    \frametitle{Where We Are}
+    \begin{itemize}
+        \item \textbf{Week 4:} We built a library of patterns (CO-STAR, RACI) to structure our requests.
+        \item \textbf{Week 5:} We mastered style, tone, and formatting to control \textit{how} the model speaks.
+        \item \textbf{This Week:} We shift from ``writing'' to ``engineering.''
+        \item \textbf{Goal:} Turn prompt creation into a systematic, data-driven optimization process.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Weekly Learning Objectives}
+    \begin{itemize}
+        \item Diagnose prompt failures using a structured error taxonomy.
+        \item Design ``Critique Prompts'' that act as automated editors.
+        \item Implement ``LLM-as-a-Judge'' workflows to scale evaluation.
+        \item Build multi-turn refinement loops (Draft $\to$ Critique $\to$ Refine).
+        \item Create a ``Prompt Runbook'' to document version history and performance.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Prompt Engineering Lifecycle}
+    \begin{center}
+        \textbf{Draft} (Weeks 1--5) $\to$ \textbf{Evaluate} (Week 6) $\to$ \textbf{Refine} (Week 6) $\to$ \textbf{Deploy}
+    \end{center}
+    \vspace{0.5cm}
+    \begin{itemize}
+        \item \textbf{Draft:} Apply frameworks (CO-STAR) and style guides.
+        \item \textbf{Evaluate:} Check against requirements (Accuracy, Tone, Format).
+        \item \textbf{Refine:} Adjust instructions, add constraints, or provide few-shot examples.
+        \item \textbf{Deploy:} Version control and monitor for drift.
+    \end{itemize}
+\end{frame}
+
+\section{Diagnosing Issues}
+
+\begin{frame}
+    \frametitle{Error Taxonomy: Naming the Problem}
+    \begin{columns}[T]
+        \column{0.48\textwidth}
+        \textbf{1. Reasoning Failures}
+        \begin{itemize}
+            \item Logic gaps, math errors, hallucinated facts.
+            \item \textit{Fix:} Chain-of-Thought, external tools.
+        \end{itemize}
+        \vspace{0.2cm}
+        \textbf{2. Constraint Violations}
+        \begin{itemize}
+            \item Ignoring word counts, wrong format (text vs JSON).
+            \item \textit{Fix:} Negative constraints, structural contracts (Week 5).
+        \end{itemize}
+        
+        \column{0.48\textwidth}
+        \textbf{3. Tone/Style Drift}
+        \begin{itemize}
+            \item Too casual, too robotic, wrong audience level.
+            \item \textit{Fix:} Voice fingerprinting, reference samples.
+        \end{itemize}
+        \vspace{0.2cm}
+        \textbf{4. Phrasing Sensitivity}
+        \begin{itemize}
+            \item Model confused by ambiguous terms.
+            \item \textit{Fix:} Clearer definitions, synonyms.
+        \end{itemize}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Root Cause Analysis: The ``Why''}
+    \begin{itemize}
+        \item \textbf{Ambiguity:} Did you ask for a ``short summary'' (vague) or ``3 bullet points'' (specific)?
+        \item \textbf{Context Overload:} Is the model distracted by irrelevant information in the prompt?
+        \item \textbf{Conflicting Directives:} ``Be detailed'' AND ``Keep it under 50 words.''
+        \item \textbf{Model Limitations:} Asking a small model to do complex reasoning without steps.
+    \end{itemize}
+\end{frame}
+
+\section{Refinement Loops}
+
+\begin{frame}
+    \frametitle{The Critique Loop}
+    \begin{block}{Concept}
+        Instead of guessing how to fix a prompt, ask the model to critique its own output against a rubric.
+    \end{block}
+    \begin{itemize}
+        \item \textbf{Step 1: Generate.} Run your draft prompt.
+        \item \textbf{Step 2: Critique.} Feed the output back to the model with a ``Critique Prompt.''
+        \item \textbf{Step 3: Revise.} Ask the model to rewrite the output based on the critique.
+        \item \textbf{Why?} It separates ``creation'' (high creativity) from ``editing'' (high logic).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Deep Dive: The Critique Prompt Structure}
+    \begin{block}{Template}
+        \small
+        ``You are an expert editor. Review the text above against the following criteria:
+        \begin{enumerate}
+            \item \textbf{Tone:} Is it professional and empathetic? (Week 5)
+            \item \textbf{Structure:} Does it follow the CO-STAR framework? (Week 4)
+            \item \textbf{Accuracy:} Are all claims supported by the provided context?
+        \end{enumerate}
+        Provide a score (1--5) for each and list specific improvements.''
+    \end{block}
+    \vspace{0.2cm}
+    \textbf{Key Insight:} Use your frameworks (CO-STAR, RACI) as the grading rubric.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Iterative Workflow Patterns}
+    \begin{itemize}
+        \item \textbf{Single-loop (Self-Correction):} Draft $\to$ Critique $\to$ Revise. Good for simple tasks.
+        \item \textbf{Double-loop (Prompt Refinement):} Use the critique to rewrite the \textit{prompt itself}, not just the output.
+        \item \textbf{Parallel Exploration (Best-of-N):} Generate 5 variants, critique all, pick the winner.
+        \item \textbf{Human-in-the-loop:} Model critiques $\to$ Human approves plan $\to$ Model executes.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{What is ``Vibe Coding''?}
+    \begin{block}{Definition}
+        Writing code by describing the desired behavior (the ``vibe'') to an LLM, then iterating based on the output's look and feel rather than inspecting the source code.
+    \end{block}
+    \begin{itemize}
+        \item \textbf{Natural Language as Syntax:} You don't write Python; you write English. The LLM translates.
+        \item \textbf{Human Role Shift:} You move from \textbf{Implementer} to \textbf{Curator}.
+        \item \textbf{The Loop:} Prompt $\to$ Run $\to$ ``Vibe Check'' (Does it work?) $\to$ Iterate.
+        \item \textbf{Key Characteristic:} Speed and intuition over precision and structure.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{The ``Vibe Coding'' Trap}
+    \begin{itemize}
+        \item \textbf{The Pro:} Incredible velocity for prototypes and simple tools.
+        \item \textbf{The Con:} \textbf{Fragility.} If you don't understand the code, you can't fix edge cases.
+        \item \textbf{The Engineering Gap:}
+        \begin{itemize}
+            \item ``It works on my machine'' $\to$ ``It vibes on my screen.''
+            \item \textbf{Reality Check:} Production systems need \textbf{Evals}, not just vibes.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Instrumentation: Measuring Success}
+    \begin{itemize}
+        \item \textbf{Version Control:} Treat prompts like code (git). Track changes.
+        \item \textbf{Golden Dataset:} Maintain 10--20 ``perfect'' examples to test against.
+        \item \textbf{Metric Tracking:}
+        \begin{itemize}
+            \item \textit{Pass Rate:} \% of outputs requiring no manual edit.
+            \item \textit{Latency:} Time to first token (operational metric).
+            \item \textit{Token Count:} Cost efficiency.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\section{Automation Aids}
+
+\begin{frame}
+    \frametitle{LLM-as-a-Judge}
+    \begin{block}{Concept}
+        Using a strong model (e.g., GPT-4) to grade the outputs of a faster/cheaper model (e.g., GPT-3.5 or Llama).
+    \end{block}
+    \begin{itemize}
+        \item \textbf{Scalability:} Evaluate thousands of outputs in minutes.
+        \item \textbf{Consistency:} Removes human fatigue and variability.
+        \item \textbf{Cost:} Cheaper than human labeling for initial passes.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Deep Dive: The Judge Prompt}
+    \begin{block}{Template}
+        \small
+        ``You are an impartial judge. Evaluate the Assistant's response to the User's question.
+        
+        \textbf{User Question:} [Insert Input]
+        \textbf{Assistant Response:} [Insert Output]
+        \textbf{Ground Truth:} [Insert Correct Answer]
+        
+        Score the response from 1 to 5 based on:
+        1. Correctness (Is it factually true?)
+        2. Completeness (Did it answer all parts?)
+        
+        Output format: JSON \{'score': int, 'reasoning': string\}''
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Prompt Version Control (PromptOps)}
+    \begin{itemize}
+        \item \textbf{The Problem:} Prompts are code, but often treated like text files.
+        \item \textbf{Best Practices:}
+        \begin{itemize}
+            \item Store prompts in a repo (Git).
+            \item Use variables for dynamic parts (e.g., \texttt{\{\{user\_input\}\}}).
+            \item Log every run: \texttt{Prompt Version + Input + Output + Model Config}.
+        \end{itemize}
+        \item \textbf{A/B Testing:} Run Version A and Version B on live traffic; compare ``Judge'' scores.
+    \end{itemize}
+\end{frame}
+
+\section{Wrap-up}
+
+\begin{frame}
+    \frametitle{Key Takeaways}
+    \begin{itemize}
+        \item \textbf{Don't just write prompts; engineer systems.}
+        \item \textbf{Critique loops} are the secret to high-quality output.
+        \item \textbf{Automation} (Judges) allows you to scale from 1 to 1000 prompts.
+        \item \textbf{Iterate forever:} The best prompt today is the baseline for tomorrow.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Questions and Discussion}
+    \begin{center}
+    {\Huge Thank You!}
+    \vspace{1cm}
+
+        \textbf{Dr.\ Mehmet Ali Akyol}\\
+        \texttt{mehmetali.akyol@gmail.com}
+    \vspace{1cm}
+
+    {\large Questions?}
+    \end{center}
+\end{frame}
+
+\end{document}
