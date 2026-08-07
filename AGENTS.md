@@ -111,6 +111,21 @@ examinable — that frame is the bridge between building and the exam bank.
   engineering. Not all software examples.
 - Every week needs at least one in-class activity.
 
+### Two standing rules set by the instructor
+
+**No "what changed" narrative.** Do not compare the course or the field to last year or
+to any earlier state. No "this used to be taught differently", no "the field has moved
+on", no job-market-shift statistics. State what is true, present tense. Students should
+never be told what they missed by not taking an earlier version.
+
+**Slides must not depend on student participation.** Assume nobody runs the activity.
+Every activity therefore needs its substance *on the slides* — at least one fully worked
+example with concrete content the instructor can present and talk through alone. Never
+write a slide whose content is only questions to the room ("who found X? hands up"), and
+never write notes that require a student answer to continue. Participation should improve
+the session, not be load-bearing. Put the "if the room is quiet, go straight to the worked
+examples" instruction in the speaker notes.
+
 ### Known-stale content in `archive/`
 
 Do not copy forward without checking: "Why Prompting Matters in 2025"; GPT-3/GPT-4
@@ -141,11 +156,12 @@ statement — this no longer reads as false and must be replaced.**
 
 - [x] 1 · Read the 2025–2026 material; coverage, weakness and repetition analysis
 - [x] 2 · Archive old semester, scaffold new tree
-- [x] 3 · Theme + Week 1 format prototype
+- [x] 3 · Theme + Week 1 format prototype (revised: no change-narrative, activity-independent)
+- [x] 10 · Form content document (TR/EN) — pulled forward, see Forms/form-content.md
 - [ ] 4 · Weeks 2–5 (baseline block)
 - [ ] 5 · Weeks 6–8 (Micro-Tool, Grounded Assistant, Test Set)
 - [ ] 6 · Weeks 9–10 (Automation Chain, Field Build)
 - [ ] 7 · Weeks 11–13 (Domain Pack, Attack & Patch, Ethics)
 - [ ] 8 · Week 14 (Synthesis)
 - [ ] 9 · Assessment materials — 5 quizzes + keys, midterm, final, makeup
-- [ ] 10 · Form content document (TR/EN)
+
