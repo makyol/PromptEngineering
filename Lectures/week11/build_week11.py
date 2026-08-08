@@ -371,6 +371,75 @@ pack. That comparison is the whole point — most people are surprised by how mu
 best represented, and take terms from the room. This works as a discussion.]
 """)
 
+boxes_slide(
+    prs, "What Makes a Golden Example Good",
+    [
+        ("Typical",
+         "The ordinary case, done well. Establishes the baseline shape, vocabulary and length. "
+         "This is the one people include and then stop."),
+        ("Complex",
+         "More going on than usual — several issues, competing considerations. Shows how the "
+         "shape holds up under load, and where the structure bends."),
+        ("Edge case",
+         "The one that does not fit the standard shape, and what you do about it. This teaches "
+         "most, because it shows the judgment the format cannot express."),
+    ],
+    notes="""
+Three examples, and the mistake is including only the first.
+
+Typical: the ordinary case, done well. Establishes baseline shape, vocabulary and length. This is
+the one everybody includes, and then they stop, because it feels sufficient. It isn't — it teaches
+the system only what an easy day looks like.
+
+Complex: more going on than usual. Several issues at once, competing considerations. This shows
+how the shape holds up under load, and where the structure bends rather than breaking.
+
+Edge case: the one that doesn't fit the standard shape, and — crucially — what you do about it.
+This is the one that teaches most, because it shows the judgment the format cannot express.
+
+Think about what an edge case actually encodes. It says: here is a situation where the rules don't
+quite apply, and here is what an experienced person does. That is precisely the tribal knowledge
+that never gets written down, and precisely what the model has no access to.
+
+If you include only one example, make it the edge case. It carries more information about how your
+field actually works than the typical one does.
+""")
+
+content_slide(
+    prs, "Keeping the Pack Current",
+    [
+        "A pack written once and never revisited slowly stops matching how you work",
+        "",
+        (1, "Add a term whenever output misreads one — that misreading is the evidence you needed", None),
+        (1, "Replace a golden example when your conventions change; an outdated example teaches the old way confidently", None),
+        (1, "Add a \"never\" statement whenever output says something a professional would not have said", None),
+        "",
+        ("Ten minutes every few months. Treat it as a document your successor will inherit.", None, "bold"),
+        (1, "In most institutions it will be the only written record of how the work is actually done.", None),
+    ],
+    notes="""
+Maintenance, briefly, because a pack written once and never revisited slowly stops matching how
+you work — and worse, it does so silently.
+
+Three triggers, each of which costs a minute.
+
+Add a term whenever the output misreads one. That misreading is the evidence you needed; you don't
+have to sit down and brainstorm the glossary, you just have to notice and record.
+
+Replace a golden example when your conventions change. And note the risk if you don't: an outdated
+example teaches the old way, confidently, to everyone who uses the pack. That's worse than having
+no example, because it's authoritative and wrong.
+
+Add a "never" statement whenever the output says something a professional would not have said.
+
+Ten minutes every few months. And I'd ask you to treat it as a document your successor will
+inherit, because in most institutions it will end up being the only written record of how the work
+is actually done.
+
+That's a slightly odd outcome for an AI course. But I've seen it happen more than once — the
+useful artifact turns out to be the written-down knowledge, not the assistant.
+""")
+
 content_slide(
     prs, "What the Pack Changes — and What It Does Not",
     [

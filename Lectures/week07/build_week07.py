@@ -332,6 +332,85 @@ The check is quick: search your document for the quoted string. If it isn't ther
 trusting everything else in that answer too.
 """)
 
+content_slide(
+    prs, "The Three Instructions in Action",
+    [
+        ("Question:", None, "bold"),
+        (1, "\"What is the maximum period for submitting an appeal?\"", None),
+        "",
+        ("A good answer looks like this:", None, "bold"),
+        (1, "\"Fifteen working days from the date of notification.\"", None),
+        (1, "\"Source: 'An appeal shall be lodged within fifteen (15) working days of the date on which the decision is notified.' (Regulation 8.2)\"", None),
+        "",
+        ("A bad answer looks like this:", None, "bold"),
+        (1, "\"Appeals are generally expected to be submitted promptly, typically within two to four weeks of the decision.\"", None),
+        (1, "No quotation. No clause. Hedged language. Nothing you can check.", None),
+    ],
+    notes="""
+Let me show you the difference concretely, because it's easy to nod at the three instructions and
+still accept a bad answer.
+
+The question: what's the maximum period for submitting an appeal?
+
+A good answer. Fifteen working days from notification. Then the source: a quoted sentence, with a
+regulation number. You can search your document for that sentence and find clause 8.2 in about
+five seconds. And notice the quotation contains the number, so the answer and its evidence agree
+in a way you can see.
+
+Now the bad answer. "Appeals are generally expected to be submitted promptly, typically within
+two to four weeks of the decision."
+
+Read it again and notice the tells. "Generally expected." "Typically." A range instead of a
+figure. No quotation. No clause number.
+
+That is what answering from memory looks like — and it's plausible, professional-sounding, and
+completely useless. If you skim it while thinking about something else, you take away "two to four
+weeks" and act on it.
+
+The hedging is the signal. A grounded answer working from an actual passage tends to be more
+specific than a remembered one, not less. When the answer goes vague, ask where the quote is.
+""")
+
+content_slide(
+    prs, "Preparing Documents So Retrieval Works",
+    [
+        "Fifteen minutes of preparation buys more than any amount of prompt rewriting",
+        "",
+        (1, "Split a long document into sections of roughly one topic each, with descriptive headings", None),
+        (1, "Replace \"as described above\" and \"see section 3\" with the actual content, where you can", None),
+        (1, "Convert scanned pages to real text — otherwise nothing is retrievable at all", None),
+        (1, "Delete material irrelevant to the questions you will ask; it competes for retrieval", None),
+        "",
+        ("Then re-run the same questions and compare. This is the fastest improvement available to you.", None, "bold"),
+    ],
+    notes="""
+This slide is the practical one, and it's the thing people skip because it feels like admin
+rather than work.
+
+Fifteen minutes of document preparation buys more than any amount of prompt rewriting. Genuinely.
+If a grounded assistant is disappointing you, the source is more often the problem than the
+prompt.
+
+Four moves.
+
+Split a long document into sections of roughly one topic each, with descriptive headings. This
+matters because retrieval pulls passages — if your passages each cover one thing, the right one
+gets found.
+
+Replace "as described above" and "see section 3" with the actual content where you can. Remember
+why: a retrieved passage arrives on its own, and a cross-reference to something that wasn't
+retrieved is a sentence that means nothing — which the model will interpret anyway.
+
+Convert scanned pages to real text. If the text is a picture, nothing is retrievable at all, and
+this is very common with older institutional documents.
+
+And delete material irrelevant to the questions you'll ask. It competes for retrieval and crowds
+out what you wanted.
+
+Then re-run the same questions and compare. That comparison is the fastest improvement available
+to you in this entire course.
+""")
+
 boxes_slide(
     prs, "Three Ways a Grounded Answer Goes Wrong",
     [

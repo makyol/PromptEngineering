@@ -43,7 +43,11 @@ Weeks 1–5 baseline · Weeks 6–13 build · Week 14 synthesis
 
 ## Assessment
 
-Midterm 40% (in-class written) · Final 60% · Quizzes +10 bonus points (all 5 count)
+Midterm 40% · Final 60% · Quizzes +10 bonus points (all 5 count)
+
+All papers are multiple choice. Midterm 25 questions x 4 points (50 min, Weeks 1-7);
+final and makeup 25 questions x 4 points (60 min, whole course); quizzes 10 questions
+(10 min). Each exam scores directly out of 100.
 
 ## Building
 

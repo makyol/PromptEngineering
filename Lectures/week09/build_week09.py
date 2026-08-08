@@ -268,6 +268,81 @@ which it verifies anything.
 """)
 
 content_slide(
+    prs, "A Three-Step Chain, Written Out",
+    [
+        ("The task: incoming student enquiries, sorted and drafted.", None, "bold"),
+        "",
+        ("Step 1 — Classify.", None, "bold"),
+        (1, "\"Read the enquiry. Output one of: DEADLINE, REGISTRATION, GRADES, OTHER. Nothing else.\"", None),
+        ("Step 2 — Retrieve and draft.", None, "bold"),
+        (1, "\"Using only the regulations provided, draft a reply. Quote the clause. If not covered, output NOT IN SOURCES.\"", None),
+        ("Step 3 — Format.", None, "bold"),
+        (1, "\"Format as an email with our standard greeting and signature. Change no factual content.\"", None),
+        "",
+        ("Then: a person reads it and sends it. That is the fourth step, and it is not automated.", None, "bold"),
+    ],
+    notes="""
+Here's a real three-step chain, so you can see the shape.
+
+The task: incoming student enquiries, sorted and drafted.
+
+Step one, classify. Read the enquiry, output one of four labels, nothing else. Notice how tightly
+constrained the output is — one word from a fixed list. That's deliberate. A step whose output is
+one of four values can be checked at a glance, and it cannot silently corrupt the next step with a
+paragraph of hedging.
+
+Step two, retrieve and draft. Using only the regulations, draft a reply, quote the clause, and
+output NOT IN SOURCES if it isn't covered. That's week seven, dropped straight into a workflow.
+
+Step three, format. Standard greeting and signature, and — the crucial constraint — change no
+factual content. Without that line, a formatting step will smooth and adjust, and you'll have
+introduced a change nobody reviewed.
+
+And then a person reads it and sends it. That's the fourth step and it is not automated. Which is
+the whole design: three cheap steps that prepare, one human step that commits.
+
+Notice also that step two can refuse. Refusals propagate to the human, which is exactly right —
+the uncovered cases are the ones that most need a person.
+""")
+
+boxes_slide(
+    prs, "Worth Automating, and Not",
+    [
+        ("Worth it",
+         "Sorting a queue by type. Extracting fields from many similar documents. Reformatting "
+         "between two fixed shapes. Flagging items for attention. All repetitive, all "
+         "recoverable, all checkable at a glance."),
+        ("Not worth it",
+         "Anything you do twice a year. Anything where you cannot specify the judgment. Anything "
+         "whose output goes straight to a person without review."),
+        ("The honest test",
+         "Would you hand this task, with these instructions, to a capable new colleague on their "
+         "first day — and let them act on it unsupervised? If not, do not automate it either."),
+    ],
+    notes="""
+Worth automating and not. This is the slide that saves you from building things you'll abandon.
+
+Worth it: sorting a queue by type. Extracting fields from many similar documents. Reformatting
+between two fixed shapes. Flagging items for attention. Look at what those have in common — all
+repetitive, all recoverable, and all checkable at a glance. That last one matters: if verifying
+the output takes as long as doing the task, you've gained nothing.
+
+Not worth it: anything you do twice a year — the automation costs more than the task. Anything
+where you cannot specify the judgment, because if you can't write the rule the system can't
+follow it. And anything whose output goes straight to a person without review.
+
+And the honest test, which I'd like you to carry: would you hand this task, with these
+instructions, to a capable new colleague on their first day — and let them act on it
+unsupervised?
+
+If the answer is no, don't automate it either. A new colleague is actually a generous comparison:
+they'd ask when confused, they'd notice something odd, they'd remember the last conversation.
+Your automation does none of those things.
+
+If you wouldn't trust the new colleague unsupervised, you shouldn't trust the chain.
+""")
+
+content_slide(
     prs, "Designing Around It",
     [
         ("Keep the chain short.", None, "bold"),

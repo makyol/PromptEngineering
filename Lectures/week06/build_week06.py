@@ -253,6 +253,77 @@ Pick something you actually do. It makes the next twenty minutes much better.
 """)
 
 # ═════════════════════════════════════════════════════════ part 3 — where it breaks
+boxes_slide(
+    prs, "Candidates From Your Fields",
+    [
+        ("Healthcare · Education",
+         "A dosage-schedule formatter that turns a prescription into a printable timetable. "
+         "A rubric scorer that takes marks and produces standard feedback text. "
+         "A reading-level checker for patient information."),
+        ("Law · Business",
+         "A clause checklist that confirms a draft contains your standard sections. "
+         "A citation formatter. A meeting-note structurer that sorts free text into decisions, "
+         "actions and open questions."),
+        ("Engineering · Any field",
+         "A unit converter for the specific quantities your lab uses. A checklist generator for a "
+         "recurring procedure. A form that turns five fields into a correctly worded standard "
+         "message."),
+    ],
+    notes="""
+Concrete candidates, so nobody spends five of their twenty minutes deciding what to build.
+
+Healthcare and education. A dosage-schedule formatter — take a prescription, produce a printable
+timetable a patient can put on the fridge. A rubric scorer that takes your marks and produces
+standard feedback text. A reading-level checker for patient information, which several of you
+could specify very precisely after last week.
+
+Law and business. A clause checklist that confirms a draft contains your standard sections. A
+citation formatter. A meeting-note structurer that takes free text and sorts it into decisions,
+actions and open questions.
+
+Engineering and anything else. A unit converter for the specific quantities your lab actually
+uses — not a general one, yours, with your units and your precision. A checklist generator for a
+recurring procedure. A form that turns five fields into a correctly worded standard message.
+
+Look at what all nine have in common. Every one is boring. Every one is something a person
+currently does by hand, repeatedly, slightly differently each time. None of them require judgment.
+
+That's the target. If your idea sounds impressive, it's probably too big.
+""")
+
+content_slide(
+    prs, "When the First Attempt Is Wrong",
+    [
+        ("Describe the behaviour you want, not the code you imagine.", None, "bold"),
+        (1, "\"The date should show as 15 March 2027, not 2027-03-15\" — not \"change the date format function\"", None),
+        ("Give a concrete failing example.", None, "bold"),
+        (1, "\"When I enter a name with an apostrophe, the output is blank. It should show the name.\"", None),
+        ("Change one thing at a time.", None, "bold"),
+        (1, "Same reason as Week 4 — otherwise you cannot tell which change fixed it, or what it broke.", None),
+        ("Re-test what already worked.", None, "bold"),
+        (1, "You cannot see what a change affected. This is the compensation for not reading the code.", None),
+    ],
+    notes="""
+When the first attempt is wrong — and it often is, in a small way — here's how to fix it without
+making things worse.
+
+Describe the behaviour you want, not the code you imagine. Say "the date should show as fifteenth
+of March twenty twenty-seven, not two-thousand-twenty-seven dash oh-three dash fifteen." Don't say
+"change the date format function," because you're guessing at an internal structure you can't see,
+and if you guess wrong the instruction is worse than useless.
+
+Give a concrete failing example. "When I enter a name with an apostrophe, the output is blank. It
+should show the name." That's a test case and a specification in one sentence, and it's far more
+effective than "it doesn't handle special characters properly."
+
+Change one thing at a time. Same reason as week four — otherwise you can't tell which change fixed
+it, and you certainly can't tell what it broke.
+
+And re-test what already worked. You cannot see what a change affected. When you can read code,
+you can look at the blast radius. You can't, so re-testing is the compensation. It isn't optional
+and it isn't paranoia — it's the price of the trade you made.
+""")
+
 section_slide(
     prs, 3, "Where It Breaks",
     notes="""

@@ -103,9 +103,16 @@ Build weeks follow a fixed shape: demo (~10 min) → unpack (~30 min) → build 
 Midterm 40% (in-class written) · Final 60% (written) · 5 pop quizzes as **+10 bonus
 points**, all five counting. There is **no term project** — do not reintroduce one.
 
-Quizzes: **10** multiple-choice questions, 4 options, separate answer key, LaTeX
-`article` class. Last year's final (40 MCQs, 2.5 points each, 90 minutes) is the
-structural model for both exams.
+All papers are MCQ, LaTeX `article` class, built on the shared `Assessment/pelm.sty`.
+
+- **Quizzes:** 10 questions, 4 options, 10 minutes. Each worth up to 10 bonus points.
+- **Midterm:** 25 questions x 4 points = 100, 50 minutes, Weeks 1-7.
+- **Final and makeup:** 25 questions x 4 points = 100, 60 minutes, whole course,
+  weighted to Weeks 6-13 and split roughly 8 mechanism / 8 diagnosis / 9 design.
+
+Every answer key carries an answer string for fast marking. **Verify it against the
+per-question keys programmatically after any edit** — a mismatch is silent and
+mis-marks the whole cohort.
 
 Exams are conventional recall style by instructor decision. Because the course is
 build-led, **every build week must close with a `concepts_slide()`** naming what is

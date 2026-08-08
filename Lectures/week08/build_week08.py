@@ -235,6 +235,82 @@ related condition. That's the realistic case, and it's where the system actually
 """)
 
 content_slide(
+    prs, "A Test Set, Written Out",
+    [
+        ("Sources: a clinical guideline extract and a departmental protocol.", None, "bold"),
+        "",
+        ("Answerable (two of the seven):", None, "bold"),
+        (1, "\"What monitoring interval does the guideline state for the first 48 hours?\"  — stated plainly", None),
+        (1, "\"Which patients are excluded from the standard pathway?\"  — phrased as an exception, so harder", None),
+        "",
+        ("Unanswerable (all three):", None, "bold"),
+        (1, "\"What does the guideline say about paediatric patients?\"  — the extract covers adults only", None),
+        (1, "\"What is the equivalent recommendation in the 2027 update?\"  — a later version we do not hold", None),
+        (1, "\"How does this compare with the German guideline?\"  — an adjacent source we never loaded", None),
+    ],
+    notes="""
+Here's a real test set, so you can see the shape rather than the description.
+
+Sources: a clinical guideline extract and a departmental protocol.
+
+Two of the seven answerable questions. First, what monitoring interval is stated for the first
+forty-eight hours — stated plainly in one place, so this is an easy one, checking that the
+machinery works at all.
+
+Second, which patients are excluded from the standard pathway. Phrased in the source as an
+exception, which makes it harder, because retrieval finds the general rule more readily than the
+carve-out. Exceptions are excellent test questions for exactly this reason: a system that
+retrieves the rule and misses the exception gives you a confident answer that is wrong precisely
+in the cases where it matters.
+
+Now the three unanswerable ones, and notice how they're constructed.
+
+Paediatric patients — the extract covers adults only. A different population.
+
+The 2027 update — a later version we don't hold. A different time.
+
+The German guideline — an adjacent source we never loaded. A different jurisdiction.
+
+Population, time, jurisdiction. Those three axes will generate plausible unanswerable questions
+in any field. Steal that pattern.
+""")
+
+boxes_slide(
+    prs, "Good and Bad Unanswerable Questions",
+    [
+        ("Good",
+         "\"What does it say about paediatric patients?\" — a colleague would genuinely ask this, "
+         "the topic is adjacent, and the sources happen not to cover it. The system has just "
+         "enough to be tempted."),
+        ("Bad — too absurd",
+         "\"What does the clinical guideline say about football?\" It will refuse, you will learn "
+         "nothing, and you will conclude wrongly that your system is well behaved."),
+        ("Bad — actually answerable",
+         "A question you believe is uncovered but which the source addresses obliquely. You will "
+         "record a false finding. Check your sources before deciding a question is unanswerable."),
+    ],
+    notes="""
+Writing the unanswerable questions is the skill, so let me be precise about it.
+
+Good: "what does it say about paediatric patients?" A colleague would genuinely ask this. The
+topic is adjacent to what the source covers. And crucially — the system has just enough related
+material to be tempted. That's the condition you're trying to create.
+
+Bad, too absurd: asking a clinical guideline about football. It will refuse, obviously, you'll
+learn nothing, and — this is the real damage — you'll conclude that your system is well behaved
+when you haven't tested it at all. A false pass is worse than no test.
+
+Bad, actually answerable: a question you assumed was uncovered but which the source addresses
+obliquely, perhaps in a footnote or a table. Now you record a failure that isn't one, and you
+distrust a system that was working.
+
+So: check your sources properly before deciding a question is unanswerable. It takes two minutes
+and it's the difference between a finding and a mistake.
+
+The general rule — aim for adjacent, not absent. Adjacent is where the temptation lives.
+""")
+
+content_slide(
     prs, "Grading What Comes Back",
     [
         ("For each of the ten, record one of:", None, "bold"),
@@ -387,6 +463,41 @@ supports. "May" becomes "must." A specific case becomes a general rule.
 
 Go back and check yours for that specifically. It's easy to miss because the answer isn't
 false, it's overstated.
+""")
+
+boxes_slide(
+    prs, "What to Do With What You Found",
+    [
+        ("It answered the unanswerable",
+         "Strengthen the refusal instruction and make the string shorter and more visible. Retest. "
+         "If it still answers, treat every uncited claim from that system as unverified."),
+        ("It failed on exceptions and tables",
+         "That is a document problem, not a prompting problem. Split the source into "
+         "topic-sized sections with descriptive headings, and retest the same questions."),
+        ("It over-read repeatedly",
+         "Add a constraint: \"Do not state a requirement more strongly than the source. If the "
+         "source says may, do not write must.\" Then check that specific behaviour again."),
+    ],
+    notes="""
+A test set is only useful if it changes something. So: three findings and what each one should
+make you do.
+
+It answered an unanswerable question. Strengthen the refusal instruction, and make the string
+shorter and more visible. Retest. And if it still answers — this is the important part — treat
+every uncited claim from that system as unverified, permanently. You've learned that this
+system's silence means nothing, so quotations become mandatory rather than nice to have.
+
+It failed on exceptions and material held in tables. Notice the diagnosis: that's a document
+problem, not a prompting problem. No amount of rewording fixes a passage that was never
+retrieved. Split the source into topic-sized sections with descriptive headings and retest the
+same questions. If they now pass, you've confirmed the diagnosis.
+
+It over-read repeatedly. Add the constraint on the slide — do not state a requirement more
+strongly than the source; if the source says may, do not write must. Then check that specific
+behaviour again rather than assuming it's fixed.
+
+The general shape: each failure mode has a different fix, which is exactly why naming the failure
+matters more than noticing that something went wrong.
 """)
 
 concepts_slide(
