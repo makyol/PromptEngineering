@@ -308,6 +308,121 @@ def concepts_slide(prs, items, *, notes=""):
     return s
 
 
+# ---------------------------------------------------------------- diagrams
+def _round_box(slide, x, y, w, h, fill, line=None):
+    from pptx.enum.shapes import MSO_SHAPE
+    shp = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, x, y, w, h)
+    shp.adjustments[0] = 0.10
+    shp.fill.solid()
+    shp.fill.fore_color.rgb = fill
+    if line:
+        shp.line.color.rgb = line
+        shp.line.width = Pt(1.25)
+    else:
+        shp.line.fill.background()
+    shp.shadow.inherit = False
+    return shp
+
+
+def _label(slide, x, y, w, h, lines, *, align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE):
+    """lines: list of (text, size, color, bold)."""
+    tf = _txbox(slide, x, y, w, h)
+    tf.vertical_anchor = anchor
+    for i, (text, size, color, bold) in enumerate(lines):
+        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
+        p.alignment = align
+        p.space_after = Pt(2)
+        p.line_spacing = 1.05
+        r = p.add_run()
+        r.text = text
+        _style(r, size=size, color=color, bold=bold)
+    return tf
+
+
+def timeline_slide(prs, title, events, *, notes=""):
+    """Horizontal timeline. events: list of (marker, headline, detail). Max ~6."""
+    s = _blank(prs)
+    _slide_title(s, title)
+    n = len(events)
+    y_line = Inches(3.75)
+    colw = Inches(2.0)
+    # inset the line by half a label so the first and last captions stay inside the margin
+    x0 = MARGIN + colw / 2
+    span = BODY_W - colw
+    _rect(s, x0, y_line, span, Pt(2.5), RGBColor(0xC9, 0xD4, 0xDE))
+    step = span / max(n - 1, 1)
+
+    for i, (marker, headline, detail) in enumerate(events):
+        cx = x0 + step * i
+        dot = Inches(0.17)
+        _round_box(s, cx - dot / 2, y_line - dot / 2 + Pt(1), dot, dot, ACCENT)
+        # marker + headline above the line
+        _label(s, cx - colw / 2, Inches(2.15), colw, Inches(1.4),
+               [(marker, Pt(17), ACCENT, True),
+                (headline, Pt(14), INK, True)],
+               anchor=MSO_ANCHOR.BOTTOM)
+        # detail below
+        _label(s, cx - colw / 2, Inches(4.05), colw, Inches(1.7),
+               [(detail, Pt(12), BODY, False)], anchor=MSO_ANCHOR.TOP)
+    _footer(s, prs._pe_week, prs)
+    _notes(s, notes)
+    return s
+
+
+def flow_slide(prs, title, steps, *, caption="", notes=""):
+    """Left-to-right boxes with arrows. steps: list of (heading, detail). 3–5."""
+    from pptx.enum.shapes import MSO_SHAPE
+    s = _blank(prs)
+    _slide_title(s, title)
+    n = len(steps)
+    gap = Inches(0.42)
+    bw = (BODY_W - gap * (n - 1)) / n
+    bh = Inches(2.05)
+    y = Inches(2.6)
+    for i, (heading, detail) in enumerate(steps):
+        x = MARGIN + (bw + gap) * i
+        _round_box(s, x, y, bw, bh, PANEL, RGBColor(0xD3, 0xDD, 0xE6))
+        _label(s, x + Inches(0.18), y + Inches(0.2), bw - Inches(0.36), bh - Inches(0.4),
+               [(heading, Pt(16), ACCENT, True), ("", Pt(6), WHITE, False),
+                (detail, Pt(13), BODY, False)])
+        if i < n - 1:
+            ar = s.shapes.add_shape(MSO_SHAPE.RIGHT_ARROW,
+                                    x + bw + Inches(0.08), y + bh / 2 - Inches(0.11),
+                                    gap - Inches(0.16), Inches(0.22))
+            ar.fill.solid(); ar.fill.fore_color.rgb = RGBColor(0xB6, 0xC4, 0xD0)
+            ar.line.fill.background(); ar.shadow.inherit = False
+    if caption:
+        _label(s, MARGIN, y + bh + Inches(0.45), BODY_W, Inches(0.5),
+               [(caption, Pt(15), MUTED, False)], align=PP_ALIGN.LEFT)
+    _footer(s, prs._pe_week, prs)
+    _notes(s, notes)
+    return s
+
+
+def boxes_slide(prs, title, boxes, *, notes=""):
+    """2–4 side-by-side panels. boxes: list of (heading, body). Accent on first line."""
+    s = _blank(prs)
+    _slide_title(s, title)
+    n = len(boxes)
+    gap = Inches(0.4)
+    bw = (BODY_W - gap * (n - 1)) / n
+    bh = Inches(3.5)
+    y = Inches(2.25)
+    for i, (heading, body) in enumerate(boxes):
+        x = MARGIN + (bw + gap) * i
+        _round_box(s, x, y, bw, bh, PANEL, RGBColor(0xD3, 0xDD, 0xE6))
+        _rect(s, x + Inches(0.22), y + Inches(0.3), Inches(0.7), Pt(3), ACCENT)
+        _label(s, x + Inches(0.22), y + Inches(0.55), bw - Inches(0.44), Inches(0.7),
+               [(heading, Pt(18), INK, True)],
+               align=PP_ALIGN.LEFT, anchor=MSO_ANCHOR.TOP)
+        _label(s, x + Inches(0.22), y + Inches(1.3), bw - Inches(0.44), bh - Inches(1.6),
+               [(body, Pt(13.5), BODY, False)],
+               align=PP_ALIGN.LEFT, anchor=MSO_ANCHOR.TOP)
+    _footer(s, prs._pe_week, prs)
+    _notes(s, notes)
+    return s
+
+
 def closing_slide(prs, *, notes=""):
     s = _blank(prs)
     _rect(s, Emu(0), Emu(0), W, H, INK)

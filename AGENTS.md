@@ -65,8 +65,21 @@ be overwritten on the next build — change `build_week01.py` instead.
 
 ### Theme API (`Theme/theme.py`)
 
-`new_deck()`, `title_slide()`, `section_slide()`, `content_slide()`, `two_col_slide()`,
-`callout_slide()`, `activity_slide()`, `concepts_slide()`, `closing_slide()`, `save()`.
+Text layouts: `new_deck()`, `title_slide()`, `section_slide()`, `content_slide()`,
+`two_col_slide()`, `callout_slide()`, `activity_slide()`, `concepts_slide()`,
+`closing_slide()`, `save()`.
+
+Diagram layouts — **use these; don't let a week be all bullets**:
+
+- `timeline_slide(title, [(marker, headline, detail), …])` — 4–6 events on a horizontal
+  axis. Good for chronology and for revealing answers to a dating/ordering activity.
+- `flow_slide(title, [(heading, detail), …], caption=…)` — 3–5 boxes with arrows. Good for
+  pipelines, stages, before→after.
+- `boxes_slide(title, [(heading, body), …])` — 2–4 side-by-side panels. Good for parallel
+  concepts, failure modes, comparisons.
+
+Rule of thumb: **at least two diagram slides per week.** A week of pure bullets is a
+failure of preparation, not a style choice.
 
 Bullet items accept `"text"`, `(1, "text")` for indent level, or a trailing `"bold"` /
 `"plain"` style string. `"plain"` suppresses the bullet marker.
@@ -158,7 +171,7 @@ statement — this no longer reads as false and must be replaced.**
 - [x] 2 · Archive old semester, scaffold new tree
 - [x] 3 · Theme + Week 1 format prototype (revised: no change-narrative, activity-independent)
 - [x] 10 · Form content document (TR/EN) — pulled forward, see Forms/form-content.md
-- [ ] 4 · Weeks 2–5 (baseline block)
+- [ ] 4 · Weeks 2–5 (baseline block) — Week 2 done
 - [ ] 5 · Weeks 6–8 (Micro-Tool, Grounded Assistant, Test Set)
 - [ ] 6 · Weeks 9–10 (Automation Chain, Field Build)
 - [ ] 7 · Weeks 11–13 (Domain Pack, Attack & Patch, Ethics)
