@@ -1,11 +1,11 @@
 \documentclass[11pt,a4paper]{article}
 \usepackage{../pelm}
 \begin{document}
-\paper{Makeup Examination}{Whole course, weighted towards Weeks 6--13 \quad$\cdot$\quad 40 questions $\times$ 2.5 points = 100 points}{40}{90 minutes}
+\paper{Makeup Examination}{Whole course, weighted towards Weeks 6--13 \quad$\cdot$\quad 25 questions $\times$ 4 points = 100 points}{25}{60 minutes}
 
 \begin{questions}
 
-% ============================================== mechanism
+% ============================================== mechanism (8)
 \q{Which is the single operation underlying everything a large language model produces?}
   {Matching the question against a database of answers}
   {Predicting the next token, repeatedly}
@@ -30,12 +30,6 @@
   {Higher cost for Turkish text than English}
   {The tendency to accept a false premise in a question}
 
-\q{Which word is most likely to be split into several tokens?}
-  {and}
-  {patient}
-  {an uncommon Turkish word built from several suffixes}
-  {the}
-
 \q{What happens when a document exceeds the context window in the most dangerous case?}
   {The service returns an explicit error}
   {Part of the material is dropped silently and a confident answer follows}
@@ -48,35 +42,11 @@
   {It removes disallowed material from training data}
   {It applies only to images}
 
-\q{Two colleagues get different answers to an identical prompt. The best explanation is:}
-  {One of them used a different model}
-  {Randomness in token selection}
-  {One prompt contained a typographical error}
-  {The context window differed in size}
-
 \q{Which lever should be pulled when the output assumes the wrong reader or the wrong country?}
   {Format}
   {Examples}
   {Context}
   {Temperature}
-
-\q{Which is the strongest reason for asking a model to quote its supporting sentence?}
-  {It shortens the answer}
-  {It converts an unverifiable claim into one you can check in seconds}
-  {It prevents hallucination}
-  {It reduces token cost}
-
-\q{Why is ``make it more professional'' an unreliable instruction?}
-  {The model does not recognise the word}
-  {It describes a feeling rather than a text, and many different outputs satisfy it}
-  {It conflicts with safety training}
-  {It requires more tokens than the alternatives}
-
-\q{In the three dimensions of register, \textbf{mode} refers to:}
-  {The subject vocabulary}
-  {The relationship between writer and reader}
-  {The channel --- written to be read, written to be spoken, planned or spontaneous}
-  {The level of formality}
 
 \q{Why does specifying a fallback string reduce invented content?}
   {It lowers the temperature}
@@ -84,7 +54,7 @@
   {It blocks access to training data}
   {It shortens the response}
 
-% ============================================== diagnosis
+% ============================================== diagnosis (8)
 \q{A summary is factually correct throughout but omits the only finding that would have changed a
    decision. This is:}
   {Fabrication}
@@ -120,12 +90,6 @@
   {Context overflow}
   {Direct injection}
 
-\q{What is common to every failure mode covered in this course?}
-  {They require long conversations}
-  {They are invisible in the output}
-  {They affect only grounded systems}
-  {They can be eliminated by better prompts}
-
 \q{Which is genuine verification of a factual claim?}
   {Asking the model how confident it is}
   {Asking the same question a second time}
@@ -145,13 +109,7 @@
   {It is harder to regenerate}
   {It fails at higher volumes}
 
-% ============================================== design and judgment
-\q{An agent removes which safeguard that users rarely realise they were providing?}
-  {Rate limiting}
-  {Inspection of every intermediate output}
-  {Context management}
-  {Source selection}
-
+% ============================================== design and judgment (9)
 \q{Five steps at 95\% reliability gives an end-to-end reliability closest to:}
   {95\%}
   {90\%}
@@ -163,12 +121,6 @@
   {It is a judgment about matching an intention that is not in the context, so it is predicted like anything else}
   {It consumes excessive tokens}
   {It is disabled by default}
-
-\q{Which is the most robust control over an agent's behaviour?}
-  {A detailed instruction to be cautious}
-  {A request that it explain its reasoning}
-  {Connecting only the tools strictly required}
-  {Setting a low temperature}
 
 \q{A workflow drafts patient letters and sends them automatically. Which design rule is
    violated?}
@@ -190,29 +142,11 @@
   {Users are not the only stakeholders}
   {It omits the probability of harm}
 
-\q{In a well-designed workflow, most decisions concern:}
-  {Model selection}
-  {Constraints --- what the system must not do}
-  {Prompt phrasing}
-  {Cost optimisation}
-
 \q{Which does a Domain Pack \textbf{not} address?}
   {Institution-specific vocabulary}
   {The structure professionals expect}
   {What must never be stated without qualification}
   {Whether the content is true}
-
-\q{Why is professional formatting a double-edged improvement?}
-  {It consumes context}
-  {It makes incorrect content more persuasive}
-  {It slows the workflow}
-  {It reduces the refusal rate}
-
-\q{Why does asking for IRAC structure help with legal analysis?}
-  {It is shorter than prose}
-  {Stating the rule before applying it makes a missing or wrong rule visible}
-  {Lawyers prefer lists}
-  {It reduces hallucination generally}
 
 \q{What makes prompt injection difficult to eliminate?}
   {Attackers are highly skilled}
@@ -220,42 +154,17 @@
   {Context windows are too small}
   {Safety training is incomplete}
 
-\q{A colleague summarises a PDF containing hidden instructions and receives a subtly altered
-   summary. This is:}
-  {Direct injection}
-  {Indirect injection}
-  {Jailbreaking}
-  {Leakage}
-
 \q{Which attacker objective becomes possible only when tools are connected?}
   {Altering the content of an answer}
   {Extracting other documents from the context}
   {Sending, deleting or purchasing}
   {Revealing system instructions}
 
-\q{Sharing a link to a conversation is riskier than sharing a screenshot because:}
-  {Links can be forwarded more easily}
-  {The link carries the entire history, including material you have forgotten}
-  {Screenshots are encrypted}
-  {Links expire unpredictably}
-
 \q{Which statement about anonymising clinical material is correct?}
   {Removing names is sufficient}
   {Rare details in a small population can identify a person even without names}
   {Anonymised data may be uploaded anywhere}
   {Anonymisation applies only to published research}
-
-\q{Under this course's reasoning, what makes undisclosed AI use a problem in assessed work?}
-  {AI is inherently dishonest}
-  {It breaks the measurement the assessment was designed to make}
-  {It produces lower-quality work}
-  {It is difficult to detect}
-
-\q{Why keep one professional skill that you practise unaided?}
-  {Institutional rules require it}
-  {The judgment needed to evaluate generated work is built by producing work yourself}
-  {Generated output is generally poor}
-  {It is faster in the long term}
 
 \end{questions}
 \end{document}

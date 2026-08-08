@@ -1,7 +1,7 @@
 \documentclass[11pt,a4paper]{article}
 \usepackage{../pelm}
 \begin{document}
-\paper{Midterm Examination}{Weeks 1--7 \quad$\cdot$\quad 30 questions $\times$ 2 points = 60 points, scaled to 40\% of the course grade}{30}{60 minutes}
+\paper{Midterm Examination}{Weeks 1--7 \quad$\cdot$\quad 25 questions $\times$ 4 points = 100 points \quad$\cdot$\quad 40\% of the course grade}{25}{50 minutes}
 
 \begin{questions}
 
@@ -18,25 +18,19 @@
   {It excludes any instruction added by the product}
   {It refers to the model's response}
 
-\q{A model gives a confident, well-structured answer about a topic on which it has very little
-   training material. What happens to its expressed confidence?}
+\q{A model answers a question on a topic for which it has very little training material. What
+   happens to the confidence expressed in its answer?}
   {It falls in proportion to the thinness of the coverage}
   {It stays essentially the same}
-  {It rises, because uncertainty makes output longer}
-  {It is reported as a percentage}
+  {It is reported to the user as a percentage}
+  {The model refuses rather than answering}
 
-\q{An AI summary of a report is entirely accurate but omits the single most significant finding.
-   Which failure signature is this?}
+\q{An AI summary of a report is accurate throughout but omits the single most significant
+   finding. Which failure signature is this?}
   {Fabrication}
   {Displacement}
   {Omission}
   {Silent failure}
-
-\q{Why is the dangerous AI failure described in this course as ``the fluent one''?}
-  {Fluent answers take longer to produce}
-  {Well-formatted, confident output resembles competent professional work and is trusted accordingly}
-  {Fluency indicates the model is guessing}
-  {Fluent text uses more tokens}
 
 % ---------------------------------------------------------------- Week 2
 \q{ELIZA (1966) contained:}
@@ -57,19 +51,7 @@
   {Shortages of computing hardware}
   {Legal restrictions on research}
 
-\q{Which best describes the constant direction of change across the four eras of the field?}
-  {From general systems towards specialised ones}
-  {From open research towards commercial secrecy}
-  {From human-written rules towards learning from data}
-  {From text towards images}
-
 % ---------------------------------------------------------------- Week 3
-\q{Which is \textbf{not} typically a single token?}
-  {the}
-  {hospital}
-  {a rarely-used technical term}
-  {and}
-
 \q{A long agglutinated Turkish word is likely to be split into several tokens because:}
   {Turkish grammar is irregular}
   {The complete assembled word appeared rarely in training text, though its pieces are common}
@@ -96,7 +78,7 @@
 
 \q{Why can these systems not simply reply ``I don't know'' whenever appropriate?}
   {The phrase is filtered out by safety systems}
-  {``I don't know'' is itself a token sequence competing with all others, and it is rare after questions in training text}
+  {It is a token sequence competing with all others, and questions in training text are usually followed by answers}
   {The model is instructed never to refuse}
   {It would use too many tokens}
 
@@ -107,13 +89,13 @@
   {Everything the model learned during training}
 
 \q{When a document exceeds the context window, the most dangerous behaviour is:}
-  {The tool refuses the input with an error}
+  {The tool refuses the input with an explicit error}
   {Part of the material is silently dropped and a confident answer is produced anyway}
-  {The response is truncated visibly}
+  {The response is visibly truncated}
   {The model asks you to shorten the document}
 
 % ---------------------------------------------------------------- Week 4
-\q{According to the four levers, which is \textbf{not} one of them?}
+\q{Which is \textbf{not} one of the four levers?}
   {Context}
   {Task}
   {Format}
@@ -133,13 +115,6 @@
   {The model cannot perform three tasks}
   {Translation requires a different model}
 
-\q{A prompt instructs: ``You are a world-class expert with thirty years of experience and three
-   doctorates.'' What does this most likely achieve?}
-  {A measurable improvement in factual accuracy}
-  {A shift in register and vocabulary, with the superlatives adding little}
-  {Access to specialist training data}
-  {A reduction in hallucination}
-
 \q{Someone adds a phrase to a prompt, the output improves, and they conclude the phrase works.
    The strongest objection is:}
   {The phrase may be too long}
@@ -154,11 +129,11 @@
   {``Think carefully before answering''}
 
 % ---------------------------------------------------------------- Week 5
-\q{In the three dimensions of register, \textbf{field} refers to:}
+\q{In the three dimensions of register, \textbf{tenor} refers to:}
   {The subject area and its vocabulary density}
   {The relationship between writer and reader}
   {The channel of communication}
-  {The emotional tone}
+  {The emotional warmth of the text}
 
 \q{Which specification is most likely to produce reproducible style?}
   {``Make it professional and friendly''}
@@ -171,12 +146,6 @@
   {It makes the honest answer a probable continuation rather than an unlikely one}
   {It prevents the model from accessing training data}
   {It shortens the output}
-
-\q{Which is the most effective way to specify institutional house style?}
-  {A list of adjectives describing the desired tone}
-  {Two or three short samples of approved writing}
-  {An instruction to write ``in our usual style''}
-  {A request for formal language}
 
 % ---------------------------------------------------------------- Weeks 6-7
 \q{A generated browser tool produces a subtly wrong calculation but has a clean, working
