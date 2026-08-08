@@ -222,6 +222,122 @@ specificity changes the design, every time. It's very easy to accept risk to "us
 hard to accept it for a named person.
 """)
 
+content_slide(
+    prs, "The Same Six Questions, Clinical",
+    [
+        ("1.  Task", None, "bold"),
+        (1, "Turn a consultation transcript into a structured note in our standard format.", None),
+        ("2.  Sources", None, "bold"),
+        (1, "The department's note template and its completed examples. Not the patient record.", None),
+        ("3.  Steps", None, "bold"),
+        (1, "One. Transcript in, structured draft out. There is no second step worth adding.", None),
+        ("4.  Human", None, "bold"),
+        (1, "Before the note enters the record. The clinician edits and signs; the system never writes to anything.", None),
+        ("5.  How I would know", None, "bold"),
+        (1, "Three transcripts where I already wrote the note by hand. Compare. Plus one where a key symptom is mentioned only in passing.", None),
+        ("6.  Who is harmed", None, "bold"),
+        (1, "A patient whose reported symptom is dropped from the note because it was mentioned once, quietly, in the middle.", None),
+    ],
+    notes="""
+The same six questions in a clinical setting, so you can see the pattern rather than one
+instance.
+
+Task: turn a consultation transcript into a structured note in our standard format. One
+sentence.
+
+Sources: the department's note template and completed examples. Note what is *not* a source —
+the patient record. That's a deliberate exclusion and it's driven by question six.
+
+Steps: one. Transcript in, structured draft out. And I want to point out that "one step" is a
+legitimate and often correct answer. There's no second step worth adding here, and adding one
+would cost reliability for nothing.
+
+Human: before the note enters the record. The clinician edits and signs. The system never writes
+to anything — it produces text on a screen.
+
+How I'd know: three transcripts where I already wrote the note by hand, compared. Plus — and
+this is the good one — one transcript where a key symptom is mentioned only in passing, because
+that's the failure I actually fear.
+
+Who is harmed: a patient whose reported symptom is dropped because it was mentioned once,
+quietly, in the middle of a long transcript.
+
+Notice how question six generated question five. Once you name the harm, the test writes itself.
+That's the mechanism I want you to use.
+""")
+
+boxes_slide(
+    prs, "Three Scoping Mistakes",
+    [
+        ("Building a system, not a task",
+         "\"A tool for managing referrals\" is a project. \"Draft the referral letter from these "
+         "notes\" is a task. Systems fail slowly and invisibly; tasks either work or do not."),
+        ("Automating the interesting part",
+         "The temptation is to hand over the judgment and keep the typing. Do the opposite — "
+         "automate the tedium, keep the judgment. It is also the only version that is safe."),
+        ("Designing for a task you cannot grade",
+         "If you cannot tell whether the output is right, you cannot build this responsibly, "
+         "however good the tool is. Pick something where you are the expert."),
+    ],
+    notes="""
+Three scoping mistakes. Check your worksheet against these before you build.
+
+Building a system rather than a task. "A tool for managing referrals" is a project — it has
+sub-parts, state, edge cases, and it will produce something that demos well and works badly.
+"Draft the referral letter from these notes" is a task. And note the distinction that matters:
+systems fail slowly and invisibly, tasks either work or don't. You want failures that announce
+themselves.
+
+Automating the interesting part. This is the seductive one. The temptation is to hand over the
+judgment — let it decide the diagnosis, the grade, the recommendation — and keep the typing for
+yourself. Do exactly the opposite. Automate the tedium, keep the judgment. That's not only more
+useful, it's the only version that's safe, and it's also the version that doesn't erode your own
+skill.
+
+And designing for a task you cannot grade. If you can't tell whether the output is right, you
+cannot build this responsibly, no matter how capable the tool is. You'd be deploying something
+whose failures are invisible to the one person meant to be checking. Pick something where you
+are the expert.
+""")
+
+content_slide(
+    prs, "When There Are No Documents",
+    [
+        "A common finding at question 2 — and it is a finding, not a failure",
+        "",
+        (1, "If the knowledge lives only in people's heads, grounding has nothing to work with", None),
+        (1, "The honest options: write the knowledge down first, or design something that does not need it", None),
+        "",
+        ("Often the most valuable outcome of this worksheet:", None, "bold"),
+        (1, "Discovering that your institution has never written down how something is actually done", None),
+        (1, "That document is worth more than the assistant would have been — and the assistant becomes possible afterwards", None),
+    ],
+    notes="""
+A common finding at question two, and one worth taking seriously rather than treating as a dead
+end.
+
+You get to "what sources hold the answers?" and the answer is: none. Nothing is written down. The
+knowledge lives in three experienced people and in habit.
+
+If that's true, grounding has nothing to work with, and no amount of tooling changes it.
+
+Two honest options. Write the knowledge down first — which is a real project with real value.
+Or design something that doesn't need it.
+
+And here's the bold part, which I've watched happen several times. Often the most valuable
+outcome of filling in this worksheet is discovering that your institution has never written down
+how something is actually done.
+
+That document — the one that doesn't exist yet — is usually worth more than the assistant would
+have been. It survives staff turnover. It makes training possible. It can be checked and
+corrected.
+
+And once it exists, the assistant becomes possible. So it isn't even a detour.
+
+If you reach question two and find nothing, you haven't failed the exercise. You've found the
+actual problem.
+""")
+
 boxes_slide(
     prs, "Good Candidates and Bad Ones",
     [

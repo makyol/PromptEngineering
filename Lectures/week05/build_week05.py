@@ -410,6 +410,114 @@ boring" isn't a constraint, it's a complaint. "No sentence longer than twenty wo
 constraint — you can count.
 """)
 
+boxes_slide(
+    prs, "Three Format Specifications Worth Reusing",
+    [
+        ("The extraction table",
+         "\"A table with columns: finding, exact quoted wording, source location, confidence. "
+         "If a field cannot be filled from the source, write NOT STATED.\" "
+         "Use whenever you are pulling facts out of a document."),
+        ("The bounded summary",
+         "\"Three bullets, maximum fifteen words each, in order of importance. Then one sentence "
+         "naming anything important you had to leave out.\" "
+         "That final sentence is what makes it safe to skim."),
+        ("The two-audience pair",
+         "\"Produce two versions under headings FOR THE FILE and FOR THE FAMILY. Same facts, "
+         "different register. Do not add anything to the second that is not in the first.\""),
+    ],
+    notes="""
+Three format specifications you can steal today. I use all three regularly and they cover most
+professional situations.
+
+The extraction table. A table with columns: finding, exact quoted wording, source location,
+confidence — and the fallback. Use this whenever you're pulling facts out of a document. Notice
+it combines everything from today: named columns, a quoted-wording column that makes claims
+checkable, and a fallback so gaps don't get filled.
+
+The bounded summary. Three bullets, fifteen words maximum each, in order of importance. Then one
+sentence naming anything important that had to be left out.
+
+That last sentence is what makes the summary safe to skim, and I'd argue it's the single most
+valuable line in this slide. A summary without it hides its own omissions — and omission, from
+week one, is the failure you cannot detect by reading.
+
+And the two-audience pair. Two versions under explicit headings, same facts, different register,
+with a constraint that the second must not add anything the first didn't contain. That last
+clause matters: without it, the family version tends to acquire reassurance that nobody
+authorised.
+
+Write these down. They're reusable across every field in this room.
+""")
+
+content_slide(
+    prs, "Writing in English for Turkish Readers",
+    [
+        "A situation most of you will face, and it is a register problem rather than a translation problem",
+        "",
+        (1, "Ask for shorter sentences than you would use for first-language readers", None),
+        (1, "Ask it to avoid idiom and phrasal verbs — \"postpone\" rather than \"put off\"", None),
+        (1, "Ask for the main point first, before the qualifications", None),
+        "",
+        ("A useful instruction:", None, "bold"),
+        (1, "\"The reader is a competent professional reading in their second language. Avoid idiom. One idea per sentence.\"", None),
+        (1, "Note what this is not: it is not simplification, and it is not writing down to anyone.", None),
+    ],
+    notes="""
+Here's a situation most of you will face, and it's under-discussed: writing in English for
+readers whose first language is not English.
+
+The key insight is that this is a register problem, not a translation problem. The text stays in
+English. What changes is field, and to some extent mode.
+
+Three moves. Ask for shorter sentences than you'd use for first-language readers. Ask it to
+avoid idiom and phrasal verbs — "postpone" rather than "put off," "tolerate" rather than "put up
+with." Phrasal verbs are one of the hardest parts of English for second-language readers and
+they're everywhere in natural writing. And ask for the main point before the qualifications,
+because a reader working harder to decode has less capacity left for holding a suspended clause.
+
+The instruction on the slide does all three at once: "the reader is a competent professional
+reading in their second language. Avoid idiom. One idea per sentence."
+
+And read the last line carefully, because it's the part people get wrong. This is not
+simplification, and it is not writing down to anyone. The reader is a competent professional —
+you're removing incidental difficulty, not content. Getting that distinction wrong produces
+patronising text, which is worse than difficult text.
+""")
+
+content_slide(
+    prs, "When Not to Over-Specify",
+    [
+        "Every constraint narrows the output. Enough of them and you narrow it to something useless.",
+        "",
+        (1, "Fifteen simultaneous constraints tend to produce cautious, hedged, lifeless text", None),
+        (1, "Conflicting constraints — \"be comprehensive\" and \"under 100 words\" — force an arbitrary choice you did not make", None),
+        (1, "Over-specifying format can suppress something you would have wanted to see", None),
+        "",
+        ("Practical guide:", None, "bold"),
+        (1, "Three or four targeted constraints beat fifteen. Add them as problems appear, rather than in advance.", None),
+    ],
+    notes="""
+A corrective, because today has been an argument for specificity and specificity has a limit.
+
+Every constraint narrows the output. Enough of them and you narrow it to something useless.
+
+Three ways this bites. Fifteen simultaneous constraints tend to produce cautious, hedged,
+lifeless text — the model is satisfying rules rather than doing the job, and you can feel it in
+the result.
+
+Conflicting constraints force an arbitrary choice you didn't make. "Be comprehensive" and "under
+100 words" cannot both be honoured. Something gets dropped, and you don't get to choose what,
+and you may not notice what went.
+
+And over-specifying format can suppress something you'd have wanted. If you demand exactly three
+bullets and there were four important things, one is gone. The format won.
+
+The practical guide: three or four targeted constraints beat fifteen. And add them as problems
+appear rather than in advance — which is the loop from last week. Diagnose, then constrain. Don't
+pre-emptively defend against every failure you can imagine; you'll strangle the output before you
+find out which failures actually happen.
+""")
+
 content_slide(
     prs, "One Source, Several Audiences",
     [

@@ -276,6 +276,116 @@ have an author.
 None of the artifacts matter. What you noticed while building them does.
 """)
 
+timeline_slide(
+    prs, "The Semester in One Picture",
+    [
+        ("1–3", "Understand",  "What it is, where it came from, why it is confident and wrong"),
+        ("4–5", "Instruct",    "Four levers, register, structural contracts and fallbacks"),
+        ("6–8", "Build & test", "Micro-Tool, Grounded Assistant, Test Set"),
+        ("9–11", "Scale & adapt", "Automation Chain, Field Build, Domain Pack"),
+        ("12–14", "Defend & judge", "Injection, ethics, synthesis"),
+    ],
+    notes="""
+The whole semester on one axis. Five phases.
+
+Weeks one to three: understand. What these systems are, where they came from, why they are
+confident and sometimes wrong.
+
+Weeks four and five: instruct. The four levers, register, structural contracts and the fallback
+principle.
+
+Weeks six to eight: build and test. Micro-Tool, Grounded Assistant, Test Set. This is where the
+course turned from knowing to doing.
+
+Weeks nine to eleven: scale and adapt. Automation Chain, Field Build, Domain Pack.
+
+Weeks twelve to fourteen: defend and judge. Injection, ethics, and today.
+
+I want you to notice something about the order. Every phase depends on the one before it and
+would have been incoherent without it. You could not have understood grounding in week two —
+you'd have had no reason to think you needed it. You could not have appreciated week twelve
+before you had built something worth attacking.
+
+That's why it's a course rather than a set of topics. And it's why, if you're revising, revising
+in order works much better than revising the hard bits.
+""")
+
+activity_slide(
+    prs, "Self-Check: Can You Answer These?",
+    [
+        ("No devices. Answer each in one or two sentences, to yourself or a neighbour.", None, "bold"),
+        "",
+        (1, "1.  Why can these systems not simply say \"I don't know\" whenever it would be appropriate?", None),
+        (1, "2.  Why does \"be accurate\" fail to make an answer accurate?", None),
+        (1, "3.  A grounded answer has no quotation. What do you suspect, and why?", None),
+        (1, "4.  Why is 95\\% reliability per step not reassuring in a ten-step workflow?", None),
+        (1, "5.  Why is indirect injection worse for you than direct injection?", None),
+        (1, "6.  Why does professional formatting increase risk as well as usefulness?", None),
+    ],
+    minutes=10,
+    notes="""
+Ten minutes, no devices. Six questions. Answer each in one or two sentences — to yourself, or to
+the person next to you.
+
+These are deliberately chosen: they're the six questions that, if you can answer them properly,
+mean you can answer most of what the final will ask. They are also, not coincidentally, the six
+places where a plausible-sounding wrong answer is available.
+
+One. Why can these systems not simply say "I don't know"?
+
+Two. Why does "be accurate" fail to make an answer accurate?
+
+Three. A grounded answer has no quotation. What do you suspect, and why?
+
+Four. Why is ninety-five percent reliability per step not reassuring over ten steps?
+
+Five. Why is indirect injection worse for you than direct injection?
+
+Six. Why does professional formatting increase risk as well as usefulness?
+
+Take the ten minutes properly. The answers are on the next slide, and comparing your version
+with mine is far more useful than reading mine cold.
+
+[Circulate if they're discussing. If the room is quiet, give them four minutes of thinking time
+and then walk the answers — it works either way.]
+""")
+
+content_slide(
+    prs, "The Answers",
+    [
+        (1, "1.  \"I don't know\" is a token sequence competing with all others, and questions in training text are followed by answers. Fine-tuning shifts the tendency; it installs no mechanism.", None),
+        (1, "2.  Instructions change tone and shape, never available information. Requesting authority produces authority.", None),
+        (1, "3.  Answered from memory. Absence of a quotation is its signature.", None),
+        (1, "4.  0.95 to the tenth is about 0.60 — and errors are inherited by later steps rather than averaged away.", None),
+        (1, "5.  The instruction is hidden in content you never see, so there is no point at which you could refuse. You are the victim rather than the attacker.", None),
+        (1, "6.  It makes wrong content look like competent professional work, so it is trusted more — while correctness is unchanged.", None),
+    ],
+    notes="""
+Here are the answers. Compare them with yours, and pay attention to any where you had the right
+conclusion but not the reason — the exam distractors are built for exactly that gap.
+
+One. "I don't know" is a token sequence competing with all others, and in training text questions
+are followed by answers. Fine-tuning shifts the tendency; it installs no mechanism. If you said
+"because it's overconfident," that's the observation, not the explanation.
+
+Two. Instructions change tone and shape, never available information. Requesting authority
+produces authority.
+
+Three. Answered from memory. Absence of a quotation is its signature.
+
+Four. Nought point nine five to the tenth is about nought point six — and crucially, errors are
+inherited rather than averaged, because each step works on the previous step's output.
+
+Five. The instruction is hidden in content you never see, so there was no point at which you
+could have refused. You're the victim rather than the attacker. If you said "because it's more
+sophisticated," that's wrong — it isn't necessarily.
+
+Six. It makes wrong content look like competent professional work, so it's trusted more, while
+correctness is unchanged.
+
+If you got five or six of those with the reasons, you're ready.
+""")
+
 content_slide(
     prs, "What to Carry Into Practice",
     [

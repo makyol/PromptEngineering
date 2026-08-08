@@ -169,12 +169,22 @@ statement — this no longer reads as false and must be replaced.**
 
 - [x] 1 · Read the 2025–2026 material; coverage, weakness and repetition analysis
 - [x] 2 · Archive old semester, scaffold new tree
-- [x] 3 · Theme + Week 1 format prototype (revised: no change-narrative, activity-independent)
-- [x] 10 · Form content document (TR/EN) — pulled forward, see Forms/form-content.md
-- [ ] 4 · Weeks 2–5 (baseline block) — Week 2 done
-- [ ] 5 · Weeks 6–8 (Micro-Tool, Grounded Assistant, Test Set)
-- [ ] 6 · Weeks 9–10 (Automation Chain, Field Build)
-- [ ] 7 · Weeks 11–13 (Domain Pack, Attack & Patch, Ethics)
-- [ ] 8 · Week 14 (Synthesis)
-- [ ] 9 · Assessment materials — 5 quizzes + keys, midterm, final, makeup
+- [x] 3 · Theme + Week 1 format prototype
+- [x] 4 · Weeks 2–5 (baseline block)
+- [x] 5 · Weeks 6–8 (Micro-Tool, Grounded Assistant, Test Set)
+- [x] 6 · Weeks 9–10 (Automation Chain, Field Build)
+- [x] 7 · Weeks 11–13 (Domain Pack, Attack & Patch, Ethics)
+- [x] 8 · Week 14 (Synthesis)
+- [x] 9 · Assessment materials — 5 quizzes + keys, midterm, final, makeup
+- [x] 10 · Form content document (TR/EN)
+
+**All materials built.** 14 decks (295 slides, 43,336 words of verbatim script),
+160 exam questions across 8 papers, form content in TR/EN.
+
+Outstanding, for the instructor:
+- Week 12 needs a deliberately vulnerable target assistant built before delivery
+- Week 7 needs the five-discipline source pack assembled
+- Named tools in build weeks need free-tier re-verification close to delivery
+- Form items flagged in `Forms/form-content.md` §4 (mode of delivery, overlapping
+  course, academic title)
 

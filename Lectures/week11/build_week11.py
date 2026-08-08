@@ -217,6 +217,75 @@ So when you write your own conventions, ask: what error does this shape catch? I
 """)
 
 content_slide(
+    prs, "A Domain Pack, Written Out",
+    [
+        ("Glossary (extract)", None, "bold"),
+        (1, "\"Referral\" = transfer to a named consultant, not a request for advice. Advice requests are \"consultations\".", None),
+        (1, "\"Discharge\" = discharge from the ward, not from the service. Discharge from the service is \"closure\".", None),
+        ("Output conventions", None, "bold"),
+        (1, "Sections in order: reason for referral · relevant history · current medication · specific question asked.", None),
+        (1, "Maximum one page. No abbreviations except those in the glossary.", None),
+        ("Restraint — the \"never\" statements", None, "bold"),
+        (1, "Never state a diagnosis. Never suggest a medication change. Never include anything not stated in the source notes.", None),
+    ],
+    notes="""
+Here's a pack written out, so you can see the shape rather than the description.
+
+Glossary. Two entries, both chosen because the term means something different elsewhere. In this
+department, "referral" means transfer to a named consultant — a request for advice is a
+"consultation." Get that wrong and you've mislabelled the entire document. And "discharge" means
+from the ward, not from the service; leaving the service is "closure."
+
+Neither of those is universal. Both are locally exact. That's what a glossary entry should be.
+
+Output conventions: sections in order — reason for referral, relevant history, current
+medication, the specific question being asked. Maximum one page. No abbreviations except those
+in the glossary, which is a nice constraint because it makes the glossary do double duty.
+
+And the restraint statements. Never state a diagnosis. Never suggest a medication change. Never
+include anything not stated in the source notes.
+
+Read those three again. That's a system prompt that keeps a referral letter within the author's
+professional scope. Three sentences. And that's the part that would take a colleague years to
+articulate and takes you ten minutes to write down, because you know your field.
+""")
+
+content_slide(
+    prs, "Writing the Glossary Quickly",
+    [
+        "The bottleneck is recall, not writing. You know these terms; you cannot list them on demand.",
+        "",
+        ("Three prompts that surface them:", None, "bold"),
+        (1, "What did I have to explain to the last new colleague who joined?", None),
+        (1, "What has someone from another department misunderstood in the last year?", None),
+        (1, "Which words would mean something different in a textbook than they mean here?", None),
+        "",
+        (1, "Ten terms is enough to start. The pack improves every time something goes wrong.", None),
+    ],
+    notes="""
+A practical difficulty: the bottleneck is recall, not writing. You know these terms perfectly
+well. You cannot list them on demand, because expertise doesn't come with an index — which is
+exactly the knowledge bottleneck that killed the age of rules in week two, showing up in your own
+life.
+
+Three prompts that surface them reliably.
+
+What did I have to explain to the last new colleague who joined? Whatever you explained is
+exactly what isn't obvious, and you have a recent memory of it.
+
+What has someone from another department misunderstood in the last year? Cross-department
+misunderstandings almost always come from a term that means two things. Those are your
+highest-value entries.
+
+And which words would mean something different in a textbook than they mean here? That's the
+gap between the general usage the model learned and your local usage.
+
+Ten terms is enough to start. And the pack improves every time something goes wrong — when
+output is subtly off, ask which term it misread, and add that one. After six months you have
+something genuinely valuable that nobody sat down to write.
+""")
+
+content_slide(
     prs, "Risk Is Not Distributed Evenly",
     [
         "The same output quality carries very different consequences by field",
