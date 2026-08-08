@@ -1,0 +1,71 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{../pelm}
+\begin{document}
+\paper{Quiz 3}{Weeks 5--6: Style, Tone and Format; Building Without Code}{10}{10 minutes}
+
+\begin{questions}
+
+\q{Why does the instruction ``be professional'' produce inconsistent results?}
+  {The model does not understand the word}
+  {It describes a feeling rather than a text, and is compatible with many different outputs}
+  {It is too short to affect the output}
+  {Professional writing is rare in training data}
+
+\q{In the three dimensions of register, \textbf{tenor} refers to:}
+  {The subject matter and its vocabulary}
+  {The relationship between writer and reader}
+  {Whether the text is written or spoken}
+  {The emotional warmth of the text}
+
+\q{Which of these is a \textbf{behaviour} rather than an adjective, and therefore checkable?}
+  {Make it warm}
+  {Make it reassuring}
+  {Use the reader's name and acknowledge their situation}
+  {Make it feel more human}
+
+\q{You ask for a table with a ``deadline'' column, but the source document states no deadline.
+   Without a fallback instruction, what is most likely?}
+  {The cell is left empty}
+  {The system reports an error}
+  {A plausible deadline appears in the cell}
+  {The whole table is refused}
+
+\q{Why does adding ``if a field cannot be filled from the source, write NOT STATED'' work?}
+  {It appeals to the model's honesty}
+  {It makes the honest answer a likely continuation}
+  {It disables the model's creativity}
+  {It reduces the temperature}
+
+\q{Which is a well-formed negative constraint?}
+  {Do not be boring}
+  {Do not write badly}
+  {Do not use any sentence longer than 20 words}
+  {Do not disappoint the reader}
+
+\q{When generating a working browser tool from a description, what is actually happening?}
+  {The system assembles pre-built components from a library}
+  {The system predicts code, in the same way it predicts prose}
+  {The system searches for an existing tool and copies it}
+  {The system compiles your description into a program}
+
+\q{Why do generated tools succeed most reliably on ordinary tasks?}
+  {Ordinary tasks require less code}
+  {Common tasks appear thousands of times in near-identical form in training data}
+  {The model tests ordinary tasks before returning them}
+  {Ordinary tasks have fewer edge cases by definition}
+
+\q{A generated tool has a clean interface, working buttons, and produces a confidently formatted
+   number that is wrong every time. Which failure is this?}
+  {Silently discarded input}
+  {Correct only for the cases tried}
+  {Wrong logic with right appearance}
+  {Context overflow}
+
+\q{Which statement best captures the central risk of building a tool you cannot read?}
+  {It may be slow}
+  {You can judge whether it looks right, but not whether it is right}
+  {It may stop working when the service changes}
+  {It cannot handle large amounts of data}
+
+\end{questions}
+\end{document}

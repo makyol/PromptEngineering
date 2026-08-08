@@ -1,0 +1,29 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{../pelm}
+\begin{document}
+\answerpaper{Quiz 2}{Weeks 3--4: How LLMs Work, and Principles of Effective Prompting}
+
+\begin{enumerate}[leftmargin=*, itemsep=0.5em, label=\textbf{\arabic*.}]
+\key{B}{Tokens are not words. Common words are often one token; rarer words fragment; spaces are
+  usually attached to the following word.}
+\key{B}{A fixed vocabulary of whole words fails on any unseen word. Sub-word pieces mean the system
+  is never stuck --- new names, technical terms and typos can all be assembled.}
+\key{B}{Agglutinative stacking produces long words that appeared rarely in training, so they
+  fragment. Consequences: the context fills faster, metered usage costs more, and coverage is
+  thinner.}
+\key{B}{Letter counting asks about something the system never perceived. This is a predictable
+  consequence of tokenisation, not a general weakness at arithmetic.}
+\key{B}{A probability distribution over the whole vocabulary, from which one token is selected ---
+  then the process repeats. Nothing is retrieved and no rules are applied.}
+\key{B}{Always selecting the most probable token produces flat, repetitive text, so randomness is
+  introduced deliberately. Often exposed as ``temperature''.}
+\key{B}{Consistency measures how strongly a pattern is represented, not whether it is true. A
+  widely repeated error is reproduced very consistently.}
+\key{C}{The system optimises plausibility. Plausible usually correlates with true, but nothing
+  checks, so where they diverge nothing notices. This is why it cannot simply be patched out.}
+\key{C}{Instructions change tone and shape, never available information. Asking for authority
+  produces authority --- which makes a wrong answer more convincing, not less.}
+\key{C}{Wrong shape means Format. Wrong content means Context or Task. Correct but lifeless means
+  Examples. Format is the cheapest lever and the most neglected.}
+\end{enumerate}
+\end{document}

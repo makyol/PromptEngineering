@@ -1,0 +1,262 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{../pelm}
+\begin{document}
+\paper{Final Examination}{Whole course, weighted towards Weeks 6--13 \quad$\cdot$\quad 40 questions $\times$ 2.5 points = 100 points, 60\% of the course grade}{40}{90 minutes}
+
+\begin{questions}
+
+% ============================================== Part 1: mechanism
+\q{Which best describes what a large language model does?}
+  {Retrieves the most relevant stored fact}
+  {Produces a probability for every possible next token, then one is selected}
+  {Applies rules written by its developers}
+  {Searches the internet and summarises the results}
+
+\q{Why is hallucination not simply a bug awaiting a fix?}
+  {The models are still too small}
+  {There is no step in the operation at which truth is checked; plausibility is what is optimised}
+  {Training data has not yet been cleaned}
+  {Users write insufficiently precise prompts}
+
+\q{In which situation is hallucination \textbf{most} likely?}
+  {A widely documented topic in English}
+  {A specific citation on a thinly covered topic}
+  {A request for a summary of provided text}
+  {A request to rewrite a paragraph more simply}
+
+\q{A question is phrased ``Explain why X causes Y'', when in fact X does not cause Y. What is the
+   likely result?}
+  {The model corrects the premise}
+  {The model produces an explanation, accepting the premise}
+  {The model refuses to answer}
+  {The model reports low confidence}
+
+\q{Why does the same content cost more tokens in Turkish than in English?}
+  {Turkish words are longer on average}
+  {Agglutinative stacking produces assembled words that appeared rarely in training}
+  {Turkish requires a separate tokenizer pass}
+  {Turkish uses more punctuation}
+
+\q{An assistant is asked to count letters in a word and gets it wrong. Why?}
+  {The arithmetic exceeded its capability}
+  {It never perceived individual letters --- it operates on tokens}
+  {The context window overflowed}
+  {The temperature was set too high}
+
+\q{Which is \textbf{not} held in the context window?}
+  {The conversation so far}
+  {Attached documents}
+  {Hidden instructions added by the product}
+  {The model's training data}
+
+\q{What does it mean that these systems are not deterministic?}
+  {They cannot perform arithmetic}
+  {The same prompt may produce different answers on different runs}
+  {They cannot be tested}
+  {Their output depends on the time of day}
+
+\q{Why is repeating a question and receiving a similar answer weak evidence of correctness?}
+  {The model remembers its previous answer}
+  {Consistency measures how strongly a pattern is represented, not whether it is true}
+  {The second answer is always shorter}
+  {The context window has changed}
+
+\q{Which best states the relationship between plausibility and truth in these systems?}
+  {They are equivalent}
+  {They correlate, because training text was mostly written by people trying to be accurate}
+  {They are unrelated}
+  {Truth is checked and plausibility is a by-product}
+
+\q{Adding ``be accurate and use only reliable sources'' to a prompt about a thinly covered topic
+   will most likely:}
+  {Improve factual accuracy}
+  {Produce a refusal}
+  {Make the answer sound more authoritative without improving it}
+  {Trigger a web search}
+
+\q{Which of the four levers should be used when the output has the right content in the wrong
+   shape?}
+  {Context}
+  {Task}
+  {Format}
+  {Examples}
+
+\q{Which is a well-formed negative constraint?}
+  {Do not be vague}
+  {Do not write anything unprofessional}
+  {Do not cite any case or regulation by name}
+  {Do not disappoint the reader}
+
+% ============================================== Part 2: diagnosis
+\q{An answer about Turkish procedure describes, accurately, the procedure of another country.
+   This is:}
+  {Fabrication}
+  {Displacement}
+  {Omission}
+  {Silent failure}
+
+\q{A legal memo contains a case name in correct citation format for a case that was never
+   decided. This is:}
+  {Fabrication}
+  {Displacement}
+  {Over-reading}
+  {Indirect injection}
+
+\q{Which failure is hardest to detect outside your own area of expertise, and why?}
+  {Fabrication --- because citations look real}
+  {Displacement --- because foreign systems are unfamiliar}
+  {Omission --- because there is no incorrect statement to identify}
+  {Overconfidence --- because tone is uniform}
+
+\q{A grounded assistant answers a question your documents do not cover, producing a confident
+   response with no quotation. This is:}
+  {Retrieved the wrong passage}
+  {Over-read the passage}
+  {Answered from memory}
+  {Silent failure}
+
+\q{Your source says ``the committee \emph{may} require additional evidence''. The assistant
+   reports ``the committee \emph{requires} additional evidence''. This is:}
+  {Fabrication}
+  {Over-reading the passage}
+  {Answered from memory}
+  {Displacement}
+
+\q{A grounded answer quotes a real sentence from your document, but the sentence comes from an
+   unrelated section and does not support the claim. This is:}
+  {Fabrication}
+  {Retrieved the wrong passage}
+  {Omission}
+  {Leakage}
+
+\q{A three-step workflow receives faulty input at step one and produces a complete, confident,
+   well-formatted output. Nothing reports an error. This is:}
+  {Wrong stopping point}
+  {Silent failure}
+  {Context overflow}
+  {Direct injection}
+
+\q{What do all nine failure modes covered in this course have in common?}
+  {They occur only in long conversations}
+  {They are invisible in the output}
+  {They can be prevented by better prompting}
+  {They occur only in grounded systems}
+
+\q{A generated browser tool produces a subtly wrong number, consistently, behind a clean
+   interface. Why is consistency dangerous here?}
+  {It makes the error harder to reproduce}
+  {It makes the tool appear reliable}
+  {It increases the token cost}
+  {It causes the tool to fail eventually}
+
+\q{Which check would most reliably expose a poisoned document summary?}
+  {Asking the model whether it was manipulated}
+  {Regenerating the summary several times}
+  {Checking each claim against a quoted passage in the source}
+  {Reducing the temperature}
+
+% ============================================== Part 3: design and judgment
+\q{What is the most significant thing lost when a chatbot is replaced by an agent?}
+  {Response speed}
+  {The unconscious checking you performed on every intermediate output}
+  {The ability to attach documents}
+  {Access to the context window}
+
+\q{If each step is 95\% reliable, approximately what is end-to-end reliability over ten steps?}
+  {95\%}
+  {80\%}
+  {60\%}
+  {40\%}
+
+\q{Why is compounding error worse than independent random error?}
+  {Errors are reported only at the end}
+  {Each step consumes the previous step's output, so early errors are inherited}
+  {Agents use more tokens per step}
+  {Later steps are inherently less reliable}
+
+\q{Which control does \textbf{not} rely on the system behaving as intended?}
+  {Instructing it to be careful}
+  {Asking it to verify its own output}
+  {Connecting only the narrowest tools required}
+  {Requesting quotations for each claim}
+
+\q{Where should a human be placed in an AI workflow?}
+  {At the end, reviewing the output}
+  {Before the irreversible action}
+  {At the start, writing the prompt}
+  {Wherever capacity allows}
+
+\q{Which is \textbf{not} a criterion for a good first automation candidate?}
+  {The task is genuinely repetitive}
+  {The answers exist in documents you can point at}
+  {A wrong answer is recoverable}
+  {The task is the most intellectually difficult in your field}
+
+\q{Why should the harmed person be named specifically rather than as a category?}
+  {Institutional policy requires it}
+  {Specificity changes the design; abstraction does not}
+  {It shortens the risk assessment}
+  {Categories cannot be defined precisely}
+
+\q{In a well-designed AI workflow, most decisions concern:}
+  {Which model to use}
+  {What the system must not do}
+  {How to phrase the prompt}
+  {Which tool provider to select}
+
+\q{A Domain Pack improves all of the following \textbf{except}:}
+  {Local vocabulary}
+  {Recognisable structure}
+  {Conventional restraint}
+  {Factual accuracy}
+
+\q{Why can a Domain Pack increase risk as well as usefulness?}
+  {It consumes context window space}
+  {Professional formatting makes wrong content more persuasive}
+  {It slows the system down}
+  {It prevents the system from refusing}
+
+\q{Why do professional structures such as SOAP and IRAC help when working with these systems?}
+  {They are shorter than free prose}
+  {Each makes a particular kind of error visible}
+  {They are familiar to the model}
+  {They reduce token usage}
+
+\q{What is the root cause of prompt injection?}
+  {Insufficient safety fine-tuning}
+  {The model receives one stream of tokens and cannot reliably separate instructions from data}
+  {Context windows are too small}
+  {Users upload untrusted files}
+
+\q{Why is indirect injection more serious for an ordinary user than direct injection?}
+  {It is technically harder to perform}
+  {The malicious instruction is hidden in content the user never sees, so there is no point at which they could refuse}
+  {It cannot be defended against at all}
+  {It only affects grounded systems}
+
+\q{Which attacker goal requires an agent rather than a chatbot?}
+  {Changing the content of a summary}
+  {Extracting other material from the context}
+  {Causing an action such as sending or deleting}
+  {Revealing the system instructions}
+
+\q{Which statement about anonymisation is correct?}
+  {Removing names is sufficient}
+  {A rare condition, a date and a small department can identify someone even with names removed}
+  {Anonymised data may be uploaded to any service}
+  {Anonymisation is required only for research}
+
+\q{Under this course's account of academic integrity, the central question is:}
+  {Whether AI was used at all}
+  {What the assessment is measuring, and what you are certifying by submitting}
+  {Whether the use can be detected}
+  {How much of the text was generated}
+
+\q{What is the strongest argument for occasionally drafting work yourself?}
+  {It is faster for short documents}
+  {The judgment that lets you evaluate generated output is built by doing the work}
+  {Institutional rules require it}
+  {Generated drafts are usually poor}
+
+\end{questions}
+\end{document}

@@ -1,0 +1,30 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{../pelm}
+\begin{document}
+\answerpaper{Quiz 4}{Weeks 7--8: Grounding, and Verification}
+
+\begin{enumerate}[leftmargin=*, itemsep=0.5em, label=\textbf{\arabic*.}]
+\key{B}{Grounding places passages into the context. No retraining is involved --- the model is
+  unchanged; only what it can see has changed.}
+\key{B}{Retrieve, augment the context, generate. The phrase describes nothing more elaborate than
+  that.}
+\key{C}{Grounding changes \emph{where} the answer comes from. If the source is wrong or out of date,
+  you now have a confident wrong answer with a citation attached --- arguably worse, because the
+  citation makes it more persuasive.}
+\key{B}{A short, fixed, visually obvious string survives skim-reading. ``I could not find specific
+  information, however, based on general principles\ldots'' is the same admission in a form you will
+  read straight past.}
+\key{C}{No quotation is the signature of answering from memory. If there is no quote, assume memory
+  until shown otherwise.}
+\key{B}{Over-reading: the claim is stronger than the sentence supports. ``May'' becoming ``must'' is
+  the classic instance. Compare claim strength against quote strength.}
+\key{B}{Seven answerable --- two easy, three medium, two hard --- plus three plausible unanswerable
+  ones.}
+\key{B}{In normal use you cannot tell which of your questions are unanswerable, so you never observe
+  this behaviour. Constructing it deliberately is the only way to see it.}
+\key{B}{Writing the expected answer afterwards allows you to accept whatever you got. The order
+  makes the exercise honest.}
+\key{C}{Verification requires something outside the system. Repeating a question measures how common
+  a pattern is; asking the model about its own confidence stays inside the system.}
+\end{enumerate}
+\end{document}

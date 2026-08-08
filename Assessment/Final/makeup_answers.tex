@@ -1,0 +1,58 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{../pelm}
+\begin{document}
+\answerpaper{Makeup Examination}{Whole course \quad$\cdot$\quad 40 questions $\times$ 2.5 points = 100 points}
+
+\begin{enumerate}[leftmargin=*, itemsep=0.35em, label=\textbf{\arabic*.}]
+\key{B}{Next-token prediction, repeated. Nothing is retrieved and no rules are applied.}
+\key{B}{The same operation runs regardless of pattern strength, and confidence is not part of what
+  is produced.}
+\key{B}{It answers from the earlier version or something adjacent, without flagging the cut-off.}
+\key{D}{Accepting a false premise follows from predicting a likely continuation, not from
+  tokenisation. The other three are direct tokenisation consequences.}
+\key{C}{Rare assembled forms fragment; common short words do not.}
+\key{B}{Silent truncation with a confident answer. An explicit error would be the preferable case.}
+\key{B}{Safety fine-tuning shifts probabilities. It produces a tendency, not a gate --- which is why
+  framing can defeat it.}
+\key{B}{Deliberate randomness in token selection.}
+\key{C}{Wrong reader or wrong country is a Context failure.}
+\key{B}{A quotation can be searched for in the source. It does not prevent hallucination --- it
+  makes it detectable.}
+\key{B}{It describes a feeling, not a text; many outputs satisfy it, so results vary.}
+\key{C}{Field is subject vocabulary, tenor is relationship, mode is channel.}
+\key{B}{The fallback principle: make the honest answer probable rather than appealing to honesty.}
+\key{C}{Omission --- true throughout, missing what mattered.}
+\key{A}{Displacement --- accurate elsewhere, inapplicable here.}
+\key{B}{Retrieved the wrong passage: a genuine quotation from an unrelated place.}
+\key{A}{Over-reading: an exception reported as a general rule.}
+\key{B}{Silent failure.}
+\key{B}{All are invisible in the output, which is why the response must be procedural.}
+\key{C}{Verification requires something outside the system. The other three stay inside it.}
+\key{B}{Correct only for the cases tried --- untested paths were generated but never run.}
+\key{B}{Consistency resembles reliability. Intermittent failure attracts attention; steady error
+  does not.}
+\key{B}{Inspection of every intermediate output --- free quality control, deleted without notice.}
+\key{C}{$0.95^{5} \approx 0.77$.}
+\key{B}{Completion is a judgment about matching an intention that is not present in the context, so
+  it is predicted like anything else.}
+\key{C}{Narrow tools is the only control that does not depend on the system behaving well.}
+\key{C}{Sending is irreversible and no human precedes it.}
+\key{B}{Repetitive, document-backed, recoverable. Difficulty is not a virtue here.}
+\key{B}{It commits to nothing and changes no design decision. A named person does.}
+\key{B}{Capability is free; constraint is the engineering.}
+\key{D}{A Domain Pack does nothing for truth.}
+\key{B}{It increases persuasiveness without improving correctness, so over-trust rises.}
+\key{B}{Stating the rule before applying it makes a missing or wrong rule visible.}
+\key{B}{Instructions and data share one undifferentiated channel, with no reliable trust label.}
+\key{B}{Indirect injection --- hidden in content the user never saw.}
+\key{C}{Causing an action requires connected tools; the others need only text.}
+\key{B}{A shared link carries the whole history. Screenshots crop; links do not.}
+\key{B}{Rare combinations of ordinary details identify people in small populations.}
+\key{B}{It breaks the measurement the assessment was designed to make. The problem is the broken
+  measurement, not the tool.}
+\key{B}{The judgment that lets you evaluate generated work is built by producing work yourself.}
+\end{enumerate}
+
+\vspace{0.5cm}\hrule\vspace{0.3cm}
+\noindent\textbf{Marking.} 2.5 points per question, 100 points total. No negative marking.
+\end{document}
