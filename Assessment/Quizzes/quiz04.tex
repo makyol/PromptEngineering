@@ -1,0 +1,71 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{../pelm}
+\begin{document}
+\paper{Quiz 4}{Weeks 7--8: Grounding, and Verification}{10}{10 minutes}
+
+\begin{questions}
+
+\q{``Grounding'' a system in your own sources means:}
+  {Retraining the model on your documents}
+  {Placing relevant passages from your documents into the context when it answers}
+  {Restricting the model to a single topic}
+  {Reducing the model's temperature}
+
+\q{The abbreviation RAG stands for retrieval-augmented generation. In practice it means:}
+  {A method for training smaller models}
+  {Retrieve relevant text, add it to the context, then generate}
+  {A technique for reducing token costs}
+  {A way of checking output against the internet}
+
+\q{Which problem does grounding \textbf{not} solve?}
+  {The model has never seen your institution's internal policy}
+  {The guideline was updated after the knowledge cut-off}
+  {Your source document is itself out of date}
+  {Turkish-language professional material is thinly represented}
+
+\q{Why should the refusal instruction specify a fixed string such as ``NOT IN SOURCES''?}
+  {It reduces the number of tokens used}
+  {It is easy to spot when skim-reading, unlike a hedge buried in a paragraph}
+  {It prevents the model from answering at all}
+  {It is required by most document tools}
+
+\q{An assistant answers ``The notice period is 30 days'' with no quotation from your documents.
+   Which grounded failure mode should you suspect first?}
+  {Over-read the passage}
+  {Retrieved the wrong passage}
+  {Answered from memory}
+  {Silent failure}
+
+\q{Your source states: ``Either party \emph{may} request an extension.'' The assistant reports:
+   ``Either party \emph{must} request an extension.'' This is:}
+  {Fabrication}
+  {Over-reading the passage}
+  {Answered from memory}
+  {Displacement}
+
+\q{In a ten-question test set, what is the recommended composition?}
+  {Ten questions your sources answer}
+  {Seven your sources answer and three they cannot}
+  {Five easy and five hard}
+  {Ten questions chosen at random}
+
+\q{Why do the unanswerable questions matter more than the answerable ones?}
+  {They are harder to write}
+  {They test behaviour in the situation you cannot detect during normal use}
+  {They take less time to grade}
+  {They are more likely to appear in the exam}
+
+\q{Why must you write the expected answer \textbf{before} running each test question?}
+  {It saves time}
+  {Otherwise you will unconsciously accept whatever output you receive}
+  {The tool requires it}
+  {It improves retrieval accuracy}
+
+\q{Which of these is genuine verification?}
+  {Asking the same question again and getting a similar answer}
+  {Asking the model whether it is confident}
+  {Searching your source document for the quoted sentence}
+  {Regenerating the answer three times and taking the majority}
+
+\end{questions}
+\end{document}

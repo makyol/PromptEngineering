@@ -1,0 +1,169 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{../pelm}
+\begin{document}
+\paper{Final Examination}{Whole course, weighted towards Weeks 6--13 \quad$\cdot$\quad 25 questions $\times$ 4 points = 100 points \quad$\cdot$\quad 60\% of the course grade}{25}{60 minutes}
+
+\begin{questions}
+
+% ============================================== mechanism (8)
+\q{Why is hallucination not simply a bug awaiting a fix?}
+  {The models are still too small}
+  {There is no step in the operation at which truth is checked; plausibility is what is optimised}
+  {Training data has not yet been cleaned}
+  {Users write insufficiently precise prompts}
+
+\q{In which situation is hallucination \textbf{most} likely?}
+  {A widely documented topic in English}
+  {A specific citation on a thinly covered topic}
+  {A request for a summary of provided text}
+  {A request to rewrite a paragraph more simply}
+
+\q{A question is phrased ``Explain why X causes Y'', when in fact X does not cause Y. What is the
+   likely result?}
+  {The model corrects the premise}
+  {The model produces an explanation, accepting the premise}
+  {The model refuses to answer}
+  {The model reports low confidence}
+
+\q{Why does the same content cost more tokens in Turkish than in English?}
+  {Turkish words are longer on average}
+  {Agglutinative stacking produces assembled words that appeared rarely in training}
+  {Turkish requires a separate tokenizer pass}
+  {Turkish uses more punctuation}
+
+\q{Which is \textbf{not} held in the context window?}
+  {The conversation so far}
+  {Attached documents}
+  {Hidden instructions added by the product}
+  {The model's training data}
+
+\q{Why is repeating a question and receiving a similar answer weak evidence of correctness?}
+  {The model remembers its previous answer}
+  {Consistency measures how strongly a pattern is represented, not whether it is true}
+  {The second answer is always shorter}
+  {The context window has changed}
+
+\q{Adding ``be accurate and use only reliable sources'' to a prompt about a thinly covered topic
+   will most likely:}
+  {Improve factual accuracy}
+  {Produce a refusal}
+  {Make the answer sound more authoritative without improving it}
+  {Trigger a web search}
+
+\q{Which is a well-formed negative constraint?}
+  {Do not be vague}
+  {Do not write anything unprofessional}
+  {Do not cite any case or regulation by name}
+  {Do not disappoint the reader}
+
+% ============================================== diagnosis (8)
+\q{An answer about Turkish procedure accurately describes the procedure of another country.
+   This is:}
+  {Fabrication}
+  {Displacement}
+  {Omission}
+  {Silent failure}
+
+\q{A legal memo contains a case name in correct citation format for a case that was never
+   decided. This is:}
+  {Fabrication}
+  {Displacement}
+  {Over-reading}
+  {Indirect injection}
+
+\q{Which failure is hardest to detect outside your own area of expertise, and why?}
+  {Fabrication --- because citations look real}
+  {Displacement --- because foreign systems are unfamiliar}
+  {Omission --- because there is no incorrect statement to identify}
+  {Overconfidence --- because tone is uniform}
+
+\q{A grounded assistant answers a question your documents do not cover, producing a confident
+   response with no quotation. This is:}
+  {Retrieved the wrong passage}
+  {Over-read the passage}
+  {Answered from memory}
+  {Silent failure}
+
+\q{Your source says ``the committee \emph{may} require additional evidence''. The assistant
+   reports ``the committee \emph{requires} additional evidence''. This is:}
+  {Fabrication}
+  {Over-reading the passage}
+  {Answered from memory}
+  {Displacement}
+
+\q{A three-step workflow receives faulty input at step one and produces a complete, confident,
+   well-formatted output. Nothing reports an error. This is:}
+  {Wrong stopping point}
+  {Silent failure}
+  {Context overflow}
+  {Direct injection}
+
+\q{What do all nine failure modes covered in this course have in common?}
+  {They occur only in long conversations}
+  {They are invisible in the output}
+  {They can be prevented by better prompting}
+  {They occur only in grounded systems}
+
+\q{Which check would most reliably expose a poisoned document summary?}
+  {Asking the model whether it was manipulated}
+  {Regenerating the summary several times}
+  {Checking each claim against a quoted passage in the source}
+  {Reducing the temperature}
+
+% ============================================== design and judgment (9)
+\q{What is the most significant thing lost when a chatbot is replaced by an agent?}
+  {Response speed}
+  {The unconscious checking you performed on every intermediate output}
+  {The ability to attach documents}
+  {Access to the context window}
+
+\q{If each step is 95\% reliable, approximately what is end-to-end reliability over ten steps?}
+  {95\%}
+  {80\%}
+  {60\%}
+  {40\%}
+
+\q{Which control does \textbf{not} rely on the system behaving as intended?}
+  {Instructing it to be careful}
+  {Asking it to verify its own output}
+  {Connecting only the narrowest tools required}
+  {Requesting quotations for each claim}
+
+\q{Where should a human be placed in an AI workflow?}
+  {At the end, reviewing the output}
+  {Before the irreversible action}
+  {At the start, writing the prompt}
+  {Wherever capacity allows}
+
+\q{Which is \textbf{not} a criterion for a good first automation candidate?}
+  {The task is genuinely repetitive}
+  {The answers exist in documents you can point at}
+  {A wrong answer is recoverable}
+  {The task is the most intellectually difficult in your field}
+
+\q{In a well-designed AI workflow, most decisions concern:}
+  {Which model to use}
+  {What the system must not do}
+  {How to phrase the prompt}
+  {Which tool provider to select}
+
+\q{Why can a Domain Pack increase risk as well as usefulness?}
+  {It consumes context window space}
+  {Professional formatting makes wrong content more persuasive}
+  {It slows the system down}
+  {It prevents the system from refusing}
+
+\q{Why is indirect injection more serious for an ordinary user than direct injection?}
+  {It is technically harder to perform}
+  {The malicious instruction is hidden in content the user never sees, so there is no point at which they could refuse}
+  {It cannot be defended against at all}
+  {It only affects grounded systems}
+
+\q{Under this course's account of academic integrity, the central question is:}
+  {Whether AI was used at all}
+  {What the assessment is measuring, and what you are certifying by submitting}
+  {Whether the use can be detected}
+  {How much of the text was generated}
+
+\end{questions}
+\end{document}

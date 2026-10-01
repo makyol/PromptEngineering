@@ -1,0 +1,72 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{../pelm}
+\begin{document}
+\paper{Quiz 2}{Weeks 3--4: How LLMs Work, and Principles of Effective Prompting}{10}{10 minutes}
+
+\begin{questions}
+
+\q{A \textbf{token} is best described as:}
+  {Always a single word}
+  {A piece of text --- a word, part of a word, a character, or punctuation}
+  {A single letter}
+  {A complete sentence}
+
+\q{Why do modern systems break words into sub-word pieces rather than using a fixed list of whole
+   words?}
+  {It makes the model smaller}
+  {It allows any word, including unseen ones, to be assembled from familiar pieces}
+  {It improves the model's grammar}
+  {It reduces the training time}
+
+\q{Why does the same content typically cost more tokens in Turkish than in English?}
+  {Turkish sentences are longer}
+  {Turkish is agglutinative, and stacked suffixes fragment into several pieces}
+  {Turkish uses a different alphabet}
+  {Turkish text is processed twice}
+
+\q{An assistant miscounts how many times a letter appears in a long word. The best explanation is:}
+  {The model is not good at mathematics}
+  {The model never perceived individual letters --- it works on tokens}
+  {The context window was exceeded}
+  {The temperature setting was too high}
+
+\q{Which statement best describes the model's core operation?}
+  {It retrieves the most relevant stored fact}
+  {It produces a probability for every possible next token, then one is chosen}
+  {It searches the internet and summarises the results}
+  {It applies a set of rules written by its developers}
+
+\q{Why does the same prompt sometimes produce different answers?}
+  {The model is retrained between requests}
+  {There is deliberate randomness in choosing which token comes next}
+  {The context window changes size}
+  {The model remembers the previous answer and avoids repeating it}
+
+\q{Asking the same question twice and receiving a similar answer tells you:}
+  {The answer is correct}
+  {The pattern is strongly represented in the training data}
+  {The model is confident}
+  {The context window is large enough}
+
+\q{Which statement about hallucination is correct?}
+  {It occurs when the context window overflows}
+  {It is a bug that will be removed in future versions}
+  {There is no step at which the system checks whether what it says is true}
+  {It only happens with small models}
+
+\q{A colleague adds ``Be accurate and only use reliable sources'' to a prompt about a topic the
+   model knows little about. What is the most likely effect?}
+  {The answer becomes accurate}
+  {The model refuses to answer}
+  {The answer sounds more authoritative without becoming better informed}
+  {The context window expands}
+
+\q{Output arrives with correct content but as a wall of unstructured text when you wanted three
+   short bullets. According to the Week 4 diagnosis, which lever should you pull?}
+  {Context}
+  {Task}
+  {Format}
+  {Examples}
+
+\end{questions}
+\end{document}

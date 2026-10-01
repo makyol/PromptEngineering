@@ -1,0 +1,45 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{../pelm}
+\begin{document}
+\answerpaper{Makeup Examination}{Whole course \quad$\cdot$\quad 25 questions $\times$ 4 points = 100 points}
+
+\noindent\textbf{Answer string:}
+\texttt{B B B D B B C B\, C A B A B C B B\, C B C B B D B C B}
+\vspace{0.4cm}\hrule\vspace{0.4cm}
+
+\begin{enumerate}[leftmargin=*, itemsep=0.4em, label=\textbf{\arabic*.}]
+\key{B}{Next-token prediction, repeated. Nothing is retrieved and no rules are applied.}
+\key{B}{The same operation runs regardless of pattern strength, and confidence is not part of what
+  is produced.}
+\key{B}{It answers from the earlier version or something adjacent, without flagging the cut-off.}
+\key{D}{Accepting a false premise follows from predicting a likely continuation, not from
+  tokenisation. The other three are direct tokenisation consequences.}
+\key{B}{Silent truncation with a confident answer. An explicit error would be the preferable case.}
+\key{B}{Safety fine-tuning shifts probabilities. It produces a tendency, not a gate --- which is why
+  framing can defeat it.}
+\key{C}{Wrong reader or wrong country is a Context failure.}
+\key{B}{The fallback principle: make the honest answer probable rather than appealing to honesty.}
+\key{C}{Omission --- true throughout, missing what mattered.}
+\key{A}{Displacement --- accurate elsewhere, inapplicable here.}
+\key{B}{Retrieved the wrong passage: a genuine quotation from an unrelated place.}
+\key{A}{Over-reading: an exception reported as a general rule.}
+\key{B}{Silent failure.}
+\key{C}{Verification requires something outside the system. The other three stay inside it.}
+\key{B}{Correct only for the cases tried --- untested paths were generated but never run.}
+\key{B}{Consistency resembles reliability. Intermittent failure attracts attention; steady error
+  does not.}
+\key{C}{$0.95^{5} \approx 0.77$.}
+\key{B}{Completion is a judgment about matching an intention that is not present in the context, so
+  it is predicted like anything else.}
+\key{C}{Sending is irreversible and no human precedes it.}
+\key{B}{Repetitive, document-backed, recoverable. Difficulty is not a virtue here.}
+\key{B}{It commits to nothing and changes no design decision. A named person does.}
+\key{D}{A Domain Pack does nothing for truth.}
+\key{B}{Instructions and data share one undifferentiated channel, with no reliable trust label.}
+\key{C}{Causing an action requires connected tools; the others need only text.}
+\key{B}{Rare combinations of ordinary details identify people in small populations.}
+\end{enumerate}
+
+\vspace{0.5cm}\hrule\vspace{0.3cm}
+\noindent\textbf{Marking.} 4 points per question, 100 points total. No negative marking.
+\end{document}

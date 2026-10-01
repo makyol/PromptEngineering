@@ -1,0 +1,172 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{../pelm}
+\begin{document}
+\paper{Midterm Examination}{Weeks 1--7 \quad$\cdot$\quad 25 questions $\times$ 4 points = 100 points \quad$\cdot$\quad 40\% of the course grade}{25}{50 minutes}
+
+\begin{questions}
+
+% ---------------------------------------------------------------- Week 1
+\q{Which of the following tasks is \textbf{generative}?}
+  {Ranking job applications by predicted suitability}
+  {Flagging a transaction as possibly fraudulent}
+  {Drafting a discharge letter for a patient's family}
+  {Detecting whether an image contains a tumour}
+
+\q{Which statement about the term \textbf{prompt} is correct?}
+  {It refers only to the text you type}
+  {It includes attached documents and images}
+  {It excludes any instruction added by the product}
+  {It refers to the model's response}
+
+\q{A model answers a question on a topic for which it has very little training material. What
+   happens to the confidence expressed in its answer?}
+  {It falls in proportion to the thinness of the coverage}
+  {It stays essentially the same}
+  {It is reported to the user as a percentage}
+  {The model refuses rather than answering}
+
+\q{An AI summary of a report is accurate throughout but omits the single most significant
+   finding. Which failure signature is this?}
+  {Fabrication}
+  {Displacement}
+  {Omission}
+  {Silent failure}
+
+% ---------------------------------------------------------------- Week 2
+\q{ELIZA (1966) contained:}
+  {A small knowledge base of medical facts}
+  {A simple neural network}
+  {Keyword matching and sentence reflection, with no knowledge or memory}
+  {A statistical model of English grammar}
+
+\q{What is the ``ELIZA effect''?}
+  {The tendency of early chatbots to crash under load}
+  {The attribution of understanding to a system that produces plausible language}
+  {The improvement of output when a persona is specified}
+  {The degradation of models trained on their own output}
+
+\q{The AI winters were primarily caused by:}
+  {Technical failure of the underlying methods}
+  {The gap between what was promised and what was delivered}
+  {Shortages of computing hardware}
+  {Legal restrictions on research}
+
+% ---------------------------------------------------------------- Week 3
+\q{A long agglutinated Turkish word is likely to be split into several tokens because:}
+  {Turkish grammar is irregular}
+  {The complete assembled word appeared rarely in training text, though its pieces are common}
+  {Turkish uses diacritics}
+  {Tokenizers cannot process non-English alphabets}
+
+\q{Which is \textbf{not} a consequence of Turkish costing more tokens than English?}
+  {The context window fills faster}
+  {Metered usage costs more for the same content}
+  {The model refuses Turkish input}
+  {Performance is often weaker due to thinner training coverage}
+
+\q{The model's core operation is best described as:}
+  {Looking up the most relevant stored fact}
+  {Producing a probability distribution over possible next tokens}
+  {Applying a decision tree written by its developers}
+  {Searching a database of documents}
+
+\q{Which statement about the model's internal state is correct?}
+  {It knows when it is guessing but does not report it}
+  {It performs the same operation whether the pattern is strong or weak}
+  {It has a separate mode for uncertain answers}
+  {It calculates a confidence score for each answer}
+
+\q{Why can these systems not simply reply ``I don't know'' whenever appropriate?}
+  {The phrase is filtered out by safety systems}
+  {It is a token sequence competing with all others, and questions in training text are usually followed by answers}
+  {The model is instructed never to refuse}
+  {It would use too many tokens}
+
+\q{The context window contains all of the following \textbf{except}:}
+  {Your current message}
+  {Documents you attached}
+  {Hidden instructions added by the product}
+  {Everything the model learned during training}
+
+\q{When a document exceeds the context window, the most dangerous behaviour is:}
+  {The tool refuses the input with an explicit error}
+  {Part of the material is silently dropped and a confident answer is produced anyway}
+  {The response is visibly truncated}
+  {The model asks you to shorten the document}
+
+% ---------------------------------------------------------------- Week 4
+\q{Which is \textbf{not} one of the four levers?}
+  {Context}
+  {Task}
+  {Format}
+  {Temperature}
+
+\q{Output is accurate and complete but reads like nothing you would ever send. Which lever should
+   you pull?}
+  {Context}
+  {Task}
+  {Format}
+  {Examples}
+
+\q{Which is the strongest reason to split ``summarise, translate, and identify risks'' into three
+   separate turns?}
+  {It uses fewer tokens overall}
+  {Each job receives fuller attention, and you can check each result before building on it}
+  {The model cannot perform three tasks}
+  {Translation requires a different model}
+
+\q{Someone adds a phrase to a prompt, the output improves, and they conclude the phrase works.
+   The strongest objection is:}
+  {The phrase may be too long}
+  {Output varies between runs, so the improvement may be unrelated to the change}
+  {The model may not have read the phrase}
+  {The phrase may be in the wrong language}
+
+\q{Which instruction converts an unverifiable claim into a checkable one?}
+  {``Be accurate and thorough''}
+  {``Only use reliable sources''}
+  {``After each claim, quote the sentence that supports it''}
+  {``Think carefully before answering''}
+
+% ---------------------------------------------------------------- Week 5
+\q{In the three dimensions of register, \textbf{tenor} refers to:}
+  {The subject area and its vocabulary density}
+  {The relationship between writer and reader}
+  {The channel of communication}
+  {The emotional warmth of the text}
+
+\q{Which specification is most likely to produce reproducible style?}
+  {``Make it professional and friendly''}
+  {``Everyday vocabulary with no unglossed medical terms; warm but not casual; written to be read aloud''}
+  {``Use an appropriate tone for the audience''}
+  {``Write it well''}
+
+\q{Why does a stated fallback such as ``write NOT STATED'' reduce invented content?}
+  {It reduces the model's temperature}
+  {It makes the honest answer a probable continuation rather than an unlikely one}
+  {It prevents the model from accessing training data}
+  {It shortens the output}
+
+% ---------------------------------------------------------------- Weeks 6-7
+\q{A generated browser tool produces a subtly wrong calculation but has a clean, working
+   interface. Why is this particularly dangerous?}
+  {The error is intermittent and therefore hard to reproduce}
+  {The error is consistent, which makes the tool appear reliable}
+  {The tool will eventually stop working}
+  {The interface will change without warning}
+
+\q{Grounding a system in your own documents changes:}
+  {What the model knows}
+  {Where the answer comes from}
+  {Whether the model checks the truth of its output}
+  {The model's training data}
+
+\q{An assistant grounded in your documents produces an answer with no supporting quotation. The
+   most likely explanation is:}
+  {It over-read the passage}
+  {It retrieved the wrong passage}
+  {It answered from memory}
+  {The context window overflowed}
+
+\end{questions}
+\end{document}

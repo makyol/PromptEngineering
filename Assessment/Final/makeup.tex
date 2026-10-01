@@ -1,0 +1,170 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{../pelm}
+\begin{document}
+\paper{Makeup Examination}{Whole course, weighted towards Weeks 6--13 \quad$\cdot$\quad 25 questions $\times$ 4 points = 100 points}{25}{60 minutes}
+
+\begin{questions}
+
+% ============================================== mechanism (8)
+\q{Which is the single operation underlying everything a large language model produces?}
+  {Matching the question against a database of answers}
+  {Predicting the next token, repeatedly}
+  {Executing rules supplied by developers}
+  {Summarising retrieved web pages}
+
+\q{Why is the model unable to signal when it is guessing?}
+  {Guessing is suppressed by safety training}
+  {The same operation runs whether the pattern is strong or weak, and confidence is not part of the output}
+  {Confidence scores exist but are hidden by the interface}
+  {Users have disabled the feature}
+
+\q{A model is asked about a regulation amended after its knowledge cut-off. What is most likely?}
+  {It reports that its knowledge ends at a specific date}
+  {It answers confidently using the earlier version or something adjacent}
+  {It refuses to answer}
+  {It searches for the update automatically}
+
+\q{Tokenisation explains all of the following \textbf{except}:}
+  {Difficulty counting letters within a word}
+  {Inconsistent behaviour of word-count instructions}
+  {Higher cost for Turkish text than English}
+  {The tendency to accept a false premise in a question}
+
+\q{What happens when a document exceeds the context window in the most dangerous case?}
+  {The service returns an explicit error}
+  {Part of the material is dropped silently and a confident answer follows}
+  {The answer is visibly cut off}
+  {The model asks for a shorter document}
+
+\q{Which statement about fine-tuning for safety is accurate?}
+  {It installs a rule that blocks disallowed output}
+  {It shifts probabilities, producing a tendency rather than a guarantee}
+  {It removes disallowed material from training data}
+  {It applies only to images}
+
+\q{Which lever should be pulled when the output assumes the wrong reader or the wrong country?}
+  {Format}
+  {Examples}
+  {Context}
+  {Temperature}
+
+\q{Why does specifying a fallback string reduce invented content?}
+  {It lowers the temperature}
+  {It gives the honest answer a fixed and probable form}
+  {It blocks access to training data}
+  {It shortens the response}
+
+% ============================================== diagnosis (8)
+\q{A summary is factually correct throughout but omits the only finding that would have changed a
+   decision. This is:}
+  {Fabrication}
+  {Displacement}
+  {Omission}
+  {Over-reading}
+
+\q{An answer about local practice accurately describes the practice of a different country. This
+   is:}
+  {Displacement}
+  {Fabrication}
+  {Silent failure}
+  {Leakage}
+
+\q{An assistant grounded in your documents cites a genuine sentence that does not support the
+   claim it is attached to. This is:}
+  {Answered from memory}
+  {Retrieved the wrong passage}
+  {Omission}
+  {Fabrication}
+
+\q{Your source states a requirement applies ``in exceptional cases''. The assistant reports it
+   applies generally. This is:}
+  {Over-reading the passage}
+  {Fabrication}
+  {Displacement}
+  {Retrieved the wrong passage}
+
+\q{An automation produces a polished result from corrupted input, with no error anywhere. This
+   is:}
+  {Wrong stopping point}
+  {Silent failure}
+  {Context overflow}
+  {Direct injection}
+
+\q{Which is genuine verification of a factual claim?}
+  {Asking the model how confident it is}
+  {Asking the same question a second time}
+  {Locating the claim in a source you trust}
+  {Asking the model to double-check its work}
+
+\q{A generated tool works on the inputs you tried and fails on an empty field. Which failure is
+   this?}
+  {Wrong logic with right appearance}
+  {Correct only for the cases tried}
+  {Silently discarded input}
+  {Indirect injection}
+
+\q{Why is a consistently wrong generated tool more dangerous than an intermittently wrong one?}
+  {It uses more resources}
+  {Consistency resembles reliability, so the error is not noticed}
+  {It is harder to regenerate}
+  {It fails at higher volumes}
+
+% ============================================== design and judgment (9)
+\q{Five steps at 95\% reliability gives an end-to-end reliability closest to:}
+  {95\%}
+  {90\%}
+  {77\%}
+  {50\%}
+
+\q{Why does the ``am I finished?'' decision cause difficulty for agents?}
+  {It requires access to external tools}
+  {It is a judgment about matching an intention that is not in the context, so it is predicted like anything else}
+  {It consumes excessive tokens}
+  {It is disabled by default}
+
+\q{A workflow drafts patient letters and sends them automatically. Which design rule is
+   violated?}
+  {Keep the chain short}
+  {Make each step inspectable}
+  {Put the human before the irreversible action}
+  {Use the narrowest tools}
+
+\q{Which is the best candidate for a first AI workflow?}
+  {The most intellectually demanding task in your field}
+  {A repetitive task whose answers exist in a document, where a mistake is recoverable}
+  {A task requiring access to personal records}
+  {A task nobody currently performs}
+
+\q{Answering ``users might receive incorrect information'' to the question of who is harmed is
+   inadequate because:}
+  {It is too brief}
+  {It commits to nothing and therefore changes no design decision}
+  {Users are not the only stakeholders}
+  {It omits the probability of harm}
+
+\q{Which does a Domain Pack \textbf{not} address?}
+  {Institution-specific vocabulary}
+  {The structure professionals expect}
+  {What must never be stated without qualification}
+  {Whether the content is true}
+
+\q{What makes prompt injection difficult to eliminate?}
+  {Attackers are highly skilled}
+  {Instructions and data arrive through the same undifferentiated channel}
+  {Context windows are too small}
+  {Safety training is incomplete}
+
+\q{Which attacker objective becomes possible only when tools are connected?}
+  {Altering the content of an answer}
+  {Extracting other documents from the context}
+  {Sending, deleting or purchasing}
+  {Revealing system instructions}
+
+\q{Which statement about anonymising clinical material is correct?}
+  {Removing names is sufficient}
+  {Rare details in a small population can identify a person even without names}
+  {Anonymised data may be uploaded anywhere}
+  {Anonymisation applies only to published research}
+
+\end{questions}
+\end{document}

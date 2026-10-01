@@ -1,0 +1,72 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{../pelm}
+\begin{document}
+\paper{Quiz 5}{Weeks 9--12: Agents, Design, Domain Adaptation, and Security}{10}{10 minutes}
+
+\begin{questions}
+
+\q{What is the most important thing you lose when you replace a chatbot with an agent?}
+  {Speed}
+  {The ability to change the prompt}
+  {The checking you were performing on every intermediate output without noticing}
+  {Access to the context window}
+
+\q{If each step of a workflow is 95\% reliable, roughly what is the end-to-end reliability over
+   ten steps?}
+  {95\%}
+  {85\%}
+  {60\%}
+  {5\%}
+
+\q{Why is compounding error in an agent worse than independent random error?}
+  {Agents run more slowly}
+  {Each step consumes the previous step's output, so early errors are inherited}
+  {Agents use more tokens}
+  {Errors are reported only at the end}
+
+\q{A three-step workflow is given faulty input at step one and produces a complete, confident,
+   well-formatted result with no warning. This is:}
+  {Wrong stopping point}
+  {Silent failure}
+  {Context overflow}
+  {Indirect injection}
+
+\q{Which control does \textbf{not} depend on the system behaving correctly?}
+  {Instructing it to be careful}
+  {Asking it to check its own work}
+  {Giving it only the narrowest tools needed for the job}
+  {Requesting quotations}
+
+\q{In the Week 10 design worksheet, where should the human sit?}
+  {At the end, reviewing the final output}
+  {Before the irreversible action}
+  {At the beginning, writing the prompt}
+  {Wherever there is time}
+
+\q{Why is naming a specific harmed person better than naming a category of user?}
+  {It is required by the university}
+  {Specificity changes the design; abstraction does not}
+  {It makes the document longer}
+  {Categories are difficult to define}
+
+\q{A Domain Pack contains a glossary, golden examples, and output conventions. What does it
+   \textbf{not} improve?}
+  {Local vocabulary}
+  {Recognisable structure}
+  {Factual accuracy}
+  {Professional restraint}
+
+\q{Why is indirect prompt injection more dangerous to you than direct injection?}
+  {It is technically more sophisticated}
+  {The instruction is hidden in content you never see, so there is no point at which you could refuse}
+  {It only affects agents}
+  {It cannot be detected by any means}
+
+\q{What is the root cause of prompt injection?}
+  {Insufficient safety training}
+  {The model receives one stream of tokens and cannot reliably distinguish instructions from data}
+  {Context windows are too small}
+  {Users write careless prompts}
+
+\end{questions}
+\end{document}
